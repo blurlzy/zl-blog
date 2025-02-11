@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Host\ZLBlog.csproj" />
+  </ItemGroup>
+
 </Project>
