@@ -9,7 +9,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
         <div class="container">
-          <a class="navbar-brand head-title">ZL Blog</a>
+          <a class="navbar-brand head-title" routerLink="">ZL Blog</a>
           <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
