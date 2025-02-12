@@ -1,4 +1,4 @@
-﻿using System.Reflection.Metadata;
+﻿
 using Xunit.Abstractions;
 using ZLBlog.Config;
 using ZLBlog.Models;
@@ -51,6 +51,13 @@ namespace ZLBlog.Tests.Tests
             var newBlog = new Blog(title, content, userId, userId);
 
             await _blogRepository.CreateAsync(newBlog);
+        }
+
+        [Theory]
+        [InlineData("42198fb9-2990-4b67-9908-c5ad0b08adc7")]
+        public async Task Delete_Blog_Test(string id)
+        {
+            await _blogRepository.DeleteAsync(id);
         }
     }
 }

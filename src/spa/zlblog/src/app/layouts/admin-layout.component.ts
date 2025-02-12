@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-main-layout',
-  standalone: true,
-  imports: [ RouterOutlet, RouterLink, CommonModule],
+  selector: 'app-admin-layout',
+  imports: [],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
         <div class="container">
-          <a class="navbar-brand head-title" routerLink="">ZL Blog</a>
+          <a class="navbar-brand head-title" routerLink="">Admin Portal</a>
           <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -18,12 +15,6 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
             <ul class="navbar-nav ms-auto">
               <li class="nav-item head-item">
                 <a class="nav-link" routerLink=""><i class="bi bi-search"></i></a>
-              </li>
-              <li class="nav-item head-item">
-                <a class="nav-link" routerLink="">About</a>
-              </li>
-              <li class="nav-item head-item">
-                <a class="nav-link" routerLink="">Contact</a>
               </li>
             </ul>
           </div>
@@ -40,6 +31,6 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   `,
   styles: ``
 })
-export class MainLayoutComponent {
+export class AdminLayoutComponent {
 
 }

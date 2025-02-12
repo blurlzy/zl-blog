@@ -9,3 +9,10 @@ global using Microsoft.AspNetCore.Authorization;
 
 // MediatR
 global using MediatR;
+global using AutoMapper;
+
+// app
+global using ZLBlog;
+global using ZLBlog.Config;
+global using ZLBlog.Persistence;
+global using ZLBlog.Models;

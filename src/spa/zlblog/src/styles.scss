@@ -1,4 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* 
+  Import the Quill CSS
+  (this is the minimal CSS needed for the editor to work)
+*/
+
+// @import '~quill/dist/quill.bubble.css';
+
 /* 
   Minimal custom overrides 
   to maintain a clean, black-and-white theme 
