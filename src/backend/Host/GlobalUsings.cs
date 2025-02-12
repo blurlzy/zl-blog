@@ -15,4 +15,6 @@ global using AutoMapper;
 global using ZLBlog;
 global using ZLBlog.Config;
 global using ZLBlog.Persistence;
+global using ZLBlog.Filters;
+global using ZLBlog.Requests;
 global using ZLBlog.Models;

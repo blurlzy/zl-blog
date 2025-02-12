@@ -48,13 +48,13 @@ namespace ZLBlog.Tests.Tests
         [InlineData("My first blog", "jil", "<main class=\"container my-5\"><router-outlet></router-outlet></main>")]
         public async Task Create_Blog_Test(string title, string userId, string content)
         {
-            var newBlog = new Blog(title, content, userId, userId);
+            var newBlog = new Blog(title, content, Array.Empty<string>(), userId, userId);
 
             await _blogRepository.CreateAsync(newBlog);
         }
 
         [Theory]
-        [InlineData("42198fb9-2990-4b67-9908-c5ad0b08adc7")]
+        [InlineData("d9a7f839-a543-416d-94ec-98f7a01532a6")]
         public async Task Delete_Blog_Test(string id)
         {
             await _blogRepository.DeleteAsync(id);

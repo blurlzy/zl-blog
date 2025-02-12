@@ -29,6 +29,9 @@ namespace ZLBlog.Models
         /// </summary>
         public string UserName { get; set; }
 
+        // tags 
+        public string[] Tags { get; set; }
+
         /// <summary>
         /// Timestamp of the chat creation.
         /// </summary>
@@ -37,15 +40,17 @@ namespace ZLBlog.Models
         public DateTimeOffset? UpdatedOn { get; set; }
 
         // soft delete
+        //[JsonIgnore]
         public bool IsDeleted { get; set; }
 
 
         // ctor
-        public Blog(string title, string content, string userId, string userName)
+        public Blog(string title, string content, string[] tags, string userId, string userName)
         {
             this.Id = Guid.NewGuid().ToString();
             this.Title = title;
             this.Content = content;
+            this.Tags = tags;
             this.UserId = userId;
             this.UserName = userName;
             this.CreatedOn = DateTimeOffset.Now;

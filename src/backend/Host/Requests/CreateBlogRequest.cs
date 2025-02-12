@@ -2,13 +2,14 @@
 
 namespace ZLBlog.Requests
 {
-    public class CreateBlogRequest : IRequest<BlogDto>
+    public record CreateBlogRequest : IRequest<Blog>
     {
-        public string Title { get; set; }
-        public string Content { get; set; }
+        public string Title { get; init; }
+        public string Content { get; init; }
+        public string Tags { get; init; }
     }
 
-    public class CreateBlogHandler : IRequestHandler<CreateBlogRequest, BlogDto>
+    public class CreateBlogHandler : IRequestHandler<CreateBlogRequest, Blog>
     {
         private readonly BlogRepository _blogRepo;
         private readonly IMapper _mapper;
@@ -20,15 +21,13 @@ namespace ZLBlog.Requests
             _mapper = mapper;
         }
 
-        public async Task<BlogDto> Handle(CreateBlogRequest request, CancellationToken cancellationToken)
+        public async Task<Blog> Handle(CreateBlogRequest request, CancellationToken cancellationToken)
         {
-            var newBlog = new Blog(request.Title, request.Content, "zongyi", "zongyi");
+            var newBlog = new Blog(request.Title, request.Content, Array.Empty<string>(), "zongyi", "zongyi");
 
             // create
-            await _blogRepo.CreateAsync(newBlog);
+            return await _blogRepo.CreateAsync(newBlog);
 
-            // map
-            return _mapper.Map<BlogDto>(newBlog);
         }
     }
 }

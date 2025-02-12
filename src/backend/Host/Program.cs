@@ -52,6 +52,8 @@ if (app.Environment.IsDevelopment())
 app.UseGlobalExceptionHandler(app.Logger);
 
 app.UseHttpsRedirection();
+// configure cors
+app.UseCors("AllowCors");
 
 app.UseAuthorization();
 

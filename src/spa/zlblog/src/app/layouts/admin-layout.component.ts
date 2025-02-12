@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [],
+  imports: [ RouterOutlet, RouterLink, CommonModule ],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
         <div class="container">

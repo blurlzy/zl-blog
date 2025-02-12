@@ -32,7 +32,7 @@ namespace ZLBlog.Persistence
             this._container = this._client.GetContainer(database, container);
         }
 
-        public async Task<IEnumerable<T>> QueryEntitiesAsync(Func<T, bool> predicate)
+        public async Task<IEnumerable<T>> QueryEntitiesAsync(Expression<Func<T, bool>> predicate)
         {
             return await Task.Run<IEnumerable<T>>(
               () => this._container.GetItemLinqQueryable<T>(true).Where(predicate).AsEnumerable());
@@ -105,6 +105,25 @@ namespace ZLBlog.Persistence
             }
 
             await this._container.DeleteItemAsync<T>(id, new PartitionKey(partitionKey));
+        }
+
+        // get the count value
+        public async Task<int> CountAsync(QueryDefinition queryDefinition)
+        {
+            int count = 0;
+            using FeedIterator<int> resultSetIterator = _container.GetItemQueryIterator<int>(queryDefinition);
+
+            // it should only contain 1 row 
+            while (resultSetIterator.HasMoreResults)
+            {
+                var currentResultSet = await resultSetIterator.ReadNextAsync();
+                foreach (var res in currentResultSet)
+                {
+                    count += res;
+                }
+            }
+
+            return count;
         }
 
         public void Dispose()
