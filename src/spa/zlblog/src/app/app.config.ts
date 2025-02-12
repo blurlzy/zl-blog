@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 
 // quill editor module
 import { provideQuillConfig } from 'ngx-quill/config';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 //import Counter from './counter'
 
 export const appConfig: ApplicationConfig = {
@@ -31,6 +32,6 @@ export const appConfig: ApplicationConfig = {
       //   import: 'formats/font',
       //   whitelist: ['mirza', 'roboto', 'aref', 'serif', 'sansserif', 'monospace']
       // }]
-    })
+    }), provideAnimationsAsync()
   ]
 };
