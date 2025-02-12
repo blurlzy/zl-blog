@@ -46,8 +46,8 @@ import Quill from 'quill';
       }      
 
       <div class="col-12 mt-3">
-        <button type="submit" class="btn btn-primary btn-lg me-3">Submit</button>
-        <button type="submit" class="btn btn-light btn-lg">Cancel</button>
+        <button type="submit" class="btn btn-primary me-3">Submit</button>
+        <button type="submit" class="btn btn-light">Cancel</button>
       </div>
 
      

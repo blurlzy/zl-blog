@@ -17,7 +17,8 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
    
             <form class="d-flex ms-auto " role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-light me-2"><i class="bi bi-search"></i></button>
+              <button class="btn btn-light"><i class="bi bi-box-arrow-in-right"></i></button>
             </form>
           </div>
         </div>
@@ -27,7 +28,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
         <router-outlet></router-outlet>
       </main>
 
-      <footer class="border-top py-3 text-center">
+      <footer class="border-top py-3 text-center mt-3">
         <p class="mb-0">&copy; 2025 ZL Blog. All rights reserved.</p>
       </footer>
   `,
