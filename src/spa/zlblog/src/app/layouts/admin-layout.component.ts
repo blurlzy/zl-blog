@@ -6,7 +6,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   selector: 'app-admin-layout',
   imports: [ RouterOutlet, RouterLink, CommonModule ],
   template: `
-      <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+      <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
           <a class="navbar-brand head-title" routerLink="">Admin Portal</a>
           <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
@@ -14,16 +14,16 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
           </button>
 
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item head-item">
-                <a class="nav-link" routerLink=""><i class="bi bi-search"></i></a>
-              </li>
-            </ul>
+   
+            <form class="d-flex ms-auto " role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </nav>
 
-      <main class="container my-5">
+      <main class="container" style="margin-top: 80px;">
         <router-outlet></router-outlet>
       </main>
 

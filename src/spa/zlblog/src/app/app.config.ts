@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 
 // quill editor module
 import { provideQuillConfig } from 'ngx-quill/config';
-import Counter from './counter'
+//import Counter from './counter'
 
 export const appConfig: ApplicationConfig = {
   providers: [
