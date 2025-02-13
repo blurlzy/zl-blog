@@ -1,10 +1,16 @@
 export const environment = {
 	production: false,
 	apiEndpoint: 'https://localhost:7023', 
+	auth0Config:{
+		tenantDomain: 'zlblog.au.auth0.com',
+		clientId: '9BkIxugDGE3VB1p4zXF1CQinIJAMk9B5',
+		audience: 'https://zlblog.com',
+		callbackRedirectUri: '/admin',
+	},
 	msalConfig: {
 	  auth: {
-		 clientId: '16deee61-e9e6-4493-b1a3-57ed14e1c33b',
-		 authority: 'https://login.microsoftonline.com/885ba0b1-68d5-40e2-adaa-238cb699dbdc',
+		 clientId: '<your-app-registration-client-id>',
+		 authority: 'https://login.microsoftonline.com/<your-tenant-id>',
 	  },
 	},
 	apiConfig: {

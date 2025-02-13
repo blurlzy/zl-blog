@@ -7,6 +7,8 @@ namespace ZLBlog.Requests
         public string Title { get; init; }
         public string Content { get; init; }
         public string Tags { get; init; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
     }
 
     public class CreateBlogHandler : IRequestHandler<CreateBlogRequest, Blog>
@@ -23,7 +25,7 @@ namespace ZLBlog.Requests
 
         public async Task<Blog> Handle(CreateBlogRequest request, CancellationToken cancellationToken)
         {
-            var newBlog = new Blog(request.Title, request.Content, Array.Empty<string>(), "zongyi", "zongyi");
+            var newBlog = new Blog(request.Title, request.Content, request.Tags?.Split(","), request.UserId, request.UserName);
 
             // create
             return await _blogRepo.CreateAsync(newBlog);

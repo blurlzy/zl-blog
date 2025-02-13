@@ -9,5 +9,9 @@
 
         // application insights
         public const string AppInsightsConnection = "AppInsightsConnection";
+
+        // auth0
+        public const string Auth0Domain = "Auth0Domain";
+        public const string Auth0Audience = "Auth0Audience";
     }
 }

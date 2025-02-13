@@ -1,4 +1,5 @@
 using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using ZLBlog.Auth.Auth0;
 using ZLBlog.Extensions;
 
 
@@ -19,7 +20,8 @@ builder.Configuration.AddAzureKeyVault(secretClient, new KeyVaultSecretManager()
 
 
 // Add services to the container.
-// todo: add auth services
+// auth service provider - auth0 
+builder.Services.ConfigureAuth0(builder.Configuration);
 // register mediatR & auto mapper
 builder.Services.ConfigureMediatR();
 builder.Services.ConfigureAutoMapper();
@@ -55,6 +57,8 @@ app.UseHttpsRedirection();
 // configure cors
 app.UseCors("AllowCors");
 
+// auth
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
