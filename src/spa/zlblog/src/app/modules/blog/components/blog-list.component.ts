@@ -60,7 +60,7 @@ export class BlogListComponent {
   // load latest blogs
   private listBlogs() { 
     this.blogDataService.listBlogs(0, 10).subscribe((data: any) => {
-      this.blogs = data;
+      this.blogs = data.data;
       console.log(this.blogs);
     });
   }

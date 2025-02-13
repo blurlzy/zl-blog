@@ -1,13 +1,13 @@
 ﻿
 namespace ZLBlog.Requests
 {
-    public record ListBlogRequest: IRequest<IEnumerable<Blog>>
+    public record ListBlogRequest: IRequest<PagedList<Blog>>
     {
         public int PageIndex { get; init; }
         public int PageSize { get; init; }
     }
 
-    public class ListBlogHander : IRequestHandler<ListBlogRequest, IEnumerable<Blog>>
+    public class ListBlogHander : IRequestHandler<ListBlogRequest, PagedList<Blog>>
     {
         private readonly BlogRepository _blogRepo;
 
@@ -17,9 +17,9 @@ namespace ZLBlog.Requests
             _blogRepo = blogRepo;
         }
 
-        public async Task<IEnumerable<Blog>> Handle(ListBlogRequest request, CancellationToken cancellationToken)
+        public async Task<PagedList<Blog>> Handle(ListBlogRequest request, CancellationToken cancellationToken)
         {
-            return await _blogRepo.ListBlogsAsync(request.PageIndex, request.PageSize);
+            return await _blogRepo.SearcchBlogsAsync(string.Empty, request.PageIndex, request.PageSize, false);
         }
     }
 }

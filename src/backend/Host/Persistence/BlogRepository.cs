@@ -11,12 +11,18 @@ namespace ZLBlog.Persistence
                 _context = context;
         }
 
-        // get latest blogs
-        public async Task<IEnumerable<Blog>> ListBlogsAsync(int skip = 0, int count = 12)
+        // search blogs
+        public async Task<PagedList<Blog>> SearcchBlogsAsync(string keyword, int skip = 0, int count = 12, bool includeDeletedItems = false)
         {
-            // exclude the deleted blogs
-            return await _context.QueryEntitiesAsync(m => m.IsDeleted == false, skip, count);
+            if(string.IsNullOrEmpty(keyword))
+            {
+                return await _context.ListBlogsAsync(skip, count, includeDeletedItems);
+            }
+
+
+            return await _context.SearchBlogsAsync(keyword, skip, count, includeDeletedItems);
         }
+
         
         // create blog
         public async Task<Blog> CreateAsync(Blog blog)

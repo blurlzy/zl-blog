@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule, provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
@@ -12,6 +12,10 @@ import { AllowList } from './auth/auth0-config';
 import { provideQuillConfig } from 'ngx-quill/config';
 // env
 import { environment } from '../environments/environment';
+// services
+import { GlobalErrorHandler } from './core/services/error-handler.service';
+import { LoaderInterceptor } from './core/services/http-interceptor.service';
+
 // application root routes
 import { routes } from './app.routes';
 
@@ -20,6 +24,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     importProvidersFrom(BrowserAnimationsModule),
+    provideAnimationsAsync(),
     // auth0 config
     provideAuth0({
       domain: environment.auth0Config.tenantDomain,
@@ -44,6 +49,10 @@ export const appConfig: ApplicationConfig = {
     provideQuillConfig({
       
     }), 
-    provideAnimationsAsync()
+    // show loader on http requests
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    // global error handler
+    { provide: ErrorHandler,  useClass: GlobalErrorHandler}
+  
   ]
 };

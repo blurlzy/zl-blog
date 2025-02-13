@@ -1,6 +1,7 @@
 ﻿
 namespace ZLBlog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ApiBaseController
@@ -13,30 +14,26 @@ namespace ZLBlog.Controllers
             _logger = logger;
         }
 
-        [Authorize]
-        [HttpGet("version")]
+        [HttpGet("blogs")]
+        [EnsurePaginationFilter]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public IActionResult GetAdminPortalVersion()
+        public async Task<PagedList<SimpleBlogDto>> SearchBlogsAsync([FromQuery] string? keyword, int pageIndex = 0, int pageSize = 8)
         {
-            // check current user
-            var user = User.Identity.Name;
-            var claims = User.Claims;
-
-            return Ok(new { version = "ZL Blog Admin Portal v1.0" });
+            var req = new SearchcBlogAdminRequest { Keyword = keyword ?? string.Empty, PageIndex = pageIndex, PageSize = pageSize, IncludeDeletedItems = true };
+            return await base.Mediator.Send(req);
         }
 
-        [Route("blogs")]
-        [HttpPost]
+        [HttpPost("blogs")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> CreateBlogAsync([FromBody] CreateBlogRequest req)
         {
-            // test ONLY
-            req.UserId = "admin@zlblog.com";
-            req.UserName = "admin";
+  
+            req.UserId = base.IdentityName;
+            req.UserName = base.Auth0UserProfileName;
 
             // send
             await base.Mediator.Send(req);

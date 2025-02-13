@@ -31,17 +31,13 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        [InlineData(0, 12)]
-        public async Task List_Blogs_Test(int skip, int count)
+        //[InlineData("", 0, 12, true)]
+        [InlineData("second", 0, 12, true)]
+        public async Task Search_Blogs_Test(string keyword, int skip, int count, bool includeDeletedItems)
         {
-            var blogs = await _blogRepository.ListBlogsAsync(skip, count);
+           var pagedList = await _blogRepository.SearcchBlogsAsync(keyword, skip, count, includeDeletedItems);
 
-            var firstBlog = blogs.FirstOrDefault();
-
-            // show content
-            var content = firstBlog?.Content;
-
-            _output.WriteLine(content ?? "no content"); 
+            Assert.True(pagedList.Total >= 0);
         }
 
         [Theory]

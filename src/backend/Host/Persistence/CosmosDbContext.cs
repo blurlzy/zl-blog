@@ -107,6 +107,24 @@ namespace ZLBlog.Persistence
             await this._container.DeleteItemAsync<T>(id, new PartitionKey(partitionKey));
         }
 
+        // run query
+        public async Task<List<T>> RunQueryAsync(QueryDefinition queryDefinition, string? continuationToken = null)
+        {
+            var results = new List<T>();
+
+            using FeedIterator<T> resultSetIterator = _container.GetItemQueryIterator<T>(queryDefinition, continuationToken);
+
+            // read data
+            while (resultSetIterator.HasMoreResults && results.Count < MAX_LIST_COUNT)
+            {
+                FeedResponse<T> response = await resultSetIterator.ReadNextAsync();
+                results.AddRange(response);
+
+            }
+
+            return results;
+        }
+
         // get the count value
         public async Task<int> CountAsync(QueryDefinition queryDefinition)
         {

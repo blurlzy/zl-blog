@@ -19,7 +19,7 @@ namespace ZLBlog.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IEnumerable<Blog>> ListBlogsAsync([FromQuery] int pageIndex = 0, int pageSize = 8)
+        public async Task<PagedList<Blog>> ListBlogsAsync([FromQuery] int pageIndex = 0, int pageSize = 8)
         {
             var req = new ListBlogRequest { PageIndex = pageIndex, PageSize = pageSize };
 

@@ -6,6 +6,10 @@ import { environment } from '../../environments/environment';
 export const AllowList = [
 	{
 		uri: `${environment.apiEndpoint}/api/admin/*`,
+		httpMethod: HttpMethod.Get,
+	 },
+	{
+		uri: `${environment.apiEndpoint}/api/admin/*`,
 		httpMethod: HttpMethod.Post,
 	 },
 	 {

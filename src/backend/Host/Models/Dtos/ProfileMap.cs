@@ -6,7 +6,7 @@ namespace ZLBlog.Models.Dtos
     {
         public BlogProfileMap()
         {
-            CreateMap<Blog, BlogDto>();
+            CreateMap<Blog, SimpleBlogDto>();
         }
     }
 }

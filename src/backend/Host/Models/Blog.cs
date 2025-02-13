@@ -40,7 +40,7 @@ namespace ZLBlog.Models
         public DateTimeOffset? UpdatedOn { get; set; }
 
         // soft delete
-        //[JsonIgnore]
+        [JsonIgnore]
         public bool IsDeleted { get; set; }
 
 

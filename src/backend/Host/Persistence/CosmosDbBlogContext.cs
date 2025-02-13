@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 using System.Linq.Expressions;
-
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace ZLBlog.Persistence
 {
@@ -12,13 +12,6 @@ namespace ZLBlog.Persistence
                 
         }
 
-        public Task<IEnumerable<Blog>> QueryEntitiesAsync(int skip, int count)
-        {
-            return Task.Run<IEnumerable<Blog>>(
-                    () => base._container.GetItemLinqQueryable<Blog>(true)
-                                         .OrderByDescending(m => m.CreatedOn).Skip(skip).Take(count).AsEnumerable());
-        }
-
         public Task<IEnumerable<Blog>> QueryEntitiesAsync(Expression<Func<Blog, bool>> predicate, int skip, int count)
         {
             return Task.Run<IEnumerable<Blog>>(
@@ -26,17 +19,75 @@ namespace ZLBlog.Persistence
                             .Where(predicate).OrderByDescending(m => m.CreatedOn).Skip(skip).Take(count).AsEnumerable());
         }
 
-        public async Task<PagedList<Blog>> GetPagedList(int skip, int count)
+        public async Task<PagedList<Blog>> ListBlogsAsync(int pageIndex, int pageSize, bool includeDeletedItems)
         {
-            // count query
-            QueryDefinition countQuery = new QueryDefinition("SELECT VALUE COUNT(1) FROM c");
+            // query items
+            var query = @"SELECT * FROM c ";
 
-            var total = await base.CountAsync(countQuery);
+            if (!includeDeletedItems)
+            {
+                query += "WHERE c.isDeleted = false ";
+            }
 
-            // list
-            var blogs = await this.QueryEntitiesAsync(skip, count);
+            query += " ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
 
-            return new PagedList<Blog>(total, blogs.ToList());
+            QueryDefinition queryDef = new QueryDefinition(query)
+               .WithParameter("@skip", pageIndex * pageSize)
+               .WithParameter("@take", pageSize);
+
+            var pagedList = await base.RunQueryAsync(queryDef);
+            
+            // count total items
+            var countQuery = @"SELECT VALUE COUNT(1) FROM c  ";
+
+            if (!includeDeletedItems)
+            {
+                countQuery += "WHERE c.isDeleted = false ";
+            }
+
+            QueryDefinition countQueryDef = new QueryDefinition(countQuery);
+            var totalCount = await base.CountAsync(countQueryDef);
+
+            return new PagedList<Blog>(totalCount, pagedList);
+        }
+
+        public async Task<PagedList<Blog>> SearchBlogsAsync(string keyword, int pageIndex, int pageSize, bool includeDeletedItems)
+        {
+            // search items by keyword
+            var searchQuery = @"SELECT * FROM c
+                            WHERE (CONTAINS(LOWER(c.title), LOWER(@keyword)) OR CONTAINS(LOWER(c.content), LOWER(@keyword))) ";
+            
+            if(!includeDeletedItems)
+            {
+                searchQuery += "AND (c.isDeleted = false) ";
+            }
+
+            searchQuery += " ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
+
+
+            QueryDefinition query = new QueryDefinition(searchQuery)
+                           .WithParameter("@keyword", keyword)
+                           .WithParameter("@skip", pageIndex * pageSize)
+                           .WithParameter("@take", pageSize);
+
+            var pagedList = await base.RunQueryAsync(query);
+
+            // count items
+            var countQuery = @"SELECT VALUE COUNT(1) FROM c 
+                                WHERE (CONTAINS(LOWER(c.title), LOWER(@keyword)) OR CONTAINS(LOWER(c.content), LOWER(@keyword))) ";
+
+
+            if (!includeDeletedItems)
+            {
+                countQuery += "AND (c.isDeleted = false) ";
+            }
+
+            QueryDefinition count = new QueryDefinition(countQuery)
+                      .WithParameter("@keyword", keyword);
+
+            var totalCount = await base.CountAsync(count);
+
+            return new PagedList<Blog>(totalCount, pagedList);
         }
 
     }

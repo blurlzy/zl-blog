@@ -1,6 +1,6 @@
 ﻿namespace ZLBlog.Models
 {
-    public class BlogDto
+    public class SimpleBlogDto
     {
         /// <summary>
         /// blog Id that is persistent and unique.
@@ -9,8 +9,7 @@
 
         public string Title { get; set; }
 
-        // blog content (html)
-        public string Content { get; set; }
+        public string[] Tags { get; set; }
 
         /// <summary>
         /// unique Id of the user who created this session. (azure object id)
