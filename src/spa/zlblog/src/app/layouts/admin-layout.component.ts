@@ -30,7 +30,7 @@ import { Loader } from '../core/services/loader.service';
       </nav>
 
       @if (loader.isLoading | async) {
-        <mat-progress-bar mode="indeterminate" style="z-index:9999"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" style="z-index:9999;"></mat-progress-bar>
       }
       
       <main class="container" style="margin-top: 80px;">

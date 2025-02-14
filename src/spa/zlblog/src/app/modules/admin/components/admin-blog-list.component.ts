@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
               <th scope="col">Blog</th>
               <th scope="col">Date</th>
               <th scope="col">By</th>
+              <th scope="col">Published</th>
               <th scope="col"></th>
             </tr>
         </thead>
@@ -28,6 +29,15 @@ import { MatButtonModule } from '@angular/material/button';
                 </td>
                 <td class="align-middle">{{ item.createdOn | date: 'short' }}</td>
                 <td class="align-middle">{{ item.userName  }}</td>
+                <td class="align-middle">
+                  @if (item.published) {
+                    <i class="bi bi-check-circle-fill text-success"></i>
+                  }
+                  @else {
+                    <i class="bi bi-x-circle-fill"></i>
+                  }
+
+                </td>
                 <td>
                   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                       <mat-icon>more_vert</mat-icon>

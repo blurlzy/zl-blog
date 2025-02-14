@@ -19,7 +19,7 @@ namespace ZLBlog.Requests
 
         public async Task<PagedList<Blog>> Handle(ListBlogRequest request, CancellationToken cancellationToken)
         {
-            return await _blogRepo.SearcchBlogsAsync(string.Empty, request.PageIndex, request.PageSize, false);
+            return await _blogRepo.SearcchBlogsAsync(string.Empty, request.PageIndex, request.PageSize, true, false);
         }
     }
 }

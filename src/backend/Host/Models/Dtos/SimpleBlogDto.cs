@@ -25,7 +25,7 @@
         /// Timestamp of the chat creation.
         /// </summary>
         public DateTimeOffset CreatedOn { get; set; }
-
         public DateTimeOffset? UpdatedOn { get; set; }
+        public bool Published { get; set; }
     }
 }

@@ -15,5 +15,9 @@ export const AllowList = [
 	 {
 		uri: `${environment.apiEndpoint}/api/admin/*`,
 		httpMethod: HttpMethod.Put,
+	 },
+	 {
+		uri: `${environment.apiEndpoint}/api/admin/*`,
+		httpMethod: HttpMethod.Delete,
 	 }
 ]

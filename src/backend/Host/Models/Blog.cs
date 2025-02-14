@@ -39,8 +39,9 @@ namespace ZLBlog.Models
 
         public DateTimeOffset? UpdatedOn { get; set; }
 
+        public bool Published { get; set; }
+        
         // soft delete
-        [JsonIgnore]
         public bool IsDeleted { get; set; }
 
 
@@ -54,6 +55,7 @@ namespace ZLBlog.Models
             this.UserId = userId;
             this.UserName = userName;
             this.CreatedOn = DateTimeOffset.Now;
+            this.Published = false;
             this.IsDeleted = false;
         }
 

@@ -38,6 +38,7 @@ export class AdminHomeComponent {
     this.blogAdminDataService.search('', 0, 12)
       .subscribe((pagedList: any) => {
         this.blogs = pagedList.data;
+        console.log(this.blogs);
       });
   }
 }

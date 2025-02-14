@@ -6,7 +6,7 @@ namespace ZLBlog.Requests
         public string Keyword { get; set; }
         public int PageIndex { get; init; }
         public int PageSize { get; init; }
-        public bool IncludeDeletedItems { get; set; }
+        // public bool IncludeDeletedItems { get; set; }
     }
 
     public class SearchBlogAdminHandler : IRequestHandler<SearchcBlogAdminRequest, PagedList<SimpleBlogDto>>
@@ -23,7 +23,8 @@ namespace ZLBlog.Requests
 
         public async Task<PagedList<SimpleBlogDto>> Handle(SearchcBlogAdminRequest request, CancellationToken cancellationToken)
         {
-            var pagedList = await _blogRepo.SearcchBlogsAsync(request.Keyword, request.PageIndex, request.PageSize, request.IncludeDeletedItems);
+            // in the admin portal, we are able to search blogs included unpublished & deleted blogs
+            var pagedList = await _blogRepo.SearcchBlogsAsync(request.Keyword, request.PageIndex, request.PageSize, false, true);
 
             // convert
             var pagedData = _mapper.Map<List<SimpleBlogDto>>(pagedList.Data);

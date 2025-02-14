@@ -32,10 +32,10 @@ namespace ZLBlog.Tests.Tests
 
         [Theory]
         //[InlineData("", 0, 12, true)]
-        [InlineData("second", 0, 12, true)]
-        public async Task Search_Blogs_Test(string keyword, int skip, int count, bool includeDeletedItems)
+        [InlineData("second", 0, 12, false, true)]
+        public async Task Search_Blogs_Test(string keyword, int skip, int count, bool publishedOnly, bool includeDeletedItems)
         {
-           var pagedList = await _blogRepository.SearcchBlogsAsync(keyword, skip, count, includeDeletedItems);
+           var pagedList = await _blogRepository.SearcchBlogsAsync(keyword, skip, count, publishedOnly, includeDeletedItems);
 
             Assert.True(pagedList.Total >= 0);
         }

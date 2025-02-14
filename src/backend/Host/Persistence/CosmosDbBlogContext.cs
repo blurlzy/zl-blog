@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 using System.Linq.Expressions;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
+
 
 namespace ZLBlog.Persistence
 {
@@ -19,7 +19,7 @@ namespace ZLBlog.Persistence
                             .Where(predicate).OrderByDescending(m => m.CreatedOn).Skip(skip).Take(count).AsEnumerable());
         }
 
-        public async Task<PagedList<Blog>> ListBlogsAsync(int pageIndex, int pageSize, bool includeDeletedItems)
+        public async Task<PagedList<Blog>> ListBlogsAsync(int pageIndex, int pageSize, bool publishedOnly, bool includeDeletedItems)
         {
             // query items
             var query = @"SELECT * FROM c ";
@@ -27,6 +27,11 @@ namespace ZLBlog.Persistence
             if (!includeDeletedItems)
             {
                 query += "WHERE c.isDeleted = false ";
+            }
+
+            if (publishedOnly)
+            {
+                query += !includeDeletedItems ? " AND c.published = true " : " WHERE c.published = true ";
             }
 
             query += " ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
@@ -45,13 +50,18 @@ namespace ZLBlog.Persistence
                 countQuery += "WHERE c.isDeleted = false ";
             }
 
+            if (publishedOnly)
+            {
+                countQuery += !includeDeletedItems ? " AND c.published = true " : " WHERE c.published = true ";
+            }
+
             QueryDefinition countQueryDef = new QueryDefinition(countQuery);
             var totalCount = await base.CountAsync(countQueryDef);
 
             return new PagedList<Blog>(totalCount, pagedList);
         }
 
-        public async Task<PagedList<Blog>> SearchBlogsAsync(string keyword, int pageIndex, int pageSize, bool includeDeletedItems)
+        public async Task<PagedList<Blog>> SearchBlogsAsync(string keyword, int pageIndex, int pageSize, bool publishedOnly, bool includeDeletedItems)
         {
             // search items by keyword
             var searchQuery = @"SELECT * FROM c
@@ -60,6 +70,11 @@ namespace ZLBlog.Persistence
             if(!includeDeletedItems)
             {
                 searchQuery += "AND (c.isDeleted = false) ";
+            }
+
+            if(publishedOnly)
+            {
+                searchQuery += "AND (c.published = true) ";
             }
 
             searchQuery += " ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
@@ -80,6 +95,11 @@ namespace ZLBlog.Persistence
             if (!includeDeletedItems)
             {
                 countQuery += "AND (c.isDeleted = false) ";
+            }
+
+            if (publishedOnly)
+            {
+                countQuery += "AND (c.published = true) ";
             }
 
             QueryDefinition count = new QueryDefinition(countQuery)

@@ -7,6 +7,9 @@
         public const string CosmosDb = "CosmosDb";
         public const string BlogContainer = "BlogContainer";
 
+        // storage account - blog
+        public const string StorageAccConnection = "StorageAccountConnection";
+
         // application insights
         public const string AppInsightsConnection = "AppInsightsConnection";
 

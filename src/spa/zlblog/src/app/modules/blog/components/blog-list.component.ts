@@ -38,9 +38,10 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 
   `,
   styles: `
-      .article-container {
-      
-      }
+    .article-container {
+        word-wrap: break-word; /* Ensures long words break */
+        overflow-wrap: break-word;
+    }
       .article-container img {
         width: 100%;
         height: auto;
@@ -61,7 +62,6 @@ export class BlogListComponent {
   private listBlogs() { 
     this.blogDataService.listBlogs(0, 10).subscribe((data: any) => {
       this.blogs = data.data;
-      console.log(this.blogs);
     });
   }
 }

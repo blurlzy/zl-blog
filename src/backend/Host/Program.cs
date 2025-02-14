@@ -28,6 +28,7 @@ builder.Services.ConfigureAutoMapper();
 
 // register persistence services
 builder.Services.ConfigurePersistence(builder.Configuration);
+builder.Services.ConfigureBlobStorageService(builder.Configuration);
 // register application insights
 builder.Services.ConfigureApplicationInsights(builder.Configuration);
 
