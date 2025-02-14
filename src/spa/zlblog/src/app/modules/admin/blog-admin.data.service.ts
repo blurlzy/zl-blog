@@ -18,12 +18,18 @@ export class BlogAdminDataService {
 		return this.http.get(url);
 	}
 
-	// create or update a blog
-	saveBlog(blog: any): Observable<any> { 
+	// create a blog
+	createBlog(blog: any): Observable<any> { 
 		const url = `${this.blogAdminApiEndpoint}/blogs`;
 		return this.http.post(url, blog);
 	}
 
+	// update a blog
+	updateBlog(blog: any): Observable<any> { 
+		const url = `${this.blogAdminApiEndpoint}/blogs/${blog.id}`;
+		return this.http.put(url, blog);
+	}
+	
 	// get the latest blog images
 	getLatestImages(): Observable<any> { 
 		const url = `${this.blogAdminApiEndpoint}/blog-images`;

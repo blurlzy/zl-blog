@@ -40,16 +40,41 @@ namespace ZLBlog.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> CreateBlogAsync([FromBody] CreateBlogDto model)
+        public async Task<IActionResult> CreateBlogAsync([FromBody] UpsetBlogDto model)
         {
 
-            var req = new CreateBlogRequest { Title = model.Title, Content = model.Content, Tags = model.Tags, UserId = base.IdentityName, UserName = base.Auth0UserProfileName };
-            //req.UserId = base.IdentityName;
-            //req.UserName = base.Auth0UserProfileName;
+            var req = new CreateBlogAdminRequest 
+            { 
+                Title = model.Title, 
+                Content = model.Content, 
+                Tags = model.Tags, 
+                UserId = base.IdentityName, 
+                UserName = base.Auth0UserProfileName 
+            };
 
             // send
             var newBlog = await base.Mediator.Send(req);
             return Ok(new { id = newBlog.Id });
+        }
+
+        [HttpPut("blogs/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> UpdateBlogAsync(string id, [FromBody] UpsetBlogDto model)
+        {
+            var req = new UpdateBlogAdminRequest 
+            { 
+                Id = id, 
+                Title = model.Title, 
+                Content = model.Content,
+                Tags = model.Tags,
+                UserId = base.IdentityName, 
+                UserName = base.Auth0UserProfileName 
+            };
+
+            var blog = await base.Mediator.Send(req);
+            return Ok(new { blog });
         }
 
         [HttpPost("blogs/{id}/publish")]
@@ -89,7 +114,7 @@ namespace ZLBlog.Controllers
                                                   .ToList();
 
 
-            var req = new UploadBlogImagesRequest { Files = uploadedFiles };
+            var req = new UploadBlogImagesAdminRequest { Files = uploadedFiles };
             await base.Mediator.Send(req);
 
             return Ok();            

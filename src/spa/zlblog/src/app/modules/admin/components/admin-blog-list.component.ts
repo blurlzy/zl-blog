@@ -45,11 +45,11 @@ import { MatButtonModule } from '@angular/material/button';
                     <mat-menu #menu="matMenu">
                       <button mat-menu-item>
                         <a routerLink="/admin/edit/{{item.id}}" class="link-dark link-underline-opacity-0">
-                          <i class="bi bi-pencil-square"></i> Edit
+                          <i class="bi bi-pencil-square me-2"></i> Edit
                         </a> 
                       </button>
                       <button mat-menu-item>
-                        <i class="bi bi-archive"></i> Archive
+                        <i class="bi bi-archive me-2"></i> Archive
                       </button>
                     </mat-menu>
                 </td>

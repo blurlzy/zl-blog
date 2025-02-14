@@ -1,12 +1,12 @@
 ﻿
 namespace ZLBlog.Requests
 {
-    public class UploadBlogImagesRequest: IRequest<Unit>
+    public class UploadBlogImagesAdminRequest: IRequest<Unit>
     {
         public List<FileUploadDto> Files { get; set; }
     }
 
-    public class UploadBlogImageHandler : IRequestHandler<UploadBlogImagesRequest, Unit>
+    public class UploadBlogImageHandler : IRequestHandler<UploadBlogImagesAdminRequest, Unit>
     {
         private readonly BlobService _blobService;
 
@@ -17,7 +17,7 @@ namespace ZLBlog.Requests
 
         }
 
-        public async Task<Unit> Handle(UploadBlogImagesRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UploadBlogImagesAdminRequest request, CancellationToken cancellationToken)
         {
             // ensure each content item has at least one image fiel
             if (request.Files == null || !request.Files.Any())

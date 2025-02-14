@@ -1,7 +1,7 @@
 ﻿
 namespace ZLBlog.Requests
 {
-    public record CreateBlogRequest : IRequest<Blog>
+    public record CreateBlogAdminRequest : IRequest<Blog>
     {
         public string Title { get; init; }
         public string Content { get; init; }
@@ -10,7 +10,7 @@ namespace ZLBlog.Requests
         public string UserName { get; set; }
     }
 
-    public class CreateBlogHandler : IRequestHandler<CreateBlogRequest, Blog>
+    public class CreateBlogHandler : IRequestHandler<CreateBlogAdminRequest, Blog>
     {
         private readonly BlogRepository _blogRepo;
 
@@ -20,7 +20,7 @@ namespace ZLBlog.Requests
             _blogRepo = blogRepo;
         }
 
-        public async Task<Blog> Handle(CreateBlogRequest request, CancellationToken cancellationToken)
+        public async Task<Blog> Handle(CreateBlogAdminRequest request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.Title))
             {

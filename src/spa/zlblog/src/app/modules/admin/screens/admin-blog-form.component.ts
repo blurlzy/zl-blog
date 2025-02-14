@@ -71,7 +71,7 @@ import { AdminBlogImageListComponent } from '../components/admin-blog-image-list
       }      
 
         <div class="col-10 mt-3">
-          <button type="submit" class="btn btn-primary me-3" [disabled]="form.invalid || (loader.isLoading | async)" (click)="saveBlog()">Save Draft</button>
+          <button type="submit" class="btn btn-primary me-3" [disabled]="form.invalid || (loader.isLoading | async)" (click)="saveBlog()">Save</button>
           <button type="submit" class="btn btn-light" (click)="goBack()">Cancel</button>
           @if (editing) {
             @if (form.value.published) {
@@ -184,17 +184,28 @@ export class AdminBlogFormComponent {
   // create a new blog
   createBlog(): void { 
     // this.form.patchValue({ tags: this.tags.join(',') });
-    this.blogAdminDataService.saveBlog(this.form.value).subscribe((res) => {
-      this.snackbarService.success('Blog created successfully');
-      console.log(res);
+    this.blogAdminDataService.createBlog(this.form.value).subscribe((res) => {
+      this.snackbarService.success('Blog created successfully');    
     });
     
   }
 
+  // update a blog
+  updateBlog(): void { 
+    // this.form.patchValue({ tags: this.tags.join(',') });
+    this.blogAdminDataService.updateBlog(this.form.value).subscribe((res) => {
+      this.snackbarService.success('Blog updated successfully');
+    });
+  } 
+
   saveBlog(): void {
     // convert tags
     this.form.patchValue({ tags: this.tags.join(',') });
-    console.log(this.form.value);
+    if(this.editing) {
+      this.updateBlog();
+      return;
+    }
+
     this.createBlog();
   }
 
@@ -210,7 +221,7 @@ export class AdminBlogFormComponent {
       });
 
       // set tags
-      this.tags = res.tags;
+      this.tags = res.tags?? [];
     });
   }
 

@@ -7,7 +7,12 @@ import { BlogListComponent } from '../components/blog-list.component';
   standalone: true,
   imports: [ BlogListComponent ],
   template: `
-    <app-blog-list></app-blog-list>
+  <div class="row">
+    <div class="col-12">
+         <app-blog-list></app-blog-list>
+    </div>
+  </div>
+ 
   `,
   styles: ``
 })
