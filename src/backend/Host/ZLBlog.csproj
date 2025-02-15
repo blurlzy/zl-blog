@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>a7c1e787-c453-4551-a186-fe9036533274</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +19,7 @@
 	  <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
 	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.44.0-preview.1" />
 	  <PackageReference Include="Microsoft.Identity.Web" Version="3.1.0" />
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
 	  <PackageReference Include="Azure.Identity" Version="1.13.0-beta.1" />
 	  <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.6.0" />

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 // services
 import { BlogDataService } from '../blog.data.service';
 // import components
@@ -8,12 +9,18 @@ import { BlogListComponent } from '../components/blog-list.component';
 @Component({
   selector: 'app-blog-home',
   standalone: true,
-  imports: [BlogListComponent],
+  imports: [MatPaginatorModule, BlogListComponent],
   template: `
   <div class="row">
     <div class="col-12 mt-3">
          <app-blog-list [data]="blogs"></app-blog-list>
     </div>
+    <mat-paginator 
+              [hidePageSize]="true" 
+           
+              showFirstLastButtons
+              aria-label="Select page">
+</mat-paginator>
   </div>
  
   `,
