@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 export class BlogAdminDataService {
 	// api endpoint
 	private blogAdminApiEndpoint = `${environment.apiEndpoint}/api/admin`;
+	private blobAdminApiEndpoint = `${environment.apiEndpoint}/api/blobs`;
 
 	// ctor
 	constructor(private http: HttpClient) { }
@@ -32,10 +33,20 @@ export class BlogAdminDataService {
 	
 	// get the latest blog images
 	getLatestImages(): Observable<any> { 
-		const url = `${this.blogAdminApiEndpoint}/blog-images`;
+		const url = `${this.blobAdminApiEndpoint}/blog-images`;
 		return this.http.get(url);
 	}
 	
+	// upload blog images
+	uploadImages(formData: any): Observable<any> { 
+
+		const url = `${this.blobAdminApiEndpoint}`;
+
+console.log(formData);
+		
+		return this.http.post(url, formData);
+	}
+
 	// get blog by id
 	getBlogById(id: string): Observable<any> { 
 		const url = `${this.blogAdminApiEndpoint}/blogs/${id}`;

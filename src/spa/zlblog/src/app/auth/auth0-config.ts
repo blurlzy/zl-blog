@@ -1,4 +1,4 @@
-import { HttpMethod   } from '@auth0/auth0-angular';
+import { HttpMethod } from '@auth0/auth0-angular';
 // env
 import { environment } from '../../environments/environment';
 
@@ -7,17 +7,29 @@ export const AllowList = [
 	{
 		uri: `${environment.apiEndpoint}/api/admin/*`,
 		httpMethod: HttpMethod.Get,
-	 },
+	},
 	{
 		uri: `${environment.apiEndpoint}/api/admin/*`,
 		httpMethod: HttpMethod.Post,
-	 },
-	 {
+	},
+	{
 		uri: `${environment.apiEndpoint}/api/admin/*`,
 		httpMethod: HttpMethod.Put,
-	 },
-	 {
+	},
+	{
 		uri: `${environment.apiEndpoint}/api/admin/*`,
 		httpMethod: HttpMethod.Delete,
-	 }
+	},
+	{
+		uri: `${environment.apiEndpoint}/api/blobs/*`,
+		httpMethod: HttpMethod.Get,
+	},
+	{
+		uri: `${environment.apiEndpoint}/api/blobs`,
+		httpMethod: HttpMethod.Post,
+	},
+	{
+		uri: `${environment.apiEndpoint}/api/blobs/*`,
+		httpMethod: HttpMethod.Put,
+	}
 ]

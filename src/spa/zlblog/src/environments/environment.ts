@@ -1,6 +1,6 @@
 export const environment = {
 	production: true,
-	apiEndpoint: 'https://app-laozaoshanghai-api-prod.azurewebsites.net',
+	apiEndpoint: 'https://localhost:7023', 
 	auth0Config:{
 		tenantDomain: 'zlblog.au.auth0.com',
 		clientId: '9BkIxugDGE3VB1p4zXF1CQinIJAMk9B5',

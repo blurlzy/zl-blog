@@ -130,6 +130,9 @@ export class AdminBlogFormComponent {
       this.getBlog(blogId);
     }
     //console.log(blogId);
+    this.auth.getAccessTokenSilently().subscribe(token => {
+      console.log(token);
+     });
   }
 
   toogleHtmlEditr(): void {
@@ -186,6 +189,8 @@ export class AdminBlogFormComponent {
     // this.form.patchValue({ tags: this.tags.join(',') });
     this.blogAdminDataService.createBlog(this.form.value).subscribe((res) => {
       this.snackbarService.success('Blog created successfully');    
+      // redirect to edit page
+      this.router.navigate(['/admin/edit', res.id]);
     });
     
   }

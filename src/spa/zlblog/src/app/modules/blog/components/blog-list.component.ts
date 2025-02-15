@@ -17,7 +17,9 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
             <h2 class="article-title">
                <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
             </h2>
-            <p class="article-meta"><i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
+            <p class="article-meta">
+              <i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}
+            </p>
             
             <mat-chip-set>
               @for (tag of blog.tags; track tag) { 
@@ -29,11 +31,11 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 
 
             <!-- html content -->
-            <div [innerHTML]="blog.content | safeHtml" class="article-container mt-2"></div>
+            <div [innerHTML]="blog.content | safeHtml" class="article-container mt-2 mb-2"></div>
 
             <!-- COMMENTS SECTION (only the count, no individual comments) -->
-            <section class="comments-section mt-2">
-              <h3>Comments (2)</h3>
+            <section class="comments-section mt-3 py-2">
+              <h5> <i class="bi bi-chat-square"></i> Comments (2)</h5>
             </section>
         </article>
     }
@@ -49,6 +51,10 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
         height: auto;
         display: block; /* prevents inline spacing issues in some cases */
       }
+    
+    .comments-section h5 {
+      font-size: 0.85rem;
+    }
   `
 })
 export class BlogListComponent {
