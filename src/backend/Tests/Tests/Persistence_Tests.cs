@@ -50,7 +50,7 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        [InlineData("d9a7f839-a543-416d-94ec-98f7a01532a6")]
+        [InlineData("fe0c5a3d-f5f7-4bd5-b0ce-a520e4662450")]
         public async Task Delete_Blog_Test(string id)
         {
             await _blogRepository.DeleteAsync(id);

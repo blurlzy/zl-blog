@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
+// material
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+// services
+import { Loader } from '../core/services/loader.service';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [ RouterOutlet, RouterLink, CommonModule],
+  imports: [ RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
@@ -33,7 +37,11 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
         </div>
       </nav>
 
-      <main class="container" style="margin-top: 80px;">
+      @if (loader.isLoading | async) {
+        <mat-progress-bar mode="indeterminate" style="z-index:9999;"></mat-progress-bar>
+      }
+
+      <main class="container-xl" style="margin-top: 80px;">
         <router-outlet></router-outlet>
       </main>
 
@@ -44,5 +52,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   styles: ``
 })
 export class MainLayoutComponent {
-
+  
+    // ctor
+    constructor(public loader: Loader) { }
 }

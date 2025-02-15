@@ -15,4 +15,9 @@ export class BlogDataService {
 		const url = `${this.blogApiEndpoint}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
 		return this.http.get(url);
 	}
+
+	getBlog(id:string): Observable<any> { 
+		const url = `${this.blogApiEndpoint}/${id}`;
+		return this.http.get(url);
+	}
 }

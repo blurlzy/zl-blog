@@ -8,7 +8,7 @@ import { BlogListComponent } from '../components/blog-list.component';
   imports: [ BlogListComponent ],
   template: `
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mt-3">
          <app-blog-list></app-blog-list>
     </div>
   </div>

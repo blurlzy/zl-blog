@@ -26,5 +26,15 @@ namespace ZLBlog.Controllers
             return await base.Mediator.Send(req);
         }
 
+        [HttpGet("{id}")]
+        [EnsurePaginationFilter]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<Blog> GetBlobAsync(string id)
+        {
+            var req = new GetBlogRequest { Id = id };
+            return await base.Mediator.Send(req);
+        }
     }
 }

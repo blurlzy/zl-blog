@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 // material
 import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
@@ -9,12 +10,14 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [ MatChipsModule, DatePipe, UpperCasePipe, SafeHtmlPipe ],
+  imports: [ RouterLink, MatChipsModule, DatePipe, UpperCasePipe, SafeHtmlPipe ],
   template: `
     @for (blog of blogs; track blog) {
         <article>        
-            <h2 class="article-title"> {{ blog.title }} </h2>
-            <p class="article-meta">Posted on {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} by {{ blog.userName }}</p>
+            <h2 class="article-title">
+               <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
+            </h2>
+            <p class="article-meta"><i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
             
             <mat-chip-set>
               @for (tag of blog.tags; track tag) { 
