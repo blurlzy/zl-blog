@@ -1,4 +1,6 @@
-﻿// identity & key vault
+﻿global using System.Text.Json.Serialization;
+
+// identity & key vault
 global using Azure.Identity;
 global using Azure.Security.KeyVault.Secrets;
 global using Azure.Storage.Blobs;

@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 // material
 import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 // services
-import { BlogDataService } from '../blog.data.service';
 import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 
 @Component({
@@ -12,7 +11,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
   standalone: true,
   imports: [ RouterLink, MatChipsModule, DatePipe, UpperCasePipe, SafeHtmlPipe ],
   template: `
-    @for (blog of blogs; track blog) {
+    @for (blog of data; track blog.id) {
         <article>        
             <h2 class="article-title">
                <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
@@ -35,7 +34,9 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 
             <!-- COMMENTS SECTION (only the count, no individual comments) -->
             <section class="comments-section mt-3 py-2">
-              <h5> <i class="bi bi-chat-square"></i> Comments (2)</h5>
+              <h5> 
+                <a routerLink="/blogs/{{ blog.id }}" class="link-dark link-underline-opacity-0"> <i class="bi bi-chat-square"></i> Comments ({{ blog.totalComments ?? 0 }})</a>
+              </h5>
             </section>
         </article>
     }
@@ -58,18 +59,19 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
   `
 })
 export class BlogListComponent {
-  blogs:any = [];
+  @Input({ required: true }) data: any = [];
+  // blogs:any = [];
 
-  constructor(private blogDataService: BlogDataService) { }
+  // constructor(private blogDataService: BlogDataService) { }
 
-  ngOnInit() {
-    this.listBlogs();
-  }
+  // ngOnInit() {
+  //   this.listBlogs();
+  // }
 
-  // load latest blogs
-  private listBlogs() { 
-    this.blogDataService.listBlogs(0, 10).subscribe((data: any) => {
-      this.blogs = data.data;
-    });
-  }
+  // // load latest blogs
+  // private listBlogs() { 
+  //   this.blogDataService.listBlogs(0, 10).subscribe((data: any) => {
+  //     this.blogs = data.data;
+  //   });
+  // }
 }

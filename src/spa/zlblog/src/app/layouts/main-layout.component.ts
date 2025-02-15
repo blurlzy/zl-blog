@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { FormControl,FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 // material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 // services
@@ -9,7 +10,7 @@ import { Loader } from '../core/services/loader.service';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [ RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
+  imports: [ FormsModule, ReactiveFormsModule, RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
@@ -22,17 +23,15 @@ import { Loader } from '../core/services/loader.service';
             <ul class="navbar-nav ms-auto">
 
               <li class="nav-item head-item">
-                <a class="nav-link" routerLink="">About</a>
+                <a class="nav-link" routerLink="/blogs/7001e221-28e1-4f97-a5dd-a762e28e1cda">About</a>
               </li>
-              <li class="nav-item head-item">
-                <a class="nav-link" routerLink="">Contact</a>
-              </li>
+
             </ul>
           </div>
 
           <form class="d-flex ms-auto ms-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-light me-2"><i class="bi bi-search"></i></button>
+            <input class="form-control me-2 ms-1" type="search" placeholder="Search" aria-label="Search" [formControl]="keywordsCtrl">
+            <button class="btn btn-light me-2" [disabled]="keywordsCtrl.invalid" (click)="search()"><i class="bi bi-search"></i></button>
           </form>
         </div>
       </nav>
@@ -56,7 +55,15 @@ import { Loader } from '../core/services/loader.service';
   styles: ``
 })
 export class MainLayoutComponent {
-  
-    // ctor
-    constructor(public loader: Loader) { }
+  // inject services
+    private readonly router = inject(Router);
+    public readonly loader = inject(Loader);
+
+    keywordsCtrl = new FormControl('', [Validators.required]);
+
+    search(): void {
+      this.router.navigate(['/'], {
+        queryParams: { keywords: this.keywordsCtrl.value }
+      });
+    }
 }

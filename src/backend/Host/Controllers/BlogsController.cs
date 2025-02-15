@@ -19,9 +19,9 @@ namespace ZLBlog.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<PagedList<Blog>> ListBlogsAsync([FromQuery] int pageIndex = 0, int pageSize = 8)
+        public async Task<PagedList<Blog>> ListBlogsAsync([FromQuery] string? keywords, int pageIndex = 0, int pageSize = 8)
         {
-            var req = new ListBlogRequest { PageIndex = pageIndex, PageSize = pageSize };
+            var req = new ListBlogsRequest { Keywords = keywords,  PageIndex = pageIndex, PageSize = pageSize };
 
             return await base.Mediator.Send(req);
         }
@@ -34,6 +34,19 @@ namespace ZLBlog.Controllers
         public async Task<Blog> GetBlobAsync(string id)
         {
             var req = new GetBlogRequest { Id = id };
+            return await base.Mediator.Send(req);
+        }
+
+
+        [HttpGet("{id}/comments")]
+        [EnsurePaginationFilter]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IEnumerable<BlogComment>> GetComments(string id)
+        {
+            var req = new ListCommentsRequest { BlogId = id };
+
             return await base.Mediator.Send(req);
         }
     }

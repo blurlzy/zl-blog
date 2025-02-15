@@ -1,5 +1,4 @@
-﻿using ZLBlog.Persistence.Storage;
-
+﻿
 namespace ZLBlog.Persistence
 {
     public static class Startup
@@ -10,14 +9,17 @@ namespace ZLBlog.Persistence
             var cosmosConn = configuration[SecretKeys.CosmosConnection];
             var cosmosDb = configuration[SecretKeys.CosmosDb];
             var cosmosBlogContainer = configuration[SecretKeys.BlogContainer];
+            var cosmosBlogCommentContainer = configuration[SecretKeys.BlogCommentContainer];
 
             // init cosmos db context
 #pragma warning disable CS8604 // Possible null reference argument.
             var blogDbContext = new CosmosDbBlogContext(cosmosConn, cosmosDb, cosmosBlogContainer);
+            var blogCommentDbContext = new CosmosDbBlogCommentContext(cosmosConn, cosmosDb, cosmosBlogCommentContainer);
 #pragma warning restore CS8604 // Possible null reference argument.
 
             // register repo
             services.AddSingleton<BlogRepository>(m => new BlogRepository(blogDbContext));
+            services.AddSingleton<BlogCommentRepository>(m => new BlogCommentRepository(blogCommentDbContext));
         }
 
         public static void ConfigureBlobStorageService(this IServiceCollection services, IConfiguration configuration)

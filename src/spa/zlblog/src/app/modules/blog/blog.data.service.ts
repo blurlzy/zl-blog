@@ -7,17 +7,28 @@ import { environment } from '../../../environments/environment';
 export class BlogDataService {
 	// api endpoint
 	private blogApiEndpoint = `${environment.apiEndpoint}/api/blogs`;
-
+	private commentApiEndpoint = `${environment.apiEndpoint}/api/BlogComments`;
 	// ctor
 	constructor(private http: HttpClient) { }
 
-	listBlogs(pageIndex:number, pageSize: number): Observable<any> { 
-		const url = `${this.blogApiEndpoint}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+	listBlogs(keywords:string, pageIndex:number, pageSize: number): Observable<any> { 
+		const url = `${this.blogApiEndpoint}?keywords=${keywords}&pageIndex=${pageIndex}&pageSize=${pageSize}`;
+		console.log(url);
 		return this.http.get(url);
 	}
 
 	getBlog(id:string): Observable<any> { 
 		const url = `${this.blogApiEndpoint}/${id}`;
 		return this.http.get(url);
+	}
+
+	listComments(blogId:string): Observable<any> { 
+		const url = `${this.blogApiEndpoint}/${blogId}/comments`;
+		return this.http.get(url);
+	}
+	
+	createComment(comment:any): Observable<any> {
+		const url = `${this.commentApiEndpoint}`;
+		return this.http.post(url, comment);
 	}
 }

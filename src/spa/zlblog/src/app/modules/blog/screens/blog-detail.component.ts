@@ -7,10 +7,14 @@ import { MatButtonModule } from '@angular/material/button';
 // services
 import { BlogDataService } from '../blog.data.service';
 import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
+// components
+import { BlogCommentsComponent } from '../components/blog-comments.component';
 
 @Component({
   selector: 'app-blog-detail',
-  imports: [RouterLink, MatChipsModule, MatButtonModule, SafeHtmlPipe, DatePipe, UpperCasePipe],
+  imports: [RouterLink, MatChipsModule, MatButtonModule, SafeHtmlPipe, DatePipe, UpperCasePipe,
+    BlogCommentsComponent
+  ],
   template: `
     <div class="row">
       <div class="col-12 mt-3">
@@ -26,44 +30,13 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
               </mat-chip-set>
             </div>
 
+            <!-- blog content -->
             <div class="post-content" [innerHTML]="blog.content | safeHtml"></div>
 
-            <section class="comments-section my-2">
-              <p> <i class="bi bi-chat-left"></i> Comments (2)</p>
-
-              <!-- Example existing comments -->
-              <div class="comment-box">
-                <strong>Alice:</strong>
-                <p class="mb-0">Great post! I'm definitely trying these tips.</p>
-              </div>
-
-              <!-- Add a comment form (static example) -->
-              <h5 class="mt-4">Add a Comment</h5>
-              <form>
-                <div class="mb-3">
-                  <label for="commentName" class="form-label">Name</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    id="commentName" 
-                    placeholder="Your name"
-                  >
-                </div>
-                <div class="mb-3">
-                  <label for="commentContent" class="form-label">Comment</label>
-                  <textarea 
-                    class="form-control" 
-                    id="commentContent" 
-                    rows="3" 
-                    placeholder="Write your comment here"
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn btn-dark">Submit</button>
-              </form>
-            </section>
-
-            <!-- Back / Continue Navigation (Optional) -->
-            <div class="d-flex justify-content-between my-1 mt-3">
+            <!-- comments -->
+            <app-blog-comments [blogId]="blogId"></app-blog-comments>
+            
+            <div class="d-flex justify-content-between mt-1 mb-2">
               <a mat-button routerLink="">&larr; Back to Home</a>     
             </div>
       </div>
@@ -74,11 +47,13 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
       font-size: 2rem;
       margin-bottom: 0.5rem;
     }
+    
     .post-meta {
       font-size: 0.875rem;
       color: #6c757d; /* Light gray for meta info */
       margin-bottom: 1rem;
     }
+
     .post-content {
       word-wrap: break-word; /* Ensures long words break */
       overflow-wrap: break-word;
@@ -89,21 +64,10 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
         display: block;
         margin: 1rem 0;
       }
-
-
-    .comment-box {
-      border: 1px solid #dee2e6;
-      border-radius: 0.25rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .comment-box strong {
-      display: block;
-      margin-bottom: 0.1rem;
-    }
   `
 })
 export class BlogDetailComponent {
+  blogId: string  = '';
   blog: any = {};
 
   // Inject ActivatedRoute and Router in the constructor of the component class so they are available to this component:
@@ -113,10 +77,10 @@ export class BlogDetailComponent {
 
 
   ngOnInit() {
-    const blogId = this.route.snapshot.paramMap.get('id');
+    this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
     // ensure blog id is GUID    
-    if(blogId && blogId.length > 10){
-      this.getBlog(blogId);
+    if(this.blogId && this.blogId.length > 10){
+      this.getBlog(this.blogId);
     }
   }
 
@@ -124,7 +88,6 @@ export class BlogDetailComponent {
   private getBlog(id: string): void {
     this.blogDataService.getBlog(id).subscribe((data: any) => {
       this.blog = data;
-      console.log(data);
     });
   }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace ZLBlog.Models
 {
     public class Blog
@@ -44,6 +43,8 @@ namespace ZLBlog.Models
         // soft delete
         public bool IsDeleted { get; set; }
 
+        // total comments
+        public int? TotalComments { get; set; }
 
         // ctor
         public Blog(string title, string content, string[] tags, string userId, string userName)

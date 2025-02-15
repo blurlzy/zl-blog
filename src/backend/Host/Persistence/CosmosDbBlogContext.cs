@@ -1,7 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 using System.Linq.Expressions;
 
-
 namespace ZLBlog.Persistence
 {
     public class CosmosDbBlogContext: CosmosDbContext<Blog>

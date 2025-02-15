@@ -1,4 +1,5 @@
 ﻿
+using Azure.Core.Pipeline;
 using Xunit.Abstractions;
 using ZLBlog.Config;
 using ZLBlog.Models;
@@ -12,9 +13,13 @@ namespace ZLBlog.Tests.Tests
         private readonly string _cosmosConnection = SecretManager.GetSecret(SecretKeys.CosmosConnection);
         private readonly string _cosmosDb = SecretManager.GetSecret(SecretKeys.CosmosDb);
         private readonly string _blogContainer = SecretManager.GetSecret(SecretKeys.BlogContainer);
+        private readonly string _blogCommentContainer = SecretManager.GetSecret(SecretKeys.BlogCommentContainer);
 
         private readonly CosmosDbBlogContext _context;
+        private readonly CosmosDbBlogCommentContext _commentContext;
+        
         private readonly BlogRepository _blogRepository;
+        private readonly BlogCommentRepository _blogCommentRepository;
 
         private readonly ITestOutputHelper _output;
 
@@ -23,9 +28,11 @@ namespace ZLBlog.Tests.Tests
         {
             // cosmos db context
             _context = new CosmosDbBlogContext(_cosmosConnection, _cosmosDb, _blogContainer);
+            _commentContext = new CosmosDbBlogCommentContext(_cosmosConnection, _cosmosDb, _blogCommentContainer);
 
             // repo
             _blogRepository = new BlogRepository(_context);
+            _blogCommentRepository = new BlogCommentRepository(_commentContext);
 
             _output = output;
         }
@@ -56,6 +63,24 @@ namespace ZLBlog.Tests.Tests
         public async Task Delete_Blog_Test(string id)
         {
             await _blogRepository.DeleteAsync(id);
+        }
+
+        [Theory]
+        [InlineData("e39a5df3-0258-43b1-9c45-d5005b9a0824")]
+        public async Task List_Comments_Test(string blogId)
+        {
+            var comments = await _blogCommentRepository.GetCommentsAsync(blogId);
+
+            Assert.NotNull(comments);
+        }
+
+        [Theory]
+        [InlineData("e39a5df3-0258-43b1-9c45-d5005b9a0824", "Justin Li", "Hello world!")]
+        public async Task Create_Comment_Test(string blogId, string name, string commentText)
+        {
+            var blogComment = new BlogComment(blogId, commentText, name, name);
+
+            await _blogCommentRepository.CreateAsync(blogComment);
         }
     }
 }
