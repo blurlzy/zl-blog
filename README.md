@@ -81,12 +81,4 @@ app.UseAuthorization();
 - Install @auth0/auth0-angular
 - Install @angular/material 
 - Install bootstrap-icons
-- npm i ngx-quill
-
-```
-npm install @azure/msal-browser @azure/msal-angular@latest
-ng add @angular/material
-npm i bootstrap-icons
-```
-
-## https://www.npmjs.com/package/ngx-quill
+- npm i ngx-quill (https://www.npmjs.com/package/ngx-quill)
