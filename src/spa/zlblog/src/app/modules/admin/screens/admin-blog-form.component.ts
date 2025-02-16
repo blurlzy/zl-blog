@@ -206,6 +206,11 @@ export class AdminBlogFormComponent {
   saveBlog(): void {
     // convert tags
     this.form.patchValue({ tags: this.tags.join(',') });
+    console.log(this.util.cleanHtml(this.form.value.content));
+    console.log(this.form.value.content);
+    // clean html
+    this.form.patchValue({ content: this.util.cleanHtml(this.form.value.content) });
+
     if(this.editing) {
       this.updateBlog();
       return;

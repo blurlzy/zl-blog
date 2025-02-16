@@ -23,4 +23,9 @@ export class Util {
 		const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
 		return supportedTypes.findIndex(m => m === fileExtension.toLocaleLowerCase()) > -1;
 	}
+
+	// remove the auto-generated "&nbsp;", the html editor will generate "&nbsp;" when the space key is pressed
+	cleanHtml(html: string): string {
+		return html.replace(/&nbsp;/g, ' ');
+	}
 }
