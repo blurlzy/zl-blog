@@ -1,7 +1,7 @@
 ﻿
 namespace ZLBlog.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class VersionsController : ApiBaseController
     {
@@ -10,7 +10,7 @@ namespace ZLBlog.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetVersion()
         {
-            return Ok(new { version = "ZL Blog APIs v1.0 - 202502.1" });
+            return Ok(new { version = "ZL Blog APIs v1.0 - 202502.2" });
         }
     }
 }
