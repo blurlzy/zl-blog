@@ -1,5 +1,5 @@
 # ZL Blog
-A simple and minimalist blog site designed for a clean reading experience. It includes an admin portal that allows administrators to manage blogs and comments efficiently.
+A simple and minimalist blog site designed for a clean reading experience. It includes an admin portal that allows administrators to create, edit, publish and delete blogs efficiently.
 
 Frontend: Developed using Angular 19 for a modern and responsive UI.
 
@@ -8,7 +8,7 @@ Backend: Powered by ASP.NET Core 8.0, ensuring high performance and scalability.
 Database: Securely stores data in Azure Cosmos DB for reliability and flexibility.
 
 ## Demo
-[demo](https://zongyi.me/) 
+[https://zongyi.me](https://zongyi.me/) 
 
 ![ZL Blog](https://stzlblog.blob.core.windows.net/app-images/site_1.png)
 ![ZL Blog](https://stzlblog.blob.core.windows.net/app-images/site_2.png)
