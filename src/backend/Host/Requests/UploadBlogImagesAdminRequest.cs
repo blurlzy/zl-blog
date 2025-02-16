@@ -1,9 +1,11 @@
 ﻿
 namespace ZLBlog.Requests
 {
-    public class UploadBlogImagesAdminRequest: IRequest<Unit>
+    public record UploadBlogImagesAdminRequest: IRequest<Unit>
     {
-        public List<FileUploadDto> Files { get; set; }
+        public List<FileUploadDto> Files { get; init; }
+        public string UserId { get; init; }
+        public string UserEmail { get; init; }
     }
 
     public class UploadBlogImageHandler : IRequestHandler<UploadBlogImagesAdminRequest, Unit>
@@ -25,13 +27,20 @@ namespace ZLBlog.Requests
                 throw new Exception("At least one file / image is required.");
             }
 
+            // blob meta data
+            Dictionary<string, string> metadata = new Dictionary<string, string>
+            {
+                { "author", request.UserId },
+                { "authorEmail", request.UserEmail}
+            };
+
             // upload files
             foreach (var file in request.Files)
             {
                 // generate unique file name
                 var fileName = Guid.NewGuid().ToString() + file.FileExtension;
                 // upload file
-                var blobUri = await _blobService.UploadImageAsync(file.FileStream, fileName);
+                var blobUri = await _blobService.UploadImageAsync(file.FileStream, fileName, metadata);
             }
 
             return Unit.Value;

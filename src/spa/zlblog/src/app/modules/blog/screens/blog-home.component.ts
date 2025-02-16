@@ -1,23 +1,30 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 // services
 import { BlogDataService } from '../blog.data.service';
+import { Loader } from '../../../core/services/loader.service'; 
 // import components
 import { BlogListComponent } from '../components/blog-list.component';
 
 @Component({
   selector: 'app-blog-home',
   standalone: true,
-  imports: [MatPaginatorModule, BlogListComponent],
+  imports: [ CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogListComponent],
   template: `
   <div class="row">
     <div class="col-12 mt-3">
-         <app-blog-list [data]="blogs"></app-blog-list>
+         <app-blog-list [data]="pagedList.data"></app-blog-list>
     </div>
     <mat-paginator 
+              [pageSize]="filterFormGroup.value.pageSize"
+							[pageIndex]="filterFormGroup.value.pageIndex" 
+							[length]="pagedList.total"
               [hidePageSize]="true" 
-           
+							[disabled]="(loader.isLoading | async)"
+							(page)="pageIndexChanged($event)"            
               showFirstLastButtons
               aria-label="Select page">
 </mat-paginator>
@@ -29,29 +36,44 @@ import { BlogListComponent } from '../components/blog-list.component';
 export class BlogHomeComponent {
   // Inject ActivatedRoute and Router in the constructor of the component class so they are available to this component:
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly blogDataService = inject(BlogDataService);
-  blogs: any = [];
-  pager: any = { pageIndex: 0, pageSize: 15};
+  public readonly loader = inject(Loader); 
+
+  // properties
+  pagedList: any = { data: [], total: 0 };
+	// filter form group
+	filterFormGroup = new FormGroup({
+		keyword: new FormControl(''),
+		pageSize: new FormControl(12), 
+		pageIndex: new FormControl(0)
+	});
 
   ngOnInit() {
     // query params change
     this.activatedRoute.queryParams.subscribe(params => {
       // get the query params
-      let keywords = params['keywords'];
-      // list latest blogs
-      if(!keywords) {
-        keywords = '';
-      }
-
+      this.filterFormGroup.patchValue({ keyword: params['keywords'] ?? '' });
       // search blogs
-      this.listBlogs(keywords, this.pager.pageIndex, this.pager.pageSize);
+      this.listBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
     });
   }
+
+  	// page index changed
+	pageIndexChanged(event: PageEvent): void {
+		// update the page index in the query string, which will trigger the query params changes event		
+    this.router.navigate(['/'], {
+			queryParams: {
+				pageIndex: event.pageIndex,
+				keyword: this.filterFormGroup.value.keyword,
+			}
+		});
+	}
 
   // load latest blogs
   private listBlogs(keywords: string, pageIndex: number, pageSize: number) {
     this.blogDataService.listBlogs(keywords, pageIndex, pageSize).subscribe((data: any) => {
-      this.blogs = data.data;
+      this.pagedList = data;
     });
   }
 }

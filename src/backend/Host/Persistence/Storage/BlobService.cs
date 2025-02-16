@@ -6,6 +6,9 @@
         private readonly string _containerName;
         private readonly BlobContainerClient _containerClient;
 
+        // metadata key
+        private readonly string _authorKey = "author";
+        
         public BlobService(BlobServiceClient blobServiceClient, string containerName)
         {
             _blobServiceClient = blobServiceClient;
@@ -20,9 +23,6 @@
         /// <returns>A list of blob URIs, sorted by last modified descending.</returns>
         public async Task<IEnumerable<BlobItem>> GetLatestImagesAsync(int count = 20)
         {
-            // Get the container client
-            // BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-
 
             // We will collect BlobItems in memory, then sort them by last modified
             var blobItems = new List<BlobItem>();
@@ -38,36 +38,72 @@
             }
 
             // Sort by last-modified descending, then take the top "count"
+#pragma warning disable CS8629 // Nullable value type may be null.
             var latestBlobs = blobItems
                 .Where(b => b.Properties.LastModified.HasValue)
                 .OrderByDescending(b => b.Properties.LastModified.Value)
                 .Take(count);
+#pragma warning restore CS8629 // Nullable value type may be null.
 
             return latestBlobs;
-
-            //// Build the public or direct-access URIs
-            //// This will work only if the container is public or you have a SAS approach
-            //var imageUris = new List<string>();
-
-            //foreach (var blobItem in latestBlobs)
-            //{
-            //    // Get a reference to the blob
-            //    BlobClient blobClient = containerClient.GetBlobClient(blobItem.Name);
-
-            //    // If the container is public, you can just use blobClient.Uri
-            //    // If not public, you'll need a SAS token or to retrieve a short-lived read URI
-            //    imageUris.Add(blobClient.Uri.ToString());
-            //}
-
-            //return imageUris;
         }
 
+        public async Task<IEnumerable<BlobItem>> GetLatestImagesAsync(string userId, int count = 20)
+        {
+            // We need metadata in the listing, so we request BlobTraits.Metadata
+            var blobList = _containerClient.GetBlobsAsync(traits: BlobTraits.Metadata);
+
+            // We will collect BlobItems in memory, then sort them by last modified
+            var blobItems = new List<BlobItem>();
+
+            // List all blobs in the container (flat listing)
+            await foreach (var blob in blobList)
+            {
+                // You might want to filter by blob type or extension if only some are images
+                // For example:
+                // if (!IsImageFile(blob.Name)) continue;
+
+                // Check if the "author" metadata is present 
+                if (blob.Metadata.TryGetValue(_authorKey, out var value) && value == userId)
+                {
+                    blobItems.Add(blob);
+                }
+
+            }
+
+            // Sort by last-modified descending, then take the top "count"
+#pragma warning disable CS8629 // Nullable value type may be null.
+            var latestBlobs = blobItems
+                .Where(b => b.Properties.LastModified.HasValue)
+                .OrderByDescending(b => b.Properties.LastModified.Value)
+                .Take(count);
+#pragma warning restore CS8629 // Nullable value type may be null.
+
+            return latestBlobs;
+        }
+
+
+        // return blob uri
         public string GetBlobUri(BlobItem item)
         {
 
             // Get a reference to the blob
             BlobClient blobClient = _containerClient.GetBlobClient(item.Name);
             return blobClient.Uri.ToString();
+        }
+
+        // upload a file blob including meta data
+        public async Task<Uri> UploadImageAsync(Stream stream, string fileName, Dictionary<string, string>? metadata = null)
+        {
+            // blob client
+            var blobClient = _containerClient.GetBlobClient(fileName);
+            // blob metadata
+            BlobUploadOptions options = new BlobUploadOptions
+            {
+                Metadata = (metadata == null || metadata.Count == 0) ? new Dictionary<string, string>() : metadata
+            };
+            await blobClient.UploadAsync(stream, options);
+            return blobClient.Uri;
         }
 
         // upload a file blob via Stream

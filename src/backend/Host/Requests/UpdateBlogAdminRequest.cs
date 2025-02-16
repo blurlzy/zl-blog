@@ -29,7 +29,7 @@ namespace ZLBlog.Requests
             // update
             blog.Title = request.Title;
             blog.Content = request.Content;
-            blog.Tags = request.Tags?.Split(",");
+            blog.Tags = request.Tags.Split(",");
             blog.UpdatedOn = DateTimeOffset.Now;
 
             // update

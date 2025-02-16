@@ -30,7 +30,7 @@ namespace ZLBlog.Controllers
                                                   .ToList();
 
 
-            var req = new UploadBlogImagesAdminRequest { Files = uploadedFiles };
+            var req = new UploadBlogImagesAdminRequest { Files = uploadedFiles, UserId = base.IdentityName, UserEmail = base.Auth0Email };
             await base.Mediator.Send(req);
 
             return Ok();
