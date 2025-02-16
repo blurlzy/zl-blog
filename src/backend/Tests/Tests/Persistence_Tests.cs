@@ -38,13 +38,23 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        //[InlineData("", 0, 12, true)]
         [InlineData("second", 0, 12, false, true)]
         public async Task Search_Blogs_Test(string keyword, int skip, int count, bool publishedOnly, bool includeDeletedItems)
         {
            var pagedList = await _blogRepository.SearcchBlogsAsync(keyword, skip, count, publishedOnly, includeDeletedItems);
 
             Assert.True(pagedList.Total >= 0);
+        }
+
+        [Theory]
+        [InlineData("Azure", 0, 12, false, true)]
+        [InlineData("About", 0, 12, false, true)]
+        [InlineData("Test", 0, 12, false, true)]
+        public async Task Flter_Blogs_Test(string tag, int skip, int count, bool publishedOnly, bool includeDeletedItems)
+        {
+            var pagedList = await _blogRepository.FilterBlogsAsync(tag, skip, count, publishedOnly, includeDeletedItems);
+
+            _output.WriteLine($"Total results: {pagedList.Total}");
         }
 
         [Theory]

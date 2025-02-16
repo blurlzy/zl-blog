@@ -24,3 +24,4 @@ global using ZLBlog.Filters;
 global using ZLBlog.Requests;
 global using ZLBlog.Models;
 global using ZLBlog.Models.Dtos;
+global using ZLBlog.Utils;

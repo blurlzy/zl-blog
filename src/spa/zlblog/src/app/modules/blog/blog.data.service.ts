@@ -11,12 +11,19 @@ export class BlogDataService {
 	// ctor
 	constructor(private http: HttpClient) { }
 
+	// search blogs by keywords
 	listBlogs(keywords:string, pageIndex:number, pageSize: number): Observable<any> { 
 		const url = `${this.blogApiEndpoint}?keywords=${keywords}&pageIndex=${pageIndex}&pageSize=${pageSize}`;
 		console.log(url);
 		return this.http.get(url);
 	}
 
+	// filter blogs by a tag
+	listBlogsByTag(tag:string, pageIndex:number, pageSize: number): Observable<any> { 
+		const url = `${this.blogApiEndpoint}/tags/${tag}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+		return this.http.get(url);
+	}
+	
 	getBlog(id:string): Observable<any> { 
 		const url = `${this.blogApiEndpoint}/${id}`;
 		return this.http.get(url);

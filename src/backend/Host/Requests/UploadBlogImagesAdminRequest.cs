@@ -37,10 +37,15 @@ namespace ZLBlog.Requests
             // upload files
             foreach (var file in request.Files)
             {
+                if (!FileValidator.IsImage(file.FileExtension))
+                {
+                    continue;
+                }
+
                 // generate unique file name
                 var fileName = Guid.NewGuid().ToString() + file.FileExtension;
                 // upload file
-                var blobUri = await _blobService.UploadImageAsync(file.FileStream, fileName, metadata);
+                await _blobService.UploadImageAsync(file.FileStream, fileName, metadata);
             }
 
             return Unit.Value;

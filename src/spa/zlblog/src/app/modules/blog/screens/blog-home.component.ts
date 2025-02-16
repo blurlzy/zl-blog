@@ -5,14 +5,14 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 // services
 import { BlogDataService } from '../blog.data.service';
-import { Loader } from '../../../core/services/loader.service'; 
+import { Loader } from '../../../core/services/loader.service';
 // import components
 import { BlogListComponent } from '../components/blog-list.component';
 
 @Component({
   selector: 'app-blog-home',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogListComponent],
+  imports: [CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogListComponent],
   template: `
   <div class="row">
     <div class="col-12 mt-3">
@@ -38,41 +38,56 @@ export class BlogHomeComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly blogDataService = inject(BlogDataService);
-  public readonly loader = inject(Loader); 
+  public readonly loader = inject(Loader);
 
   // properties
   pagedList: any = { data: [], total: 0 };
-	// filter form group
-	filterFormGroup = new FormGroup({
-		keyword: new FormControl(''),
-		pageSize: new FormControl(12), 
-		pageIndex: new FormControl(0)
-	});
+  // filter form group
+  filterFormGroup = new FormGroup({
+    keyword: new FormControl(''),
+    pageSize: new FormControl(12),
+    pageIndex: new FormControl(0)
+  });
 
   ngOnInit() {
     // query params change
     this.activatedRoute.queryParams.subscribe(params => {
       // get the query params
       this.filterFormGroup.patchValue({ keyword: params['keywords'] ?? '' });
-      // search blogs
-      this.listBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+      // if keywords is a tag, then filter by tag
+      if (params['type'] && params['type'] === 'tag') {
+        this.listBlogsByTag(params['keywords'], this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+      }
+      else {
+        // search blogs
+        this.listBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+      }
+
+    });
+
+  }
+
+  // page index changed
+  pageIndexChanged(event: PageEvent): void {
+    // update the page index in the query string, which will trigger the query params changes event		
+    this.router.navigate(['/'], {
+      queryParams: {
+        pageIndex: event.pageIndex,
+        keyword: this.filterFormGroup.value.keyword,
+      }
     });
   }
 
-  	// page index changed
-	pageIndexChanged(event: PageEvent): void {
-		// update the page index in the query string, which will trigger the query params changes event		
-    this.router.navigate(['/'], {
-			queryParams: {
-				pageIndex: event.pageIndex,
-				keyword: this.filterFormGroup.value.keyword,
-			}
-		});
-	}
-
-  // load latest blogs
+  // list blogs by keywords
   private listBlogs(keywords: string, pageIndex: number, pageSize: number) {
     this.blogDataService.listBlogs(keywords, pageIndex, pageSize).subscribe((data: any) => {
+      this.pagedList = data;
+    });
+  }
+
+  // list blogs by a tag
+  private listBlogsByTag(tag: string, pageIndex: number, pageSize: number) {
+    this.blogDataService.listBlogsByTag(tag, pageIndex, pageSize).subscribe((data: any) => {
       this.pagedList = data;
     });
   }

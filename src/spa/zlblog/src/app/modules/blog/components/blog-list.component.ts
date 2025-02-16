@@ -23,7 +23,9 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
             <mat-chip-set>
               @for (tag of blog.tags; track tag) { 
                 <mat-chip>
-                  {{ tag }}
+                 <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0">  
+                  <i class="bi bi-tag"></i> {{ tag }}
+                 </a> 
                 </mat-chip>
               }           
             </mat-chip-set>

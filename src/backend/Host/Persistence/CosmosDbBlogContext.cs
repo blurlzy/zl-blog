@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 using System.Linq.Expressions;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace ZLBlog.Persistence
 {
@@ -109,5 +110,51 @@ namespace ZLBlog.Persistence
             return new PagedList<Blog>(totalCount, pagedList);
         }
 
+        public async Task<PagedList<Blog>> SearchBlogsByTagAsync(string tag, int pageIndex, int pageSize, bool publishedOnly, bool includeDeletedItems)
+        {
+            // search items by keyword
+            var searchQuery = @"SELECT * FROM c
+                            WHERE ARRAY_CONTAINS(c.tags, @tag) ";
+
+            if (!includeDeletedItems)
+            {
+                searchQuery += "AND (c.isDeleted = false) ";
+            }
+
+            if (publishedOnly)
+            {
+                searchQuery += "AND (c.published = true) ";
+            }
+            searchQuery += " ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
+
+
+            QueryDefinition query = new QueryDefinition(searchQuery)
+                           .WithParameter("@tag", tag)
+                           .WithParameter("@skip", pageIndex * pageSize)
+                           .WithParameter("@take", pageSize);
+
+            var pagedList = await base.RunQueryAsync(query);
+
+            // count items
+            var countQuery = @"SELECT VALUE COUNT(1) FROM c 
+                                WHERE ARRAY_CONTAINS(c.tags, @tag) ";
+
+
+            if (!includeDeletedItems)
+            {
+                countQuery += "AND (c.isDeleted = false) ";
+            }
+
+            if (publishedOnly)
+            {
+                countQuery += "AND (c.published = true) ";
+            }
+
+            QueryDefinition count = new QueryDefinition(countQuery).WithParameter("@tag", tag);
+
+            var totalCount = await base.CountAsync(count);
+
+            return new PagedList<Blog>(totalCount, pagedList);
+        }
     }
 }

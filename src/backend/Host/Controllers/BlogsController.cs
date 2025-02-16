@@ -37,6 +37,17 @@ namespace ZLBlog.Controllers
             return await base.Mediator.Send(req);
         }
 
+        [HttpGet("tags/{tag}")]
+        [EnsurePaginationFilter]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<PagedList<Blog>> ListBlogsByTagAsync(string tag, [FromQuery] int pageIndex = 0, int pageSize = 8)
+        {
+            var req = new ListBlogsByTagRequest { Tag = tag, PageIndex = pageIndex, PageSize = pageSize };
+
+            return await base.Mediator.Send(req);   
+        }
 
         [HttpGet("{id}/comments")]
         [EnsurePaginationFilter]

@@ -23,6 +23,17 @@ namespace ZLBlog.Persistence
             return await _context.SearchBlogsAsync(keyword, skip, count, publishedOnly, includeDeletedItems);
         }
         
+        // filter blogs by a tag
+        public async Task<PagedList<Blog>> FilterBlogsAsync(string tag, int skip = 0, int count = 12, bool publishedOnly = true, bool includeDeletedItems = false)
+        {
+            if(string.IsNullOrEmpty(tag))
+            {
+                return await _context.ListBlogsAsync(skip, count, publishedOnly, includeDeletedItems);
+            }
+
+            return await _context.SearchBlogsByTagAsync(tag, skip, count, publishedOnly, includeDeletedItems);
+        }
+
         // get blog by id
         public async Task<Blog> GetBlogAsync(string id)
         {

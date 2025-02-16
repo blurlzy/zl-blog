@@ -9,7 +9,7 @@ export class Util {
 	}
 
 	createImgHtml(imgUrl: string, alt: string): string {
-		return `<img src="${imgUrl}" alt="${alt}" width="95%" height="95%">`;
+		return `<img src="${imgUrl}" alt="${alt}" width="70%" height="70%">`;
 	}
 
 	// validate images
