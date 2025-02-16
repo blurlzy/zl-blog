@@ -1,30 +1,71 @@
-# Zlblog
+# ZL Blog
+This blog application is built on top of Semantic Kernel and hosted on Azure. The data is securely stored in Azure Cosmos DB. The user interface is developed using Angular 19, and the backend API is powered by ASP.NET Core 8.0.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
 
-## Development server
+## Backend (Asp.net Core Web API)
+### Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Install Azure.Identity & Azure.Security.KeyVault.Secrets (Azure KeyVault integration)
 
-## Code scaffolding
+```
+dotnet add package Microsoft.Identity.Web
+dotnet add package Azure.Identity
+dotnet add package Azure.Security.KeyVault.Secrets
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Auth0 Intergration
+```
+  "Auth0": {
+    "Domain": <your-auth0-domain>,         
+    "Audience": "<your-auth0-audience>" 
+  },
 
-## Build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Register / Configure Authentication
+```
+  services.AddAuthentication(options =>
+  {
+      options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+      options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+  })
+  .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+  {
+      options.Authority = $"https://{auth0Domain}";
+      options.Audience = auth0Audience;
+      // If the access token does not have a `sub` claim, `User.Identity.Name` will be `null`. 
+      // Map it to a different claim by setting the NameClaimType below.
+      options.TokenValidationParameters = new TokenValidationParameters
+      {
+          NameClaimType = ClaimTypes.NameIdentifier
+      };
+  });
 
-## Running unit tests
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Add auth middleware to pipeline
+```
+app.UseAuthentication();
+app.UseAuthorization();
 
-## Running end-to-end tests
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Front-end (Angular)
+### Prerequisites
 
-## Further help
+Complete Auth0 setup
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Installation
 
+- Install @auth0/auth0-angular
+- Install @angular/material 
+- Install bootstrap-icons
+- npm i ngx-quill
+
+```
+npm install @azure/msal-browser @azure/msal-angular@latest
+ng add @angular/material
+npm i bootstrap-icons
+```
 
 ## https://www.npmjs.com/package/ngx-quill
