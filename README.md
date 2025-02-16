@@ -1,16 +1,41 @@
 # ZL Blog
-This blog application is built on top of Semantic Kernel and hosted on Azure. The data is securely stored in Azure Cosmos DB. The user interface is developed using Angular 19, and the backend API is powered by ASP.NET Core 8.0.
+A simple and minimalist blog site designed for a clean reading experience. It includes an admin portal that allows administrators to manage blogs and comments efficiently.
 
+Frontend: Developed using Angular 19 for a modern and responsive UI.
 
-## Backend (Asp.net Core Web API)
-### Installation
+Backend: Powered by ASP.NET Core 8.0, ensuring high performance and scalability.
 
-- Install Azure.Identity & Azure.Security.KeyVault.Secrets (Azure KeyVault integration)
+Database: Securely stores data in Azure Cosmos DB for reliability and flexibility.
 
-```
-dotnet add package Microsoft.Identity.Web
-dotnet add package Azure.Identity
-dotnet add package Azure.Security.KeyVault.Secrets
+## Demo
+[demo](https://zongyi.me/) 
+
+![ZL Blog](https://stzlblog.blob.core.windows.net/app-images/site_1.png)
+![ZL Blog](https://stzlblog.blob.core.windows.net/app-images/site_2.png)
+
+## Backend (Asp.Net Core 8.0)
+### Prerequisites
+
+- Azure Identity
+- Azure Cosmos DB
+- Azure Storage Account - Blob Storage
+- MediatR
+
+## Azure Key Vault provides a way to store credentials and other secrets with increased security. 
+### Key vault intergration
+``` C#
+// register secret client
+SecretClient secretClient = new SecretClient(new Uri($"https://{builder.Configuration["Azure:KeyVault"]}.vault.azure.net"),
+                                              new DefaultAzureCredential(new DefaultAzureCredentialOptions
+                                              {
+                                                  ExcludeEnvironmentCredential = true,
+                                                  ExcludeVisualStudioCodeCredential = true,
+                                                  ExcludeSharedTokenCacheCredential = true,
+                                                  ExcludeInteractiveBrowserCredential = true,
+                                              }));
+
+// loads secrets into configuration.
+builder.Configuration.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
 ```
 
 ### Auth0 Intergration
@@ -23,7 +48,7 @@ dotnet add package Azure.Security.KeyVault.Secrets
 ```
 
 ### Register / Configure Authentication
-```
+``` C#
   services.AddAuthentication(options =>
   {
       options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -52,10 +77,6 @@ app.UseAuthorization();
 
 ## Front-end (Angular)
 ### Prerequisites
-
-Complete Auth0 setup
-
-### Installation
 
 - Install @auth0/auth0-angular
 - Install @angular/material 
