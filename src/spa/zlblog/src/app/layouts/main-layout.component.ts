@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
-import { FormControl,FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 // material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 // services
@@ -10,16 +10,16 @@ import { Loader } from '../core/services/loader.service';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [ FormsModule, ReactiveFormsModule, RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
+  imports: [FormsModule, ReactiveFormsModule, RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
           <a class="navbar-brand head-title" routerLink=""> Not Just <i class="bi bi-chat-square"></i> Tech</a>
-          <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
+          <button  class="navbar-toggler" type="button" (click)="toggleNav()">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div [ngClass]="collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show'">
             <ul class="navbar-nav ms-auto">
 
               <li class="nav-item head-item">
@@ -56,14 +56,20 @@ import { Loader } from '../core/services/loader.service';
 })
 export class MainLayoutComponent {
   // inject services
-    private readonly router = inject(Router);
-    public readonly loader = inject(Loader);
+  private readonly router = inject(Router);
+  public readonly loader = inject(Loader);
 
-    keywordsCtrl = new FormControl('', [Validators.required]);
+  // nav responsive (mobile view)
+  collapsed = true;
+  keywordsCtrl = new FormControl('', [Validators.required]);
 
-    search(): void {
-      this.router.navigate(['/'], {
-        queryParams: { keywords: this.keywordsCtrl.value }
-      });
-    }
+  search(): void {
+    this.router.navigate(['/'], {
+      queryParams: { keywords: this.keywordsCtrl.value }
+    });
+  }
+
+  toggleNav(): void {
+    this.collapsed = !this.collapsed;
+  }
 }
