@@ -16,12 +16,31 @@ Database: Securely stores data in Azure Cosmos DB for reliability and flexibilit
 ## Backend (Asp.Net Core 8.0)
 ### Prerequisites
 
-- Azure Identity
+- Azure Key Vault
 - Azure Cosmos DB
 - Azure Storage Account - Blob Storage
-- MediatR
 
 ## Azure Key Vault provides a way to store credentials and other secrets with increased security. 
+### Add Key vault secrets
+```
+# cosmos db
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "CosmosConnection" --value "<secret-value>"
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "CosmosDb" --value "<secret-value>"
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "BlogContainer" --value "<secret-value>"
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "BlogCommentContainer" --value "<secret-value>"
+ 
+# storage account
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "StorageAccountConnection" --value "<secret-value>"
+ 
+#auth0
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "Auth0Domain" --value "<secret-value>"
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "Auth0Audience" --value "<secret-value>"
+ 
+# application insights
+az keyvault secret set --vault-name "<your-unique-keyvault-name>" --name "AppInsightsConnection" --value "<secret-value>"
+
+```
+
 ### Key vault intergration
 ``` C#
 // register secret client
@@ -78,7 +97,34 @@ app.UseAuthorization();
 ## Front-end (Angular)
 ### Prerequisites
 
-- Install @auth0/auth0-angular
+- Install @auth0/auth0-angular (https://github.com/auth0/auth0-angular)
 - Install @angular/material 
 - Install bootstrap-icons
 - npm i ngx-quill (https://www.npmjs.com/package/ngx-quill)
+
+### Setup auth0 authentication in app.config.ts
+```js
+    provideAuth0({
+      domain: environment.auth0Config.tenantDomain,
+      clientId: environment.auth0Config.clientId,
+      authorizationParams: {
+        audience: environment.auth0Config.audience,
+        redirect_uri: `${window.location.origin}${environment.auth0Config.callbackRedirectUri}`
+      },
+      // The AuthHttpInterceptor configuration
+      httpInterceptor: {
+        allowedList: [
+          ...AllowList
+        ],
+      }
+    }),
+
+```
+
+### Setup Quill in app.config.ts
+```js
+    provideQuillConfig({
+      
+    }), 
+
+```

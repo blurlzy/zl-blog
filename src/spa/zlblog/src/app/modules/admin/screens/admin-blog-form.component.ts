@@ -163,7 +163,8 @@ export class AdminBlogFormComponent {
 
   goBack(): void {
     // This tells the browser to move back one step in its history
-    this.location.back();
+    //this.location.back();
+    this.router.navigate(['/admin']);
   }
 
   openImageListDialog(): void { 

@@ -19,11 +19,22 @@ namespace ZLBlog
 
         public static void ConfigureCors(this IServiceCollection services, string corsPolicy) 
         {
+            string[] allowedOrigins = new[]
+            {
+                "http://localhost:4200",
+                "https://zongyi.me",
+                "http://zongyi.me",
+                "https://www.zongyi.me",
+                "http://www.zongyi.me",
+                "https://delightful-sky-0c8f4b600.4.azurestaticapps.net"
+            };
+
             // cors policy
             services.AddCors(
-            opt =>
-            {
-                    opt.AddPolicy(corsPolicy, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+                opt =>
+                {
+                    opt.AddPolicy(corsPolicy, 
+                        builder => builder.WithOrigins(allowedOrigins));
                 });
         }
 

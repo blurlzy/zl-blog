@@ -1,11 +1,22 @@
-
-/* 
-  Import the Quill CSS
-  (this is the minimal CSS needed for the editor to work)
-*/
-
-// @import '~quill/dist/quill.bubble.css';
-
+// customize angular material theme
+@use '@angular/material' as mat;
+ 
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.progress-bar-overrides((
+    active-indicator-color: #ed008c,
+    track-color: transparent,
+  ));
+}
+ 
+:root {
+	@include mat.paginator-overrides((
+		select-trigger-text-size: var(--mat-sys-body-large-size),
+		container-text-weight: var(--mat-sys-body-large-weight),
+		container-text-size: var(--mat-sys-body-large-size),
+	  container-background-color: transparent,
+	));
+ }
 /* 
   Minimal custom overrides 
   to maintain a clean, black-and-white theme 
@@ -37,7 +48,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	margin-bottom: 0.5rem;
  }
  
- 
  /* 
 	Dashed line divider between articles:
 	border bottom on every article except the last one.
@@ -54,6 +64,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	padding-bottom: 0;
  }
  
+ .zlblog-pink {
+	color: #ed008c;
+ }
 
  .full-width {
 	width: 100%;

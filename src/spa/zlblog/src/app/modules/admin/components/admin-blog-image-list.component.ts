@@ -62,7 +62,7 @@ import { Loader } from '../../../core/services/loader.service';
     }
 
     .card.selected {
-      border: 3px solid #e3165b; /* Blue border for selected state */
+      border: 3px solid #ed008c; /* Blue border for selected state */
     }
   `
 })

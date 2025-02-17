@@ -40,7 +40,7 @@ import { Loader } from '../core/services/loader.service';
         <mat-progress-bar mode="indeterminate" style="z-index:9999;"></mat-progress-bar>
       }
 
-      <main class="container-xl" style="margin-top: 80px;">
+      <main class="container-xl main-content">
         <router-outlet></router-outlet>
       </main>
 
@@ -52,7 +52,17 @@ import { Loader } from '../core/services/loader.service';
         </p>           
       </footer>
   `,
-  styles: ``
+  styles: `
+    .main-content {
+        margin-top: 80px;
+      }
+
+    @media screen and (max-width: 768px) {
+      .main-content {
+        margin-top: 100px;
+      }
+    }
+  `
 })
 export class MainLayoutComponent {
   // inject services
