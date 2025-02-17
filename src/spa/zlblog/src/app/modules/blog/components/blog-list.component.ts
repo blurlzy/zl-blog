@@ -17,7 +17,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
                <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
             </h2>
             <p class="article-meta">
-              <i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}
+              <i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, HH:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}
             </p>
             
             <mat-chip-set>

@@ -27,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
                           {{ item.title  }}
                     </a>               
                 </td>
-                <td class="align-middle">{{ item.createdOn | date: 'short' }}</td>
+                <td class="align-middle">{{ item.createdOn | date : 'MMM d, y, HH:mm' }}</td>
                 <td class="align-middle">{{ item.userName  }}</td>
                 <td class="align-middle">
                   @if (item.published) {
