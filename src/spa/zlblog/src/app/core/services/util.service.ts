@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class Util {
+	// SEO
+	private readonly meta = inject(Meta);
+	private readonly title = inject(Title);
 
-	constructor() {
-
-	}
+	// default SEO tags
+	private readonly defaultTags = 'AI,Azure,Cloud computing,Tech,OpenAI,Azure OpenAI,AWS,GCP,Fabric,Microsoft,Google,Amazon,Cloud,Machine Learning,Generative AI, AGI, AI Agent, LLMs, LLM, Data Engineering,Security,DevOps,CICD,Container,Docker';
+	private readonly defaultDescription = 'AI,Azure,Cloud computing,Tech,OpenAI,Azure OpenAI,AWS,GCP,Fabric,Microsoft,Google,Amazon,Cloud,Machine Learning,Generative AI, AGI, AI Agent, LLMs, LLM,Security,DevOps,CICD,Container,Docker';
+	private readonly defaultTitle = 'ZL Blog - Tech & Beyond';
 
 	createImgHtml(imgUrl: string, alt: string): string {
 		return `<img src="${imgUrl}" alt="${alt}" width="70%" height="70%">`;
@@ -28,4 +33,27 @@ export class Util {
 	cleanHtml(html: string): string {
 		return html.replace(/&nbsp;/g, ' ');
 	}
+
+	setMetaTags(blog: any): void {
+		// set title
+		this.title.setTitle(blog.title);
+		// set meta tags
+		if (blog.tags && blog.tags.length > 0) {
+			this.meta.updateTag({ name: 'keywords', content: blog.tags.join(',') });
+			this.meta.updateTag({ name: 'description', content: blog.tags.join(',') });
+		}
+		else {
+			this.meta.updateTag({ name: 'keywords', content: this.defaultTags });
+			this.meta.updateTag({ name: 'description', content: this.defaultDescription });
+		}
+	}
+
+	resetMetaTags(): void {
+		// set title
+		this.title.setTitle(this.defaultTitle);
+		// set meta tags
+		this.meta.updateTag({ name: 'keywords', content: this.defaultTags });
+		this.meta.updateTag({ name: 'description', content: this.defaultDescription });
+	}
+
 }

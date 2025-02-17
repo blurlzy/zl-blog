@@ -6,6 +6,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 // services
 import { BlogDataService } from '../blog.data.service';
+import { Util } from '../../../core/services/util.service';
 import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 // components
 import { BlogCommentsComponent } from '../components/blog-comments.component';
@@ -55,31 +56,30 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
     }
 
     .post-content {
-      word-wrap: break-word; /* Ensures long words break */
-      overflow-wrap: break-word;
+
     }
-      .post-content img {
-        max-width: 100%; /* Ensure images are responsive */
-        height: auto;
-        display: block;
-        margin: 1rem 0;
-      }
+    .post-content img {
+      width: 100%; /* Ensure images are responsive */
+      height: auto;
+      display: block;
+    }
   `
 })
 export class BlogDetailComponent {
-  blogId: string  = '';
+  blogId: string = '';
   blog: any = {};
 
   // Inject ActivatedRoute and Router in the constructor of the component class so they are available to this component:
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly blogDataService = inject(BlogDataService);
+  private readonly util = inject(Util);
 
 
   ngOnInit() {
     this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
     // ensure blog id is GUID    
-    if(this.blogId && this.blogId.length > 10){
+    if (this.blogId && this.blogId.length > 10) {
       this.getBlog(this.blogId);
     }
   }
@@ -88,6 +88,10 @@ export class BlogDetailComponent {
   private getBlog(id: string): void {
     this.blogDataService.getBlog(id).subscribe((data: any) => {
       this.blog = data;
+
+      // set meta tags
+      this.util.setMetaTags(this.blog);
     });
   }
+
 }

@@ -2,10 +2,13 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
+// angular material
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 // services
 import { BlogDataService } from '../blog.data.service';
 import { Loader } from '../../../core/services/loader.service';
+import { Util } from '../../../core/services/util.service';
 // import components
 import { BlogListComponent } from '../components/blog-list.component';
 
@@ -39,6 +42,7 @@ export class BlogHomeComponent {
   private readonly router = inject(Router);
   private readonly blogDataService = inject(BlogDataService);
   public readonly loader = inject(Loader);
+  public readonly util = inject(Util);
 
   // properties
   pagedList: any = { data: [], total: 0 };
@@ -65,6 +69,8 @@ export class BlogHomeComponent {
 
     });
 
+    // reset meta tags
+    this.util.resetMetaTags();
   }
 
   // page index changed
@@ -91,4 +97,6 @@ export class BlogHomeComponent {
       this.pagedList = data;
     });
   }
+
+
 }
