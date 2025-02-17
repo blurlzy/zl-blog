@@ -13,7 +13,7 @@ import { Loader } from '../core/services/loader.service';
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
-          <a class="navbar-brand head-title" routerLink="">Admin Portal</a>
+          <a class="navbar-brand head-title" routerLink="/admin">Admin Portal</a>
           <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
