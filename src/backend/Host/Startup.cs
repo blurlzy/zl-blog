@@ -34,7 +34,7 @@ namespace ZLBlog
                 opt =>
                 {
                     opt.AddPolicy(corsPolicy, 
-                        builder => builder.WithOrigins(allowedOrigins));
+                        builder => builder.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod());
                 });
         }
 
