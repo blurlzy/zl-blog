@@ -23,7 +23,7 @@ import { Loader } from '../core/services/loader.service';
             <ul class="navbar-nav ms-auto">
 
               <li class="nav-item head-item">
-                <a class="nav-link" routerLink="/blogs/7001e221-28e1-4f97-a5dd-a762e28e1cda">About</a>
+                <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'About', type: 'tag' }">About</a>
               </li>
 
             </ul>
