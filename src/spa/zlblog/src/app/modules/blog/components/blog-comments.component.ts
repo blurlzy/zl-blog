@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BlogDataService } from '../blog.data.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Loader } from '../../../core/services/loader.service';
+import { Util } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-blog-comments',
@@ -75,6 +76,7 @@ export class BlogCommentsComponent {
   private readonly blogDataService = inject(BlogDataService);
   private readonly snackbarService = inject(SnackbarService);
   public readonly loader = inject(Loader);
+  public readonly util = inject(Util);
 
   comments: any[] = [];
   showCommentForm: boolean = false;
@@ -88,9 +90,10 @@ export class BlogCommentsComponent {
 
   ngOnInit() { 
     if (this.blogId && this.blogId.length > 0) {
-      this.getComments();
-    }
-    
+      if(this.util.isValidGUID(this.blogId)) {
+        this.getComments();
+      }      
+    }    
   }
 
   private getComments() { 

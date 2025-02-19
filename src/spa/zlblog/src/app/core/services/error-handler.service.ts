@@ -11,9 +11,13 @@ export class GlobalErrorHandler implements ErrorHandler {
 	}
 
 	// 
-	handleError(error: unknown) {
+	handleError(error: any) {
 		this.zone.run(() => {
 			//  todo: add logging service
+			if(error?.status === 404) { 
+				return;
+			}
+			
 			this.snackbarService.error('Error occurred !');
 		 });
 		 

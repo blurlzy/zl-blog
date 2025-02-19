@@ -1,5 +1,4 @@
 ﻿
-using Azure.Core.Pipeline;
 using Xunit.Abstractions;
 using ZLBlog.Config;
 using ZLBlog.Models;
@@ -92,7 +91,7 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        [InlineData("3b34c8fe-e243-4fff-94d2-e16b6ae7453a", true)]
+        [InlineData("", true)]
         public async Task Archive_Blog_Test(string blogId, bool isArchived)
         {
             await _blogRepository.ArchiveAsync(blogId, isArchived);

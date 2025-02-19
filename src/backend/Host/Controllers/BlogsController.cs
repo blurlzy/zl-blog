@@ -27,13 +27,20 @@ namespace ZLBlog.Controllers
         }
 
         [HttpGet("{id}")]
+        [ValidateGuid]  // validates the route parameter 'id'
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<Blog> GetBlobAsync(string id)
+        public async Task<IActionResult> GetBlobAsync(string id)
         {
             var req = new GetBlogRequest { Id = id };
-            return await base.Mediator.Send(req);
+            var blog = await base.Mediator.Send(req);
+            if (blog.IsDeleted)
+            {
+                return NotFound();
+            }
+
+            return Ok(blog);
         }
 
         [HttpGet("tags/{tag}")]
@@ -49,6 +56,7 @@ namespace ZLBlog.Controllers
         }
 
         [HttpGet("{id}/comments")]
+        [ValidateGuid]  // validates the route parameter 'id'
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

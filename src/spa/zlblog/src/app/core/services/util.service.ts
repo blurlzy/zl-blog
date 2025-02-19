@@ -13,8 +13,9 @@ export class Util {
 	private readonly defaultDescription = 'AI,Azure,Cloud computing,Tech,OpenAI,Azure OpenAI,AWS,GCP,Fabric,Microsoft,Google,Amazon,Cloud,Machine Learning,Generative AI, AGI, AI Agent, LLMs, LLM,Security,DevOps,CICD,Container,Docker';
 	private readonly defaultTitle = 'ZL Blog - Tech & Beyond';
 
-	createImgHtml(imgUrl: string, alt: string): string {
-		return `<img src="${imgUrl}" alt="${alt}" width="70%" height="70%">`;
+	isValidGUID(id: string): boolean {
+		const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+		return guidRegex.test(id);
 	}
 
 	// validate images
@@ -27,6 +28,10 @@ export class Util {
 		// get the file extension
 		const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
 		return supportedTypes.findIndex(m => m === fileExtension.toLocaleLowerCase()) > -1;
+	}
+
+	createImgHtml(imgUrl: string, alt: string): string {
+		return `<img src="${imgUrl}" alt="${alt}" width="70%" height="70%">`;
 	}
 
 	// remove the auto-generated "&nbsp;", the html editor will generate "&nbsp;" when the space key is pressed

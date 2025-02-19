@@ -83,7 +83,7 @@ export class AdminBlogListComponent {
   private readonly snackbarService = inject(SnackbarService);
 
   archiveBlog(blog: any): void  {
-    this.blogAdminDataService.archiveBlog(blog.id, blog.isArchived)
+    this.blogAdminDataService.archiveBlog(blog.id, !blog.isArchived)
       .subscribe(() => {
         this.snackbarService.success('Blog updated successfully');
         blog.isArchived = !blog.isArchived;

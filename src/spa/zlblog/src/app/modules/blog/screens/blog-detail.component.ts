@@ -80,10 +80,15 @@ export class BlogDetailComponent {
 
   ngOnInit() {
     this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
-    // ensure blog id is GUID    
-    if (this.blogId && this.blogId.length > 10) {
-      this.getBlog(this.blogId);
+    // validate blog id
+    if(!this.util.isValidGUID(this.blogId)) {
+      // route to home
+      this.router.navigate(['/404']);
+      return;
     }
+
+    // get blog by id
+    this.getBlog(this.blogId);
   }
 
   // get blog

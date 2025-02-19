@@ -20,7 +20,6 @@ namespace ZLBlog.Requests
         public async Task<Blog> Handle(GetBlogRequest request, CancellationToken cancellationToken)
         {
             return await _blogRepo.GetBlogAsync(request.Id);
- 
         }
     }
 }

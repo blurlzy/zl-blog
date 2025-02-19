@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Azure.Cosmos;
+using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 
@@ -19,14 +21,13 @@ namespace ZLBlog.Extensions
                     context.Response.ContentType = MediaTypeNames.Application.Json;
                     var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
 
-                    // customer exception
-                    //if (exceptionHandlerPathFeature?.Error is BadContentException)
-                    //{
-                    //    // reset the status code
-                    //    context.Response.StatusCode = (int)((BadContentException)exceptionHandlerPathFeature.Error).StatusCode;
-                    //}
-
-                    // todo: handle custom exceptions...
+                    // handle custom exceptions...
+                    // Check if it's a cosmos exception - key is not found
+                    if (exceptionHandlerPathFeature?.Error is KeyNotFoundException keyNotFoundExp)
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    }
+                    
                     var baseException = exceptionHandlerPathFeature?.Error?.GetBaseException();
 
                     // logging (send error, stack track messages to Azure Application Insights)

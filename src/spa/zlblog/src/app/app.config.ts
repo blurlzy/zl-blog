@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 // services
 import { GlobalErrorHandler } from './core/services/error-handler.service';
 import { LoaderInterceptor } from './core/services/http-interceptor.service';
+import { NotFoundInterceptor } from './core/services/not-found-interceptor.service';
 
 // application root routes
 import { routes } from './app.routes';
@@ -51,6 +52,7 @@ export const appConfig: ApplicationConfig = {
     }), 
     // show loader on http requests
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: NotFoundInterceptor, multi: true },
     // global error handler
     { provide: ErrorHandler,  useClass: GlobalErrorHandler}
   
