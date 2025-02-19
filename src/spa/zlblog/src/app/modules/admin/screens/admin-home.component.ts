@@ -39,6 +39,7 @@ export class AdminHomeComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly blogAdminDataService = inject(BlogAdminDataService);
+  
   // properties
   pagedList: any = { data: [], total: 0 };
   // filter form group
@@ -47,8 +48,6 @@ export class AdminHomeComponent {
     pageSize: new FormControl(15),
     pageIndex: new FormControl(0)
   });
-
-  //blogs: any[] = [];
 
 
   ngOnInit() {
@@ -61,6 +60,8 @@ export class AdminHomeComponent {
 				keyword: params['keywords'] ?? '',        
 			});
       
+      // reset the result      			
+			this.pagedList = { data: [], total: 0 };
       // load blogs
       this.loadBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 15);
     });
@@ -71,8 +72,6 @@ export class AdminHomeComponent {
     this.blogAdminDataService.search(keyword, pageIndex, pageSize)
       .subscribe((pagedList: any) => {
         this.pagedList = pagedList;
-        // this.blogs = pagedList.data;
-        // console.log(this.blogs);
       });
   }
 

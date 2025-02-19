@@ -60,8 +60,10 @@ export class BlogHomeComponent {
 				pageIndex: pageIndex ? pageIndex : 0,
 				keyword: params['keywords'] ?? '',        
 			});
+
+      // reset the result      			
+			this.pagedList = { data: [], total: 0 };
       
-      //this.filterFormGroup.patchValue({ keyword: params['keywords'] ?? '' });
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
         this.listBlogsByTag(params['keywords'], this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
@@ -71,6 +73,8 @@ export class BlogHomeComponent {
         this.listBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
       }
 
+      // ensure it scrolls to the top of the page
+      // window.scroll(0, 0);     
     });
 
     // reset meta tags
