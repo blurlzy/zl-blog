@@ -13,14 +13,15 @@ Database: Securely stores data in Azure Cosmos DB for reliability and flexibilit
 ![ZL Blog](https://stzlblog.blob.core.windows.net/app-images/site_1.png)
 ![ZL Blog](https://stzlblog.blob.core.windows.net/app-images/site_2.png)
 
-## Backend (Asp.Net Core 8.0)
-### Prerequisites
 
+## Prerequisites
 - Azure Key Vault
 - Azure Cosmos DB
 - Azure Storage Account - Blob Storage
+- Auth0 Tenant (Authentication)
 
-## Azure Key Vault provides a way to store credentials and other secrets with increased security. 
+## Backend (Asp.Net Core 8.0)
+### Azure Key Vault provides a way to store credentials and other secrets with increased security. 
 ### Add Key vault secrets
 ```
 # cosmos db
