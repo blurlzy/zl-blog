@@ -1,13 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DatePipe, UpperCasePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
+// angular material
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+// services
+import { BlogAdminDataService } from '../blog-admin.data.service';
+import { Loader } from '../../../core/services/loader.service';
+import { SnackbarService } from '../../../core/services/snackbar.service';
 
 @Component({
   selector: 'app-admin-blog-list',
-  imports: [ DatePipe,RouterLink, MatButtonModule, MatIconModule, MatMenuModule ],
+  imports: [DatePipe, RouterLink, MatButtonModule, MatIconModule, MatMenuModule],
   template: `
        <table class="table table-striped table-hover">
         <thead>
@@ -25,7 +30,11 @@ import { MatButtonModule } from '@angular/material/button';
                 <td class="align-middle">
                     <a routerLink="/admin/edit/{{item.id}}" class="link-dark link-underline-opacity-0">
                           {{ item.title  }}
-                    </a>               
+                    </a>  
+
+                    @if(item.isArchived) {
+                      <span class="text-danger">[ Archived ]</span>
+                    }            
                 </td>
                 <td class="align-middle">{{ item.createdOn | date : 'MMM d, y, HH:mm' }}</td>
                 <td class="align-middle">{{ item.userName  }}</td>
@@ -48,8 +57,13 @@ import { MatButtonModule } from '@angular/material/button';
                           <i class="bi bi-pencil-square me-2"></i> Edit
                         </a> 
                       </button>
-                      <button mat-menu-item>
-                        <i class="bi bi-archive me-2"></i> Archive
+                      <button mat-menu-item (click)="archiveBlog(item)">
+                        @if(!item.isArchived) { 
+                          <i class="bi bi-archive me-2"></i> Archive
+                        }
+                        @else { 
+                          <i class="bi bi-arrow-counterclockwise"></i> Unarchive
+                        }                        
                       </button>
                     </mat-menu>
                 </td>
@@ -62,4 +76,17 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AdminBlogListComponent {
   @Input({ required: true }) data: any[] = [];
+
+  // inject services
+  private readonly blogAdminDataService = inject(BlogAdminDataService);
+  private readonly loader = inject(Loader);
+  private readonly snackbarService = inject(SnackbarService);
+
+  archiveBlog(blog: any): void  {
+    this.blogAdminDataService.archiveBlog(blog.id, blog.isArchived)
+      .subscribe(() => {
+        this.snackbarService.success('Blog updated successfully');
+        blog.isArchived = !blog.isArchived;
+      });
+  }
 }

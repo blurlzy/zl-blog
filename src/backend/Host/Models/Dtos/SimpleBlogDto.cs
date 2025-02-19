@@ -27,5 +27,6 @@
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset? UpdatedOn { get; set; }
         public bool Published { get; set; }
+        public bool IsArchived { get; set; }
     }
 }

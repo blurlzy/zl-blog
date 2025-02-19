@@ -35,7 +35,7 @@ namespace ZLBlog.Requests
             // new
             blog.TotalComments = totalComments + 1; 
             // update
-            await _blogRepo.UpdateAsyncc(blog);
+            await _blogRepo.UpdateAsync(blog);
 
             return newComment;
         }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 // material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -9,7 +10,7 @@ import { Loader } from '../core/services/loader.service';
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
+  imports: [RouterOutlet, RouterLink, CommonModule, ReactiveFormsModule, FormsModule, MatProgressBarModule],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
@@ -21,8 +22,8 @@ import { Loader } from '../core/services/loader.service';
           <div class="collapse navbar-collapse" id="navbarNav">
    
             <form class="d-flex ms-auto " role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-light me-2"><i class="bi bi-search"></i></button>
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [formControl]="keywordsCtrl">
+              <button class="btn btn-light me-2" (click)="search()"><i class="bi bi-search"></i></button>
               <button class="btn btn-light" (click)="logout()"><i class="bi bi-box-arrow-in-right"></i></button>
             </form>
           </div>
@@ -35,22 +36,41 @@ import { Loader } from '../core/services/loader.service';
       
       <main class="container" style="margin-top: 80px;">
         <router-outlet></router-outlet>
+
+        <footer class="py-3">
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>&copy; ZL Blog, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-body-emphasis" href="https://x.com/dczl1047" target="_blank"><i class="bi bi-twitter-x"></i></a></li>
+              <li class="ms-3"><a class="link-body-emphasis" href="https://github.com/blurlzy/zl-blog" target="_blank" ><i class="bi bi-github" ></i></a></li>           
+            </ul>
+          </div>
+      </footer>
       </main>
 
-      <footer class="border-top py-3 text-center mt-3">
-        <p class="mb-0">&copy; 2025 ZL Blog. All rights reserved.</p>
-      </footer>
+
   `,
   styles: ``
 })
 export class AdminLayoutComponent {
+  // inject services
+  private readonly router = inject(Router);
+  public readonly loader = inject(Loader);
+  public readonly auth = inject(AuthService);
+  keywordsCtrl = new FormControl('', [Validators.required]);
 
-  // ctor
-  constructor(public auth: AuthService, 
-              public loader: Loader, 
-              private router: Router) { }
+  // // ctor
+  // constructor(public auth: AuthService, 
+  //             public loader: Loader, 
+  //             private router: Router) { }
 
   // public methods
+  search(): void {
+    this.router.navigate(['/admin'], {
+      queryParams: { keywords: this.keywordsCtrl.value }
+    });
+  }
+
   logout(): void {
     // logout 
     this.auth.logout();

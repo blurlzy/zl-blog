@@ -1,4 +1,6 @@
 ﻿
+using Azure.Core;
+
 namespace ZLBlog.Persistence
 {
     public class BlogRepository
@@ -51,7 +53,7 @@ namespace ZLBlog.Persistence
             return await _context.CreateAsync(blog, blog.Partition);
         } 
         
-        // publish blog
+        // publish a blog
         public async Task<Blog> PublishAsync(string id)
         {
             var blog = await this.GetBlogAsync(id);
@@ -60,14 +62,26 @@ namespace ZLBlog.Persistence
             {
                 blog.Published = true;
                 blog.UpdatedOn = DateTimeOffset.Now;
-                await this.UpdateAsyncc(blog);
+                await this.UpdateAsync(blog);
             }
 
             return blog;
         }
 
+        // archive or unarchive a blog 
+        public async Task<Blog> ArchiveAsync(string id, bool isArchived)
+        {
+            var blog = await this.GetBlogAsync(id);
+
+            blog.IsDeleted = isArchived;
+            blog.UpdatedOn = DateTimeOffset.Now;
+
+            // update
+            return await this.UpdateAsync(blog);
+        }
+
         // update a blog 
-        public async Task<Blog> UpdateAsyncc(Blog blog)
+        public async Task<Blog> UpdateAsync(Blog blog)
         {
             return await _context.UpsertAsync(blog, blog.Partition);
         }

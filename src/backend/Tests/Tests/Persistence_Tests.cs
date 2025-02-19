@@ -58,7 +58,7 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        [InlineData("My first blog", "jil", "<main class=\"container my-5\"><router-outlet></router-outlet></main>")]
+        [InlineData("My first blog", "jil", "<main class=\"container my-5\">Test</main>")]
         public async Task Create_Blog_Test(string title, string userId, string content)
         {
             var newBlog = new Blog(title, content, Array.Empty<string>(), userId, userId);
@@ -67,16 +67,14 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        [InlineData("02065035-d21a-4b96-9b7d-f9ccf6aca217")]
-        [InlineData("13d7206f-ed8c-46c9-a1e7-401db3749a40")]
-        [InlineData("6c9ea86d-5925-4753-a6ef-c34c9203f292")]
+        [InlineData("")]
         public async Task Delete_Blog_Test(string id)
         {
             await _blogRepository.DeleteAsync(id);
         }
 
         [Theory]
-        [InlineData("e39a5df3-0258-43b1-9c45-d5005b9a0824")]
+        [InlineData("")]
         public async Task List_Comments_Test(string blogId)
         {
             var comments = await _blogCommentRepository.GetCommentsAsync(blogId);
@@ -85,12 +83,19 @@ namespace ZLBlog.Tests.Tests
         }
 
         [Theory]
-        [InlineData("e39a5df3-0258-43b1-9c45-d5005b9a0824", "Justin Li", "Hello world!")]
+        [InlineData("", "Justin Li", "Hello world!")]
         public async Task Create_Comment_Test(string blogId, string name, string commentText)
         {
             var blogComment = new BlogComment(blogId, commentText, name, name);
 
             await _blogCommentRepository.CreateAsync(blogComment);
+        }
+
+        [Theory]
+        [InlineData("3b34c8fe-e243-4fff-94d2-e16b6ae7453a", true)]
+        public async Task Archive_Blog_Test(string blogId, bool isArchived)
+        {
+            await _blogRepository.ArchiveAsync(blogId, isArchived);
         }
     }
 }

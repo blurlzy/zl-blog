@@ -27,7 +27,6 @@ namespace ZLBlog.Controllers
         }
 
         [HttpGet("{id}")]
-        [EnsurePaginationFilter]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -50,7 +49,6 @@ namespace ZLBlog.Controllers
         }
 
         [HttpGet("{id}/comments")]
-        [EnsurePaginationFilter]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

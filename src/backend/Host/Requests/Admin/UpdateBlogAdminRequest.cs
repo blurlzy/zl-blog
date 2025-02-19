@@ -33,7 +33,7 @@ namespace ZLBlog.Requests
             blog.UpdatedOn = DateTimeOffset.Now;
 
             // update
-            return await _blogRepo.UpdateAsyncc(blog);
+            return await _blogRepo.UpdateAsync(blog);
         }
     }
 }

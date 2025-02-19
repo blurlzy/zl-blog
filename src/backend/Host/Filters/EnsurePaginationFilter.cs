@@ -24,7 +24,7 @@ namespace ZLBlog.Filters
                 // validate page size value if it exists
                 var pageSize = (int?)context.ActionArguments["pageSize"];
 
-                if (pageSize.HasValue && (pageSize.Value < 5 || pageSize > 100))
+                if (pageSize.HasValue && (pageSize.Value < 1 || pageSize > 20))
                 {
                     context.Result = new BadRequestObjectResult(new { Error = $"Invalid page size: {pageSize}." });
                 }

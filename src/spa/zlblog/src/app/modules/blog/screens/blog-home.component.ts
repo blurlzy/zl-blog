@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Meta, Title } from '@angular/platform-browser';
 // angular material
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 // services
@@ -17,22 +16,21 @@ import { BlogListComponent } from '../components/blog-list.component';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogListComponent],
   template: `
-  <div class="row">
-    <div class="col-12 mt-3">
-         <app-blog-list [data]="pagedList.data"></app-blog-list>
-    </div>
-    <mat-paginator 
-              [pageSize]="filterFormGroup.value.pageSize"
-							[pageIndex]="filterFormGroup.value.pageIndex" 
-							[length]="pagedList.total"
-              [hidePageSize]="true" 
-							[disabled]="(loader.isLoading | async)"
-							(page)="pageIndexChanged($event)"            
-              showFirstLastButtons
-              aria-label="Select page">
-</mat-paginator>
-  </div>
- 
+        <div class="row">
+            <div class="col-12 mt-3">
+                <app-blog-list [data]="pagedList.data"></app-blog-list>
+            </div>
+            <mat-paginator 
+                      [pageSize]="filterFormGroup.value.pageSize"
+                      [pageIndex]="filterFormGroup.value.pageIndex" 
+                      [length]="pagedList.total"
+                      [hidePageSize]="true" 
+                      [disabled]="(loader.isLoading | async)"
+                      (page)="pageIndexChanged($event)"            
+                      showFirstLastButtons
+                      aria-label="Select page">
+          </mat-paginator>
+        </div>
   `,
   styles: ``
 })
@@ -56,8 +54,14 @@ export class BlogHomeComponent {
   ngOnInit() {
     // query params change
     this.activatedRoute.queryParams.subscribe(params => {
-      // get the query params
-      this.filterFormGroup.patchValue({ keyword: params['keywords'] ?? '' });
+      const pageIndex = +params['pageIndex'];
+			// retrive the query params
+			this.filterFormGroup.patchValue({
+				pageIndex: pageIndex ? pageIndex : 0,
+				keyword: params['keywords'] ?? '',        
+			});
+      
+      //this.filterFormGroup.patchValue({ keyword: params['keywords'] ?? '' });
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
         this.listBlogsByTag(params['keywords'], this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);

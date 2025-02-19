@@ -26,7 +26,6 @@ namespace ZLBlog.Controllers
         }
 
         [HttpGet("blogs/{id}")]
-        [EnsurePaginationFilter]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -78,7 +77,6 @@ namespace ZLBlog.Controllers
         }
 
         [HttpPost("blogs/{id}/publish")]
-        [EnsurePaginationFilter]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -91,7 +89,15 @@ namespace ZLBlog.Controllers
             return Ok();
         }
 
-
+        [HttpPut("blogs/{id}/archive")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> ArchiveAsync(string id, [FromBody] ArchiveBlobAdminRequest req)
+        {
+            await base.Mediator.Send(req);
+            return Ok();    
+        }
 
     }
 }
