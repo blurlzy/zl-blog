@@ -46,8 +46,9 @@ export class BlogHomeComponent {
   pagedList: any = { data: [], total: 0 };
   // filter form group
   filterFormGroup = new FormGroup({
-    keyword: new FormControl(''),
-    pageSize: new FormControl(8),
+    keywords: new FormControl(''),
+    type: new FormControl(''),
+    pageSize: new FormControl(2),
     pageIndex: new FormControl(0)
   });
 
@@ -58,19 +59,19 @@ export class BlogHomeComponent {
 			// retrive the query params
 			this.filterFormGroup.patchValue({
 				pageIndex: pageIndex ? pageIndex : 0,
-				keyword: params['keywords'] ?? '',        
+				keywords: params['keywords'] ?? '',   
+        type: params['type'] ?? ''                     
 			});
 
       // reset the result      			
 			this.pagedList = { data: [], total: 0 };
-      
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
-        this.listBlogsByTag(params['keywords'], this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+        this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
       }
       else {
         // search blogs
-        this.listBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+        this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
       }
 
       // ensure it scrolls to the top of the page
@@ -87,7 +88,8 @@ export class BlogHomeComponent {
     this.router.navigate(['/'], {
       queryParams: {
         pageIndex: event.pageIndex,
-        keyword: this.filterFormGroup.value.keyword,
+        keywords: this.filterFormGroup.value.keywords,
+        type: this.filterFormGroup.value.type
       }
     });
   }

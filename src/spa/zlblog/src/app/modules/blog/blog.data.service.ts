@@ -14,7 +14,6 @@ export class BlogDataService {
 	// search blogs by keywords
 	listBlogs(keywords:string, pageIndex:number, pageSize: number): Observable<any> { 
 		const url = `${this.blogApiEndpoint}?keywords=${keywords}&pageIndex=${pageIndex}&pageSize=${pageSize}`;
-		console.log(url);
 		return this.http.get(url);
 	}
 
