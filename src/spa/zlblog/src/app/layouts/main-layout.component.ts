@@ -46,7 +46,7 @@ import { Loader } from '../core/services/loader.service';
 
       <footer class="border-top py-3 text-center">
         <p class="mb-2">
-          &copy; 2025 Zongyi (Justin) Li. All rights reserved. 
+          &copy; 2025 ZL Blog. All rights reserved. 
           <a href="https://x.com/dczl1047" class="link-dark" target="_blank"><i class="bi bi-twitter-x ms-2 me-2"></i></a>  
           <a href="https://github.com/blurlzy/zl-blog" class="link-dark" target="_blank"><i class="bi bi-github"></i></a>         
         </p>           
