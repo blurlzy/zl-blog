@@ -29,7 +29,7 @@ namespace ZLBlog.Filters
                     context.Result = new BadRequestObjectResult(
                         new
                         {
-                            error = $"Invalid GUID for parameter '{_paramName}'."
+                            error = $"Invalid id: '{ rawValue }'."
                         }
                     );
                 }

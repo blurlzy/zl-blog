@@ -7,6 +7,18 @@ namespace ZLBlog.Controllers
     [ApiController]
     public class BlobsController : ApiBaseController
     {
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<PagedList<BlobDto>> GetBlobsAsync([FromQuery] int pageIndex = 0, int pageSize = 12)
+        {
+            var req = new ListBlogImagesAdminRequest { UserId = base.IdentityName, PageIndex = pageIndex, PageSize = pageSize };
+            
+            return await base.Mediator.Send(req);
+        }
+
+
         // list blog images
         [HttpGet("blog-images")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -14,7 +26,7 @@ namespace ZLBlog.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IEnumerable<BlobDto>> GetLatestBlogImages()
         {
-            var req = new ListBlogImagesAdminRequest { Top = 20 };
+            var req = new ListLatestBlogImagesAdminRequest { UserId = base.IdentityName,  Top = 12 };
 
             return await base.Mediator.Send(req);
         }

@@ -1,36 +1,39 @@
 ﻿
 namespace ZLBlog.Requests
 {
-    public record ListBlogImagesAdminRequest: IRequest<IEnumerable<BlobDto>>
+    public record ListBlogImagesAdminRequest: IRequest<PagedList<BlobDto>>
     {
-        public int Top { get; init; }
+        public string UserId { get; init; }
+        public int PageIndex { get; init; }
+        public int PageSize { get; init; }
     }
 
-    public class ListBlobImagesAdminHandler : IRequestHandler<ListBlogImagesAdminRequest, IEnumerable<BlobDto>>
+    public class ListBlogImagesAdminHandler : IRequestHandler<ListBlogImagesAdminRequest, PagedList<BlobDto>>
     {
         private readonly BlobService _blobService;
 
         // ctor
-        public ListBlobImagesAdminHandler(BlobService blobService)
+        public ListBlogImagesAdminHandler(BlobService blobService)
         {
                 _blobService = blobService;
         }
 
-        public async Task<IEnumerable<BlobDto>> Handle(ListBlogImagesAdminRequest request, CancellationToken cancellationToken)
+        public async Task<PagedList<BlobDto>> Handle(ListBlogImagesAdminRequest request, CancellationToken cancellationToken)
         {
-            // get the latest image blobs
-            var latestBlobs = await _blobService.GetLatestImagesAsync(request.Top);
+            // get the blobs
+            var resultset = await _blobService.GetImagesAsync(request.UserId, request.PageIndex, request.PageSize);
 
-            var resultSet = new List<BlobDto>();
+            var data = new List<BlobDto>(); 
 
-            foreach (var blob in latestBlobs)
+            foreach (var blob in resultset.Data)
             {
-                var blobUri = _blobService.GetBlobUri(blob);
 
-                resultSet.Add(new BlobDto { Name = blob.Name, Uri = blobUri });
+                // get the blob uri
+                var blobUri = _blobService.GetBlobUri(blob);
+                data.Add(new BlobDto { Name = blob.Name, Uri = blobUri, CreatedOn = blob.Properties.CreatedOn, Tag = blob.Properties.ETag.ToString() });
             }
 
-            return resultSet;
+            return new PagedList<BlobDto>(resultset.Total, data);
         }
     }
 }

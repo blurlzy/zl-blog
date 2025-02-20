@@ -14,7 +14,7 @@ import { Loader } from '../core/services/loader.service';
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
-          <a class="navbar-brand head-title" routerLink=""> Not Just <i class="bi bi-chat-square"></i> Tech</a>
+          <a class="navbar-brand head-title" routerLink=""> Not Just <i class="bi bi-pencil-square"></i> Tech</a>
           <button  class="navbar-toggler" type="button" (click)="toggleNav()">
             <span class="navbar-toggler-icon"></span>
           </button>

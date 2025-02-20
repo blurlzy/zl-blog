@@ -2,6 +2,7 @@
 
 namespace ZLBlog.Filters
 {
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class EnsurePaginationFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)

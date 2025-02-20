@@ -12,29 +12,39 @@ import { Loader } from '../core/services/loader.service';
   selector: 'app-admin-layout',
   imports: [RouterOutlet, RouterLink, CommonModule, ReactiveFormsModule, FormsModule, MatProgressBarModule],
   template: `
-      <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
-        <div class="container">
-          <a class="navbar-brand head-title" routerLink="/admin">Admin Portal</a>
-          <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
+      <div class="container">
+        <a class="navbar-brand head-title" routerLink="/admin">Admin Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-   
-            <form class="d-flex ms-auto " role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [formControl]="keywordsCtrl">
-              <button class="btn btn-light me-2" (click)="search()"><i class="bi bi-search"></i></button>
-              <button class="btn btn-light" (click)="logout()"><i class="bi bi-box-arrow-in-right"></i></button>
-            </form>
-          </div>
+        
+        <div Class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item head-item">
+                <a class="nav-link" [routerLink]="['/admin']" [queryParams]="{ keywords: 'About', type: 'tag' }">Blogs</a>
+              </li>
+              <li class="nav-item head-item">
+                <a class="nav-link ms-2 me-2" [routerLink]="['/admin/images']" [queryParams]="{ keywords: 'About', type: 'tag' }">Images</a>
+              </li>
+            </ul>
         </div>
-      </nav>
+
+        <form class="d-flex ms-auto ms-3" role="search">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" [formControl]="keywordsCtrl">
+          <button class="btn btn-light" (click)="search()"><i class="bi bi-search"></i></button>
+          <button class="btn btn-light ms-2" (click)="logout()"><i class="bi bi-box-arrow-in-right"></i></button>
+        </form>
+      </div>
+    </nav>
 
       @if (loader.isLoading | async) {
         <mat-progress-bar mode="indeterminate" style="z-index:9999;"></mat-progress-bar>
       }
       
       <main class="container" style="margin-top: 80px;">
+
         <router-outlet></router-outlet>
 
         <footer class="py-3">
@@ -46,7 +56,7 @@ import { Loader } from '../core/services/loader.service';
             </ul>
           </div>
       </footer>
-      </main>
+    </main>
 
 
   `,

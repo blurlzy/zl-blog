@@ -15,15 +15,9 @@
             _containerName = containerName;
             _containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
         }
-
-        /// <summary>
-        /// Returns the URIs for the most recently modified blobs (images) in the container.
-        /// </summary>
-        /// <param name="count">Number of images to return, e.g., 20 or 30.</param>
-        /// <returns>A list of blob URIs, sorted by last modified descending.</returns>
+       
         public async Task<IEnumerable<BlobItem>> GetLatestImagesAsync(int count = 20)
         {
-
             // We will collect BlobItems in memory, then sort them by last modified
             var blobItems = new List<BlobItem>();
 
@@ -33,7 +27,6 @@
                 // You might want to filter by blob type or extension if only some are images
                 // For example:
                 // if (!IsImageFile(blob.Name)) continue;
-
                 blobItems.Add(blob);
             }
 
@@ -68,7 +61,6 @@
                 {
                     blobItems.Add(blob);
                 }
-
             }
 
             // Sort by last-modified descending, then take the top "count"
@@ -82,6 +74,64 @@
             return latestBlobs;
         }
 
+        public async Task<PagedList<BlobItem>> GetImagesAsync(int pageIndex, int pageSize)
+        {
+            // We need metadata in the listing, so we request BlobTraits.Metadata
+            var blobList = _containerClient.GetBlobsAsync(traits: BlobTraits.Metadata);
+
+            // We will collect BlobItems in memory, then sort them by last modified
+            var blobItems = new List<BlobItem>();
+
+            // List all blobs in the container (flat listing)
+            await foreach (var blob in blobList)
+            {
+                // You might want to filter by blob type or extension if only some are images
+                // For example:
+                // if (!IsImageFile(blob.Name)) continue;
+
+                blobItems.Add(blob);
+            }
+
+            var totalBlobs = blobItems.Count;
+
+            var pagedBlobs = blobItems.Where(m => m.Properties.LastModified.HasValue)
+                                      .OrderByDescending(m => m.Properties.LastModified.Value)
+                                      .Skip(pageIndex * pageSize)
+                                      .Take(pageSize)
+                                      .ToList();
+
+            return new PagedList<BlobItem>(totalBlobs, pagedBlobs);
+        }
+
+        public async Task<PagedList<BlobItem>> GetImagesAsync(string userId, int pageIndex, int pageSize)
+        {
+            // We need metadata in the listing, so we request BlobTraits.Metadata
+            var blobList = _containerClient.GetBlobsAsync(traits: BlobTraits.Metadata);
+
+            // We will collect BlobItems in memory, then sort them by last modified
+            var blobItems = new List<BlobItem>();
+
+            // List all blobs in the container (flat listing)
+            await foreach (var blob in blobList)
+            {
+                // todo check blob file type
+                // Check if the "author" metadata is present 
+                if (blob.Metadata.TryGetValue(_authorKey, out var value) && value == userId)
+                {
+                    blobItems.Add(blob);
+                }
+            }
+
+            var totalBlobs = blobItems.Count;
+
+            var pagedBlobs = blobItems.Where(m => m.Properties.LastModified.HasValue)
+                                      .OrderByDescending(m => m.Properties.LastModified.Value)
+                                      .Skip(pageIndex * pageSize)
+                                      .Take(pageSize)
+                                      .ToList();
+
+            return new PagedList<BlobItem>(totalBlobs, pagedBlobs);
+        }
 
         // return blob uri
         public string GetBlobUri(BlobItem item)

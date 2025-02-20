@@ -14,8 +14,9 @@ import { Util } from '../../../core/services/util.service';
   imports: [ FormsModule, ReactiveFormsModule, MatButtonModule, DatePipe, CommonModule ],
   template: `
     <section class="comments-section border-top mt-2">            
-      <!-- Add a comment form (static example) -->      
-      <button mat-button class="mt-1" (click)="toggleCommentForm()">{{ showCommentForm ? 'Cancel' : 'Add a Comment' }}</button>
+      <!-- Add a comment form (static example) -->     
+
+      <button type="button" class="btn btn-link mt-2" (click)="toggleCommentForm()">{{ showCommentForm ? 'Cancel' : 'Add a Comment' }}</button>
       @if (showCommentForm) {
         <form [formGroup]="form">
           <div class="row mt-1 ms-2 py-2 border border-secondary rounded">

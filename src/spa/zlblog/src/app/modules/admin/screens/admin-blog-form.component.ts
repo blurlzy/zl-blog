@@ -21,7 +21,7 @@ import { Loader } from '../../../core/services/loader.service';
 import { BlogAdminDataService } from '../blog-admin.data.service';
 import { Util } from '../../../core/services/util.service';
 // components
-import { AdminBlogImageListComponent } from '../components/admin-blog-image-list.component';
+import { AdminBlogImageDialogComponent } from '../components/admin-blog-image-dialog.component';
 
 @Component({
   selector: 'app-admin-blog-form',
@@ -168,7 +168,7 @@ export class AdminBlogFormComponent {
   }
 
   openImageListDialog(): void { 
-    const dialogRef = this.dialog.open(AdminBlogImageListComponent, {
+    const dialogRef = this.dialog.open(AdminBlogImageDialogComponent, {
       width: '750px',
       maxWidth: '750px',
       hasBackdrop: true,

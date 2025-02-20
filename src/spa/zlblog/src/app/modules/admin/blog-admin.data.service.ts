@@ -37,6 +37,11 @@ export class BlogAdminDataService {
 		return this.http.get(url);
 	}
 
+	getImages(pageIndex: number, pageSize: number): Observable<any> {
+		const url = `${this.blobAdminApiEndpoint}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+		return this.http.get(url);
+	}
+
 	// upload blog images
 	uploadImages(formData: any): Observable<any> {
 		const url = `${this.blobAdminApiEndpoint}`;

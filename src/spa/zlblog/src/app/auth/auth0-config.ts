@@ -21,8 +21,12 @@ export const AllowList = [
 		httpMethod: HttpMethod.Delete,
 	},
 	{
-		uri: `${environment.apiEndpoint}/api/blobs`, // for upload file api
+		uri: `${environment.apiEndpoint}/api/blobs`, 
 		httpMethod: HttpMethod.Post,
+	},
+	{
+		uri: `${environment.apiEndpoint}/api/blobs`, // for upload file api
+		httpMethod: HttpMethod.Get,
 	},
 	{
 		uri: `${environment.apiEndpoint}/api/blobs/*`,

@@ -35,7 +35,9 @@ namespace ZLBlog.Controllers
         {
             var req = new GetBlogRequest { Id = id };
             var blog = await base.Mediator.Send(req);
-            if (blog.IsDeleted)
+
+            // if the blog is archived or unpublished
+            if (blog.IsDeleted || !blog.Published)
             {
                 return NotFound();
             }

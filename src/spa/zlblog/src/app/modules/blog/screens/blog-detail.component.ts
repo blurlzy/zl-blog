@@ -40,7 +40,7 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
             <app-blog-comments [blogId]="blogId"></app-blog-comments>
             
             <div class="d-flex justify-content-between mt-1 mb-2">
-              <a mat-button routerLink="">&larr; Back to Home</a>     
+              <a class="btn btn-outline-dark mt-3" routerLink="/"role="button"><i class="bi bi-arrow-left"></i> Back to Home</a>   
             </div>
       </div>
     </div>
