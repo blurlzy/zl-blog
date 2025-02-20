@@ -48,7 +48,7 @@ export class BlogHomeComponent {
   filterFormGroup = new FormGroup({
     keywords: new FormControl(''),
     type: new FormControl(''),
-    pageSize: new FormControl(2),
+    pageSize: new FormControl(12),
     pageIndex: new FormControl(0)
   });
 
