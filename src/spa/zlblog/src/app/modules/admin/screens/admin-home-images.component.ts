@@ -8,14 +8,18 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { BlogAdminDataService } from '../blog-admin.data.service';
 // components
 import { AdminBlogImageListComponent } from '../components/admin-blog-image-list.component';
+import { AdminBlogImageUploaderComponent } from '../components/admin-blog-image-uploader.component';
 
 @Component({
   selector: 'app-admin-home-images',
   imports: [
-    ReactiveFormsModule, MatPaginatorModule, MatButtonModule, AdminBlogImageListComponent
+    ReactiveFormsModule, MatPaginatorModule, MatButtonModule, AdminBlogImageListComponent, AdminBlogImageUploaderComponent
   ],
   template: `
       <div class="row">
+         <div class="col-8 mb-2"> 
+            <app-admin-blog-image-uploader (uploadedSuccess)="callback()"></app-admin-blog-image-uploader>
+          </div>
 
           <div class="col-12 mt-3">
             <app-admin-blog-image-list [data]="pagedList.data"></app-admin-blog-image-list>
@@ -79,5 +83,10 @@ export class AdminHomeImagesComponent {
         this.pagedList = result;
         console.log(result);
       });
+  }
+
+  callback() {
+     // load images
+     this.loadImages(this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
   }
 }

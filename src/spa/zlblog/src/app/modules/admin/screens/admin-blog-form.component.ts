@@ -22,6 +22,8 @@ import { BlogAdminDataService } from '../blog-admin.data.service';
 import { Util } from '../../../core/services/util.service';
 // components
 import { AdminBlogImageDialogComponent } from '../components/admin-blog-image-dialog.component';
+import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog.component';
+
 
 @Component({
   selector: 'app-admin-blog-form',
@@ -129,10 +131,10 @@ export class AdminBlogFormComponent {
       this.editing = true;
       this.getBlog(blogId);
     }
-    //console.log(blogId);
-    this.auth.getAccessTokenSilently().subscribe(token => {
-      console.log(token);
-     });
+
+    // this.auth.getAccessTokenSilently().subscribe(token => {
+    //   console.log(token);
+    //  });
   }
 
   toogleHtmlEditr(): void {
@@ -237,10 +239,22 @@ export class AdminBlogFormComponent {
   }
 
   publishBlog(): void { 
-    this.blogAdminDataService.publishBlog(this.form.value.id as string).subscribe((res) => {
-      this.snackbarService.success('Blog published successfully');
-      this.router.navigate(['/admin']);
+    // open confirm dialog
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: 'Are you sure you want to publish this blog?' }
     });
+
+    // when it's confirmed
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.blogAdminDataService.publishBlog(this.form.value.id as string).subscribe((res) => {
+          this.snackbarService.success('Blog published successfully');
+          this.router.navigate(['/admin']);
+        });
+      }
+    });
+
 
   }
 }

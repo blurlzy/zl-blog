@@ -6,7 +6,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { Clipboard } from '@angular/cdk/clipboard';
 
-
 @Component({
   selector: 'app-admin-blog-image-list',
   imports: [ CommonModule, MatButtonModule, MatIconModule, MatMenuModule],

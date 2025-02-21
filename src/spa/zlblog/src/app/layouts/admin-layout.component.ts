@@ -23,7 +23,7 @@ import { Loader } from '../core/services/loader.service';
         <div Class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item head-item">
-                <a class="nav-link" [routerLink]="['/admin']" [queryParams]="{ keywords: 'About', type: 'tag' }">Blogs</a>
+                <a class="nav-link" [routerLink]="['/admin']" >Blogs</a>
               </li>
               <li class="nav-item head-item">
                 <a class="nav-link ms-2 me-3" [routerLink]="['/admin/images']" [queryParams]="{ keywords: 'About', type: 'tag' }">Images</a>

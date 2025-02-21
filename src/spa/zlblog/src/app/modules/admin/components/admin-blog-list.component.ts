@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 // angular material
@@ -74,6 +74,9 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 })
 export class AdminBlogListComponent {
   @Input({ required: true }) data: any[] = [];
+  // angular 19 version
+  // Because data is a signal, you call it like a function to get the current array value - data().
+  // data = input.required<any[]>();
 
   // inject services
   private readonly blogAdminDataService = inject(BlogAdminDataService);

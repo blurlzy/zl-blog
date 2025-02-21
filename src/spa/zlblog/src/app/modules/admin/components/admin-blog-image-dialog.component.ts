@@ -8,10 +8,11 @@ import { BlogAdminDataService } from '../blog-admin.data.service';
 import { Util } from '../../../core/services/util.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Loader } from '../../../core/services/loader.service';
-
+// components
+import { AdminBlogImageUploaderComponent } from './admin-blog-image-uploader.component';
 @Component({
   selector: 'app-admin-blog-image-dialog',
-  imports: [MatDialogModule, CommonModule, MatButtonModule],
+  imports: [MatDialogModule, CommonModule, MatButtonModule, AdminBlogImageUploaderComponent],
   template: `
       <h2 mat-dialog-title>
           Latest Blog Images
@@ -32,22 +33,9 @@ import { Loader } from '../../../core/services/loader.service';
               </div>
           }
         </div>
-        <form>
-            <div class="row border-bottom mb-2 mt-3 py-1">
-              <div class="input-group">
-                <input type="file" class="form-control" id="inputGroupFile01" aria-label="Upload" multiple (change)="setFilename($event)">
-                <button class="btn btn-primary" type="button" id="inputGroupFile01" 
-                      [disabled]="selectedFiles.length == 0 || (loader.isLoading | async)"
-                      (click)="uploadImages()">Upload</button>         
-              </div>          
-              <ul class="list-inline mt-2">
-                  @for(file of selectedFiles; track file.name) {
-                    <li class="list-inline-item me-2 mb-2"><i class="bi bi-image"></i> {{ file.name }} |</li>
-                  }     
-              </ul>
-
-            </div>
-        </form>
+        
+        <!-- uploader -->
+        <app-admin-blog-image-uploader (uploadedSuccess)="callback()"></app-admin-blog-image-uploader>
 
       </mat-dialog-content>
       <mat-dialog-actions>
@@ -105,38 +93,41 @@ export class AdminBlogImageDialogComponent {
     this.dialogRef.close(selectedImage);
   }
 
-  // select the file to upload
-  setFilename(event: any) {
-    // reset
-    this.selectedFiles = [];
-    const files = event.target.files;
-
-    if (files && files.length > 0) {
-      // validate the file type, ONLY images are allowed
-      for (let i = 0; i < files.length; i++) {
-        if (!this.util.isValidImage(files[i].name)) {
-          this.snackbarService.error(`Invalid file type: ${files[i].name}.`);
-          this.selectedFiles = [];
-          return;
-        }
-      }
-      this.selectedFiles = files;
-    }
-
+  callback() { 
+    this.getLatestBlogImages();
   }
+  // // select the file to upload
+  // setFilename(event: any) {
+  //   // reset
+  //   this.selectedFiles = [];
+  //   const files = event.target.files;
 
-  // upload files to the server
-  // reload latest images once upload is successful
-  uploadImages(): void {
-    const formData = new FormData();
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      formData.append('files', this.selectedFiles[i]);
-    }
-    // upload files
-    this.blogAdminDataService.uploadImages(formData).subscribe(() => {
-      this.snackbarService.success('Images uploaded successfully.');
-      // reload images
-      this.getLatestBlogImages();
-    });
-  }
+  //   if (files && files.length > 0) {
+  //     // validate the file type, ONLY images are allowed
+  //     for (let i = 0; i < files.length; i++) {
+  //       if (!this.util.isValidImage(files[i].name)) {
+  //         this.snackbarService.error(`Invalid file type: ${files[i].name}.`);
+  //         this.selectedFiles = [];
+  //         return;
+  //       }
+  //     }
+  //     this.selectedFiles = files;
+  //   }
+
+  // }
+
+  // // upload files to the server
+  // // reload latest images once upload is successful
+  // uploadImages(): void {
+  //   const formData = new FormData();
+  //   for (let i = 0; i < this.selectedFiles.length; i++) {
+  //     formData.append('files', this.selectedFiles[i]);
+  //   }
+  //   // upload files
+  //   this.blogAdminDataService.uploadImages(formData).subscribe(() => {
+  //     this.snackbarService.success('Images uploaded successfully.');
+  //     // reload images
+  //     this.getLatestBlogImages();
+  //   });
+  // }
 }
