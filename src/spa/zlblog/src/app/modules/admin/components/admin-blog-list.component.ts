@@ -52,10 +52,8 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                      <button mat-menu-item>
-                        <a routerLink="/admin/edit/{{item.id}}" class="link-dark link-underline-opacity-0">
-                          <i class="bi bi-pencil-square me-2"></i> Edit
-                        </a> 
+                      <button mat-menu-item routerLink="/admin/edit/{{item.id}}">
+                        <i class="bi bi-pencil-square me-2"></i> Edit 
                       </button>
                       <button mat-menu-item (click)="archiveBlog(item)">
                         @if(!item.isArchived) { 

@@ -14,10 +14,10 @@ import { AdminBlogListComponent } from '../components/admin-blog-list.component'
   imports: [ReactiveFormsModule, MatPaginatorModule, RouterLink, MatButtonModule, AdminBlogListComponent],
   template: `
         <div class="row">
-            <div class="col-12 mb-2">
-              <a mat-flat-button routerLink="/admin/create">New Blog</a>
+            <div class="col-12 mb-2">         
+              <button type="button" class="btn btn-outline-dark" routerLink="/admin/create"><i class="bi bi-plus-lg"></i> New Blog</button>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-2">
               <app-admin-blog-list [data]="pagedList.data"></app-admin-blog-list>
             </div>
             <mat-paginator 

@@ -4,11 +4,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-// services
-import { BlogAdminDataService } from '../blog-admin.data.service';
-import { Util } from '../../../core/services/util.service';
-import { SnackbarService } from '../../../core/services/snackbar.service';
-import { Loader } from '../../../core/services/loader.service';
+import { Clipboard } from '@angular/cdk/clipboard';
+
 
 @Component({
   selector: 'app-admin-blog-image-list',
@@ -39,10 +36,8 @@ import { Loader } from '../../../core/services/loader.service';
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                          <a routerLink="" class="link-dark link-underline-opacity-0">
-                            <i class="bi bi-trash-fill"></i> Delete
-                          </a> 
+                        <button mat-menu-item (click)="copyToClipboard(item)">
+                            <i class="bi bi-clipboard me-1"></i> Copy Uri
                         </button>
                       </mat-menu>
                   </td>
@@ -57,15 +52,17 @@ import { Loader } from '../../../core/services/loader.service';
 })
 export class AdminBlogImageListComponent {
    @Input({ required: true }) data: any[] = [];
-
-  // Inject services & components in the constructor of the component class so they are available to this component:
-  private readonly blogAdminDataService = inject(BlogAdminDataService);
-  private readonly snackbarService = inject(SnackbarService);
-  public readonly loader = inject(Loader);
+  // services
+  private readonly clipboard = inject(Clipboard);
 
   ngOnInit() {
     
   }
 
+  
+  // copy url to clipboard
+	copyToClipboard(img: any): void {		
+		this.clipboard.copy(img.uri);
+	}
 
 }

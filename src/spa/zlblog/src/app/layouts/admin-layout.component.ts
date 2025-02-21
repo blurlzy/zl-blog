@@ -26,14 +26,14 @@ import { Loader } from '../core/services/loader.service';
                 <a class="nav-link" [routerLink]="['/admin']" [queryParams]="{ keywords: 'About', type: 'tag' }">Blogs</a>
               </li>
               <li class="nav-item head-item">
-                <a class="nav-link ms-2 me-2" [routerLink]="['/admin/images']" [queryParams]="{ keywords: 'About', type: 'tag' }">Images</a>
+                <a class="nav-link ms-2 me-3" [routerLink]="['/admin/images']" [queryParams]="{ keywords: 'About', type: 'tag' }">Images</a>
               </li>
             </ul>
         </div>
 
         <form class="d-flex ms-auto ms-3" role="search">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search" [formControl]="keywordsCtrl">
-          <button class="btn btn-light" (click)="search()"><i class="bi bi-search"></i></button>
+          <button class="btn btn-light ms-2" (click)="search()"><i class="bi bi-search"></i></button>
           <button class="btn btn-light ms-2" (click)="logout()"><i class="bi bi-box-arrow-in-right"></i></button>
         </form>
       </div>
