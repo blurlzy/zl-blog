@@ -5,17 +5,13 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 // services
-import { BlogDataService } from '../blog.data.service';
+import { BlogAdminDataService } from '../blog-admin.data.service';
 import { Util } from '../../../core/services/util.service';
 import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
-// components
-import { BlogCommentsComponent } from '../components/blog-comments.component';
 
 @Component({
-  selector: 'app-blog-detail',
-  imports: [RouterLink, MatChipsModule, MatButtonModule, SafeHtmlPipe, DatePipe, UpperCasePipe,
-    BlogCommentsComponent
-  ],
+  selector: 'app-admin-blog-preview',
+  imports: [RouterLink, MatChipsModule, MatButtonModule, SafeHtmlPipe, DatePipe, UpperCasePipe,],
   template: `
     <div class="row">
       <div class="col-12 mt-2">
@@ -36,69 +32,48 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
             <!-- blog content -->
             <div class="post-content" [innerHTML]="blog.content | safeHtml"></div>
 
-            <!-- comments -->
-            <app-blog-comments [blogId]="blogId"></app-blog-comments>
-            
-            <div class="d-flex justify-content-between mt-1 mb-2">
-              <a class="btn btn-outline-dark mt-3" routerLink="/"role="button"><i class="bi bi-arrow-left"></i> Back to Home</a>   
-            </div>
       </div>
     </div>
   `,
   styles: `
-    .post-title {
+  .post-title {
       font-size: 2rem;
       margin-bottom: 0.5rem;
     }
     
-    .post-meta {
+  .post-meta {
       font-size: 0.875rem;
       color: #6c757d; /* Light gray for meta info */
       margin-bottom: 1rem;
     }
 
-    .post-content {
+  .post-content {
 
-    }
-    .post-content img {
+  }
+  .post-content img {
       width: 100%; /* Ensure images are responsive */
       height: auto;
       display: block;
     }
   `
 })
-export class BlogDetailComponent {
+export class AdminBlogPreviewComponent {
   blogId: string = '';
   blog: any = {};
 
-  // Inject ActivatedRoute and Router in the constructor of the component class so they are available to this component:
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly blogDataService = inject(BlogDataService);
+  private readonly blogAdminDataService = inject(BlogAdminDataService);
   private readonly util = inject(Util);
-
 
   ngOnInit() {
     this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
-    // validate blog id
-    if(!this.util.isValidGUID(this.blogId)) {
-      // route to home
-      this.router.navigate(['/404']);
-      return;
-    }
-
-    // get blog by id
     this.getBlog(this.blogId);
   }
 
-  // get blog
-  private getBlog(id: string): void {
-    this.blogDataService.getBlog(id).subscribe((data: any) => {
+  private getBlog(id:string) { 
+    this.blogAdminDataService.getBlogById(id).subscribe(data => { 
       this.blog = data;
-
-      // set meta tags
-      this.util.setMetaTags(this.blog);
     });
   }
-
 }

@@ -55,6 +55,9 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
                       <button mat-menu-item routerLink="/admin/edit/{{item.id}}">
                         <i class="bi bi-pencil-square me-2"></i> Edit 
                       </button>
+                      <button mat-menu-item routerLink="/admin/preview/{{item.id}}">
+                        <i class="bi bi-eye me-2"></i> Preview 
+                      </button>
                       <button mat-menu-item (click)="archiveBlog(item)">
                         @if(!item.isArchived) { 
                           <i class="bi bi-archive me-2"></i> Archive
