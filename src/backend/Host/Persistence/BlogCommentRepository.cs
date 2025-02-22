@@ -15,6 +15,11 @@ namespace ZLBlog.Persistence
             return await _context.ListCommentsAsync(blogId);
         }
 
+        public async Task<PagedList<BlogComment>> GetCommentsAsync(int pageIndex, int pageSize)
+        {
+            return await _context.ListCommentsAysnc(pageIndex, pageSize);
+        }
+
         public async Task<BlogComment> CreateAsync(BlogComment comment)
         {
             return await _context.CreateAsync(comment, comment.BlogId);

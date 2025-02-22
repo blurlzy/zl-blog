@@ -25,8 +25,11 @@ import { Loader } from '../core/services/loader.service';
               <li class="nav-item head-item">
                 <a class="nav-link" [routerLink]="['/admin']" >Blogs</a>
               </li>
-              <li class="nav-item head-item">
-                <a class="nav-link ms-2 me-3" [routerLink]="['/admin/images']" [queryParams]="{ keywords: 'About', type: 'tag' }">Images</a>
+              <li class="nav-item head-item ms-2">
+                <a class="nav-link" [routerLink]="['/admin/comments']" >Comments</a>
+              </li>
+              <li class="nav-item head-item ms-2 me-3">
+                <a class="nav-link" [routerLink]="['/admin/images']">Images</a>
               </li>
             </ul>
         </div>

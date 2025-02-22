@@ -43,5 +43,13 @@ export const AllowList = [
 	{
 		uri: `${environment.apiEndpoint}/api/blobs/*`,
 		httpMethod: HttpMethod.Delete,
+	},
+	{
+		uri: `${environment.apiEndpoint}/api/blogcomments/*`,
+		httpMethod: HttpMethod.Get,
+	},
+	{
+		uri: `${environment.apiEndpoint}/api/blogcomments/*`,
+		httpMethod: HttpMethod.Delete,
 	}
 ]

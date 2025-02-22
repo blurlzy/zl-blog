@@ -31,7 +31,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
                 
                   <td class="align-middle">{{ item.createdOn | date : 'MMM d, y, HH:mm' }} </td>
                   <td class="align-middle">
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">

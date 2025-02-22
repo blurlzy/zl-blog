@@ -72,7 +72,7 @@ import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog.
         <textarea class="form-control editor" formControlName="content"></textarea>
       }      
 
-        <div class="col-10 mt-3">
+      <div class="col-10 mt-3">
           <button type="submit" class="btn btn-primary me-3" [disabled]="form.invalid || (loader.isLoading | async)" (click)="saveBlog()">Save</button>
           <button type="submit" class="btn btn-light" (click)="goBack()">Cancel</button>
           @if (editing) {

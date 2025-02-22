@@ -61,4 +61,11 @@ export class Util {
 		this.meta.updateTag({ name: 'description', content: this.defaultDescription });
 	}
 
+	// ensure the text length is less than 2150
+	trimText(text: string): string {
+		if (text.length > 250) {
+			return text.substring(0, 250) + '...';
+		}
+		return text;
+	}
 }

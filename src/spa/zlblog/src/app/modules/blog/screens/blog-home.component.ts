@@ -48,7 +48,7 @@ export class BlogHomeComponent {
   filterFormGroup = new FormGroup({
     keywords: new FormControl(''),
     type: new FormControl(''),
-    pageSize: new FormControl(12),
+    pageSize: new FormControl(8),
     pageIndex: new FormControl(0)
   });
 
@@ -67,11 +67,11 @@ export class BlogHomeComponent {
 			this.pagedList = { data: [], total: 0 };
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
-        this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+        this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 8);
       }
       else {
         // search blogs
-        this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 12);
+        this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 8);
       }
 
       // ensure it scrolls to the top of the page

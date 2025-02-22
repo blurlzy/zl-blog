@@ -1,5 +1,5 @@
 ﻿using Microsoft.Azure.Cosmos;
-using System.Linq.Expressions;
+
 
 namespace ZLBlog.Persistence
 {
@@ -17,6 +17,26 @@ namespace ZLBlog.Persistence
                     () => base._container.GetItemLinqQueryable<BlogComment>(true)
                             .Where(m => m.BlogId == blogId).OrderByDescending(m => m.CreatedOn)
                             .AsEnumerable());
+        }
+
+        public async Task<PagedList<BlogComment>> ListCommentsAysnc(int pageIndex, int pageSize)
+        {
+            // query items
+            var query = @"SELECT * FROM c ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
+
+            QueryDefinition queryDef = new QueryDefinition(query)
+                                               .WithParameter("@skip", pageIndex * pageSize)
+                                               .WithParameter("@take", pageSize);
+
+            var pagedList = await base.RunQueryAsync(queryDef);
+
+            // count total items
+            var countQuery = @"SELECT VALUE COUNT(1) FROM c  ";
+
+            QueryDefinition countQueryDef = new QueryDefinition(countQuery);
+            var totalCount = await base.CountAsync(countQueryDef);
+
+            return new PagedList<BlogComment>(totalCount, pagedList);
         }
     }
 }

@@ -7,9 +7,9 @@ import { environment } from '../../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class BlogAdminDataService {
 	// api endpoint
-	private blogAdminApiEndpoint = `${environment.apiEndpoint}/api/admin`;
-	private blobAdminApiEndpoint = `${environment.apiEndpoint}/api/blobs`;
-
+	private readonly blogAdminApiEndpoint = `${environment.apiEndpoint}/api/admin`;
+	private readonly blobAdminApiEndpoint = `${environment.apiEndpoint}/api/blobs`;
+	private readonly commentAdminApiEndpoint = `${environment.apiEndpoint}/api/blogcomments`;
 	// ctor
 	constructor(private http: HttpClient) { }
 
@@ -64,5 +64,16 @@ export class BlogAdminDataService {
 	archiveBlog(id: string, archive: boolean): Observable<any> {
 		const url = `${this.blogAdminApiEndpoint}/blogs/${id}/archive`;
 		return this.http.put(url, { id:id, isArchived: archive });
+	}
+
+	// get comments
+	getComments(pageIndex: number, pageSize: number): Observable<any> {
+		const url = `${this.commentAdminApiEndpoint}/?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+		return this.http.get(url);
+	}
+
+	deleteComment(blogId:string, id: string): Observable<any> {
+		const url = `${this.commentAdminApiEndpoint}/${blogId}/${id}`;
+		return this.http.delete(url);
 	}
 }

@@ -81,7 +81,7 @@ export class AdminHomeImagesComponent {
     this.blogAdminDataService.getImages(pageIndex, pageSize)
       .subscribe((result: any) => {
         this.pagedList = result;
-        console.log(result);
+        //console.log(result);
       });
   }
 

@@ -21,10 +21,10 @@ import { Util } from '../../../core/services/util.service';
         <form [formGroup]="form">
           <div class="row mt-1 ms-2 py-2 border border-secondary rounded">
               <div class="mt-2 mb-3">            
-                <input  type="text" class="form-control" formControlName="by" placeholder="Your name">
+                <input  type="text" class="form-control" formControlName="by" placeholder="Your name" maxlength="50">
               </div>
               <div class="mb-3">               
-                <textarea  class="form-control" rows="3" formControlName="commentText" placeholder="Write your comment here"></textarea>
+                <textarea  class="form-control" rows="3" formControlName="commentText" placeholder="Write your comment here" maxlength="250"></textarea>
               </div>
               <div>
                 <button mat-flat-button (click)="createComment()" [disabled]="form.invalid || (loader.isLoading | async)">Submit</button>
@@ -110,7 +110,12 @@ export class BlogCommentsComponent {
   createComment() { 
     // patch the blog id
     this.form.patchValue({ blogId: this.blogId });    
-
+    // ensure the length of the comment
+    if (this.form.value.commentText.length > 250) {
+      this.snackbarService.error('Comment should not exceed 250 characters');
+      return;
+    }
+    
     this.blogDataService.createComment(this.form.value).subscribe((res: any) => {
       this.snackbarService.success('Comment added successfully');
       // console.log(res);
