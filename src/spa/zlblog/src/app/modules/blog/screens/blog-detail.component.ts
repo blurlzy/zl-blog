@@ -18,14 +18,14 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
   ],
   template: `
     <div class="row">
-      <div class="col-12 mt-2">
+      <div class="col-12 mt-3">
             <div class="mb-3">
               <h2 class="post-title"> {{ blog.title }}</h2>
               <p class="post-meta"><i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
               <mat-chip-set>
                 @for (tag of blog.tags; track tag) { 
                   <mat-chip>
-                    <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0">  
+                    <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0 article-meta-tag">  
                       <i class="bi bi-tag"></i> {{ tag }}
                     </a> 
                   </mat-chip>
@@ -51,7 +51,7 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
     }
     
     .post-meta {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: #6c757d; /* Light gray for meta info */
     }
   `

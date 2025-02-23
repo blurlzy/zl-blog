@@ -38,16 +38,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
  /* Article titles */
  .article-title {
 	font-size: 1.75rem;
-	margin-bottom: 0.5rem;
  }
  
  /* Meta info (date, author) */
  .article-meta {
-	font-size: 0.875rem;
+	font-size: 0.85rem;
 	color: #666;
-	margin-bottom: 0.5rem;
  }
  
+ .article-meta-tag {
+	font-size: 0.85rem;
+ }
  /* 
 	Dashed line divider between articles:
 	border bottom on every article except the last one.

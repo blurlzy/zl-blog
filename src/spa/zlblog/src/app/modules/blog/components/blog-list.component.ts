@@ -20,10 +20,10 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
               <i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, HH:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}
             </p>
             
-            <mat-chip-set>
+            <mat-chip-set class="mb-3">
               @for (tag of blog.tags; track tag) { 
                 <mat-chip>
-                 <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-secondary link-underline-opacity-0">  
+                 <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0 article-meta-tag">  
                   <i class="bi bi-tag"></i> {{ tag }}
                  </a> 
                 </mat-chip>
