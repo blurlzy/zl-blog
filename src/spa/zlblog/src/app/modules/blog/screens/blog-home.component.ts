@@ -42,13 +42,14 @@ export class BlogHomeComponent {
   public readonly loader = inject(Loader);
   public readonly util = inject(Util);
 
+  private readonly pageSize = 5;
   // properties
   pagedList: any = { data: [], total: 0 };
   // filter form group
   filterFormGroup = new FormGroup({
     keywords: new FormControl(''),
     type: new FormControl(''),
-    pageSize: new FormControl(8),
+    pageSize: new FormControl(this.pageSize),
     pageIndex: new FormControl(0)
   });
 
@@ -67,11 +68,11 @@ export class BlogHomeComponent {
 			this.pagedList = { data: [], total: 0 };
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
-        this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 8);
+        this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
       }
       else {
         // search blogs
-        this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 8);
+        this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
       }
 
       // ensure it scrolls to the top of the page

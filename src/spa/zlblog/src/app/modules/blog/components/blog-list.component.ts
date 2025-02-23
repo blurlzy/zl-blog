@@ -17,13 +17,13 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
                <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
             </h2>
             <p class="article-meta">
-              <i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, HH:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}
+              <i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, HH:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}
             </p>
             
             <mat-chip-set>
               @for (tag of blog.tags; track tag) { 
                 <mat-chip>
-                 <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0">  
+                 <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-secondary link-underline-opacity-0">  
                   <i class="bi bi-tag"></i> {{ tag }}
                  </a> 
                 </mat-chip>
@@ -52,18 +52,5 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 })
 export class BlogListComponent {
   @Input({ required: true }) data: any = [];
-  // blogs:any = [];
 
-  // constructor(private blogDataService: BlogDataService) { }
-
-  // ngOnInit() {
-  //   this.listBlogs();
-  // }
-
-  // // load latest blogs
-  // private listBlogs() { 
-  //   this.blogDataService.listBlogs(0, 10).subscribe((data: any) => {
-  //     this.blogs = data.data;
-  //   });
-  // }
 }

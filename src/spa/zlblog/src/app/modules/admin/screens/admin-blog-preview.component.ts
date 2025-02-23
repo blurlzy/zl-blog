@@ -17,11 +17,11 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
       <div class="col-12 mt-2">
             <div class="mb-3">
               <h1 class="post-title"> {{ blog.title }}</h1>
-              <p class="post-meta"><i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
+              <p class="post-meta"><i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
               <mat-chip-set>
                 @for (tag of blog.tags; track tag) { 
                   <mat-chip>
-                    <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0">  
+                    <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-secondary link-underline-opacity-0">  
                       <i class="bi bi-tag"></i> {{ tag }}
                     </a> 
                   </mat-chip>
@@ -30,7 +30,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
             </div>
 
             <!-- blog content -->
-            <div class="post-content" [innerHTML]="blog.content | safeHtml"></div>
+            <div [innerHTML]="blog.content | safeHtml"></div>
 
       </div>
     </div>

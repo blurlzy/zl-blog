@@ -14,7 +14,7 @@
 		select-trigger-text-size: var(--mat-sys-body-large-size),
 		container-text-weight: var(--mat-sys-body-large-weight),
 		container-text-size: var(--mat-sys-body-large-size),
-	  container-background-color: transparent,
+	  	container-background-color: transparent,
 	));
  }
 /* 
@@ -64,6 +64,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	padding-bottom: 0;
  }
  
+ .larger-icon {
+	font-size: 1.1rem;
+	/* or 24px, 3em, etc. */
+ }
+
  .zlblog-pink {
 	color: #ed008c;
  }

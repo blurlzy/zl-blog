@@ -52,10 +52,10 @@ import { Loader } from '../core/services/loader.service';
 
         <footer class="py-3">
           <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-            <p>&copy; ZL Blog, Inc. All rights reserved.</p>
+            <p style="font-family: 'Comic Sans MS', Courier, monospace;">&copy; ZL Blog, Inc. All rights reserved.</p>
             <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a class="link-body-emphasis" href="https://x.com/dczl1047" target="_blank"><i class="bi bi-twitter-x"></i></a></li>
-              <li class="ms-3"><a class="link-body-emphasis" href="https://github.com/blurlzy/zl-blog" target="_blank" ><i class="bi bi-github" ></i></a></li>           
+              <li class="ms-3"><a class="link-body-emphasis" href="https://x.com/dczl1047" target="_blank"><i class="bi bi-twitter-x larger-icon"></i></a></li>
+              <li class="ms-3"><a class="link-body-emphasis" href="https://github.com/blurlzy/zl-blog" target="_blank" ><i class="bi bi-github larger-icon"></i></a></li>           
             </ul>
           </div>
       </footer>
@@ -70,12 +70,9 @@ export class AdminLayoutComponent {
   private readonly router = inject(Router);
   public readonly loader = inject(Loader);
   public readonly auth = inject(AuthService);
-  keywordsCtrl = new FormControl('', [Validators.required]);
 
-  // // ctor
-  // constructor(public auth: AuthService, 
-  //             public loader: Loader, 
-  //             private router: Router) { }
+  // form control
+  keywordsCtrl = new FormControl('', [Validators.required]);
 
   // public methods
   search(): void {

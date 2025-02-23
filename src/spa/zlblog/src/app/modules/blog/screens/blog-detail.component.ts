@@ -21,7 +21,7 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
       <div class="col-12 mt-2">
             <div class="mb-3">
               <h2 class="post-title"> {{ blog.title }}</h2>
-              <p class="post-meta"><i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
+              <p class="post-meta"><i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
               <mat-chip-set>
                 @for (tag of blog.tags; track tag) { 
                   <mat-chip>
@@ -34,7 +34,7 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
             </div>
 
             <!-- blog content -->
-            <div class="post-content" [innerHTML]="blog.content | safeHtml"></div>
+            <div [innerHTML]="blog.content | safeHtml"></div>
 
             <!-- comments -->
             <app-blog-comments [blogId]="blogId"></app-blog-comments>
