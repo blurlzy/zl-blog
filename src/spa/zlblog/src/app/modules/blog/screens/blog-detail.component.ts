@@ -20,7 +20,7 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
     <div class="row">
       <div class="col-12 mt-2">
             <div class="mb-3">
-              <h1 class="post-title"> {{ blog.title }}</h1>
+              <h2 class="post-title"> {{ blog.title }}</h2>
               <p class="post-meta"><i class="bi bi-calendar-event"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
               <mat-chip-set>
                 @for (tag of blog.tags; track tag) { 
@@ -47,23 +47,12 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
   `,
   styles: `
     .post-title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.75rem;
     }
     
     .post-meta {
       font-size: 0.875rem;
       color: #6c757d; /* Light gray for meta info */
-      margin-bottom: 1rem;
-    }
-
-    .post-content {
-
-    }
-    .post-content img {
-      width: 100%; /* Ensure images are responsive */
-      height: auto;
-      display: block;
     }
   `
 })

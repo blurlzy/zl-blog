@@ -31,7 +31,7 @@ export class Util {
 	}
 
 	createImgHtml(imgUrl: string, alt: string): string {
-		return `<img src="${imgUrl}" alt="${alt}" width="70%" height="70%">`;
+		return `<img src="${imgUrl}" alt="${alt}" class="img-fluid border rounded" width="90%" height="90%">`;
 	}
 
 	// remove the auto-generated "&nbsp;", the html editor will generate "&nbsp;" when the space key is pressed

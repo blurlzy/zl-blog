@@ -32,7 +32,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 
 
             <!-- html content -->
-            <div [innerHTML]="blog.content | safeHtml" class="article-container mt-2 mb-2"></div>
+            <div [innerHTML]="blog.content | safeHtml" class="mt-2 mb-2"></div>
 
             <!-- COMMENTS SECTION (only the count, no individual comments) -->
             <section class="comments-section mt-3 py-2">
@@ -44,16 +44,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
     }
 
   `,
-  styles: `
-    .article-container {
-
-    }
-      .article-container img {
-        width: 100%;
-        height: auto;
-        display: block; /* prevents inline spacing issues in some cases */
-      }
-    
+  styles: `    
     .comments-section h5 {
       font-size: 0.85rem;
     }

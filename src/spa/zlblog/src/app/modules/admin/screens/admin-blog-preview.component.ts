@@ -37,23 +37,12 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
   `,
   styles: `
   .post-title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.75rem;     
     }
     
   .post-meta {
       font-size: 0.875rem;
-      color: #6c757d; /* Light gray for meta info */
-      margin-bottom: 1rem;
-    }
-
-  .post-content {
-
-  }
-  .post-content img {
-      width: 100%; /* Ensure images are responsive */
-      height: auto;
-      display: block;
+      color: #6c757d; /* Light gray for meta info */   
     }
   `
 })
