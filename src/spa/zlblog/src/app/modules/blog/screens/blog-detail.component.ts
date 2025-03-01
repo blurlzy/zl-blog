@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { DatePipe, UpperCasePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe, Location } from '@angular/common';
 // material
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,7 +40,7 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
             <app-blog-comments [blogId]="blogId"></app-blog-comments>
             
             <div class="d-flex justify-content-between mt-1 mb-2">
-              <a class="btn btn-outline-dark mt-3" routerLink="/"role="button"><i class="bi bi-arrow-left"></i> Back to Home</a>   
+              <button type="button" class="btn btn-outline-dark mt-3" (click)="goBackOrHome()"><i class="bi bi-arrow-left"></i> Back </button>            
             </div>
       </div>
     </div>
@@ -65,7 +65,7 @@ export class BlogDetailComponent {
   private readonly router = inject(Router);
   private readonly blogDataService = inject(BlogDataService);
   private readonly util = inject(Util);
-
+  private readonly location = inject(Location);
 
   ngOnInit() {
     this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
@@ -90,4 +90,7 @@ export class BlogDetailComponent {
     });
   }
 
+  goBackOrHome(): void {
+    this.location.back();
+  }
 }

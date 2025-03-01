@@ -21,7 +21,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
               <mat-chip-set>
                 @for (tag of blog.tags; track tag) { 
                   <mat-chip>
-                    <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-secondary link-underline-opacity-0">  
+                    <a [routerLink]="['/']" [queryParams]="{ keywords: tag, type: 'tag' }" class="link-dark link-underline-opacity-0 article-meta-tag">  
                       <i class="bi bi-tag"></i> {{ tag }}
                     </a> 
                   </mat-chip>
@@ -41,7 +41,7 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
     }
     
   .post-meta {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: #6c757d; /* Light gray for meta info */   
     }
   `
