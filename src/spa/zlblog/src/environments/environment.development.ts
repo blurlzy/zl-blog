@@ -1,6 +1,6 @@
 export const environment = {
 	production: false,
-	apiEndpoint: 'https://localhost:7023', 
+	apiEndpoint: 'https://aca-zlblog-api.calmglacier-d525e52c.australiaeast.azurecontainerapps.io', 
 	auth0Config:{
 		tenantDomain: 'zlblog.au.auth0.com',
 		clientId: '9BkIxugDGE3VB1p4zXF1CQinIJAMk9B5',

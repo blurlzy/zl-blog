@@ -54,8 +54,8 @@ import { Loader } from '../core/services/loader.service';
       </main>
 
       <footer class="border-top py-3 text-center">
-        <p class="mb-2" style="font-family: 'Comic Sans MS', Courier, monospace; ">
-          &copy; 2025 ZL Blog. All rights reserved. 
+        <p class="mb-2 footer-item">
+          &copy; 2025 ZL Blog. 🚀 All rights reserved. 
           <a href="https://x.com/dczl1047" class="link-dark" target="_blank"><i class="bi bi-twitter-x ms-2 me-2 larger-icon"></i></a>  
           <a href="https://github.com/blurlzy/zl-blog" class="link-dark" target="_blank"><i class="bi bi-github ms-1 larger-icon"></i></a>         
         </p>           
