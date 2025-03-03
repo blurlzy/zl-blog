@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
@@ -57,15 +57,15 @@ export class BlogHomeComponent {
     // query params change
     this.activatedRoute.queryParams.subscribe(params => {
       const pageIndex = +params['pageIndex'];
-			// retrive the query params
-			this.filterFormGroup.patchValue({
-				pageIndex: pageIndex ? pageIndex : 0,
-				keywords: params['keywords'] ?? '',   
-        type: params['type'] ?? ''                     
-			});
+      // retrive the query params
+      this.filterFormGroup.patchValue({
+        pageIndex: pageIndex ? pageIndex : 0,
+        keywords: params['keywords'] ?? '',
+        type: params['type'] ?? ''
+      });
 
       // reset the result      			
-			this.pagedList = { data: [], total: 0 };
+      this.pagedList = { data: [], total: 0 };
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
         this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
@@ -109,5 +109,38 @@ export class BlogHomeComponent {
     });
   }
 
+  // keyboard event handler - right / left arrow keys
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    //console.log(event); 
+    const totalPages = Math.ceil(this.pagedList.total / this.pageSize);
+    const currentPageIndex = this.filterFormGroup.value.pageIndex ?? 0;
+    let newPageIndex = currentPageIndex;
 
+    if (event.key === 'ArrowLeft') {
+      if (currentPageIndex > 0) {
+        // go to previous page
+        newPageIndex = currentPageIndex - 1;
+      }
+    }
+
+    if (event.key === 'ArrowRight') {
+      if (currentPageIndex < totalPages - 1) {
+        // go to next page
+        newPageIndex = currentPageIndex + 1;
+       
+      }
+    }
+
+    if (newPageIndex !== currentPageIndex) {
+      // update the page index in the query string, which will trigger the query params changes event		
+      this.router.navigate(['/'], {
+        queryParams: {
+          pageIndex: newPageIndex,
+          keywords: this.filterFormGroup.value.keywords,
+          type: this.filterFormGroup.value.type
+        }
+      });
+    }
+  }
 }

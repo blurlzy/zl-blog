@@ -25,5 +25,5 @@ export const routes: Routes = [
 			}
 		]
 	},
-	{ path: '**',   redirectTo: '', pathMatch: 'full' } // redirect to default screen
+	{ path: '**',   redirectTo: '404', pathMatch: 'full' } // redirect to 404 screen (not found) in the default (blog) module
 ];
