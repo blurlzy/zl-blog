@@ -6,9 +6,9 @@ import { Util } from '../../../core/services/util.service';
   imports: [],
   template: `
   <div class="profile-header text-center">
-    <img src="https://stzlblog.blob.core.windows.net/blog-images/cb60013f-361f-4742-988e-5ea4656f1765.jpg"  alt="ZL" class="profile-img"/>
-    <h3 class="mt-3">ZL</h3>
-    <small>Cloud Solution Architect &#64; msft</small> <i class="bi bi-microsoft ms-2"></i>
+    <img src="https://stzlblog.blob.core.windows.net/blog-images/cb60013f-361f-4742-988e-5ea4656f1765.jpg"  alt="ZL" class="profile-img mt-3"/>
+    <h3 class="mt-3">About me</h3>
+    <small>Sr Cloud Solution Architect &#64; msft</small> <i class="bi bi-microsoft ms-2"></i>
   </div>
 
   <!-- About Section -->
@@ -40,7 +40,6 @@ A space where I share my knowledge, experiences, and ideas on Cloud, AI, industr
       margin-bottom: 2rem;
       border-bottom: 2px dashed #000;
       padding-bottom: 1rem;
-
     }
     .profile-img {
       width: 260px;
