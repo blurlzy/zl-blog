@@ -42,19 +42,5 @@ namespace ZLBlog.Tests.Tests
             }
         }
 
-
-        [Theory]
-        [InlineData("auth0|67ac7f1696b9884d33e4f06c", 30)]
-        public async Task Get_Latest_Images_by_User_Test(string userId, int top)
-        {
-            var blobs = await _blobService.GetLatestImagesAsync(userId, top);
-
-            foreach (var blob in blobs)
-            {
-                _output.WriteLine($"File name: {blob.Name}");
-                var blobUri = _blobService.GetBlobUri(blob);
-                _output.WriteLine($"Uri: {blobUri}");
-            }
-        }
     }
 }

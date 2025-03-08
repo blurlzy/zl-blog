@@ -96,5 +96,6 @@ namespace ZLBlog.Tests.Tests
         {
             await _blogRepository.ArchiveAsync(blogId, isArchived);
         }
+
     }
 }

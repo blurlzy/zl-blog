@@ -8,7 +8,7 @@ import { Util } from '../../../core/services/util.service';
   <div class="profile-header text-center">
     <img src="https://stzlblog.blob.core.windows.net/blog-images/cb60013f-361f-4742-988e-5ea4656f1765.jpg"  alt="ZL" class="profile-img mt-3"/>
     <h3 class="mt-3">About me</h3>
-    <small>Sr Cloud Solution Architect &#64; msft</small> <i class="bi bi-microsoft ms-2"></i>
+    <small>Sr Cloud Solution Architect &#64; Microsoft</small> <i class="bi bi-microsoft ms-2"></i>
   </div>
 
   <!-- About Section -->
@@ -21,7 +21,7 @@ A space where I share my knowledge, experiences, and ideas on Cloud, AI, industr
 
       <h2 class="section-title">Overview of the technology stack and high-level architectural design of ZL Blog:</h2>
       <ul class="profile-list">
-        <li>Frontend: Angular 18</li>
+        <li>Frontend: Angular 19</li>
         <li>Backend: .NET 8.0</li>
         <li>Authentication: Auth0</li>
         <li>Hosting: Fully deployed on Azure</li>
