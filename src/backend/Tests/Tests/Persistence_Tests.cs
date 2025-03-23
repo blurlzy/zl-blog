@@ -97,5 +97,17 @@ namespace ZLBlog.Tests.Tests
             await _blogRepository.ArchiveAsync(blogId, isArchived);
         }
 
+        [Theory]
+        [InlineData("30a6f8fe-f58f-4ab4-a64e-d87e30566fda")]
+        public async Task Update_Blog_Test(string id)
+        {
+            var blog = await _blogRepository.GetBlogAsync(id);
+
+            // update
+            blog.CreatedOn = DateTime.Now.AddDays(-12);
+
+            await _blogRepository.UpdateAsync(blog);
+        }
+
     }
 }

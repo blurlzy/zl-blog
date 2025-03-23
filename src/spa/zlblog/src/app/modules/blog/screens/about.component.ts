@@ -25,7 +25,6 @@ A space where I share my knowledge, experiences, and ideas on Cloud, AI, industr
         <li>Backend: .NET 8.0</li>
         <li>Authentication: Auth0</li>
         <li>Hosting: Fully deployed on Azure</li>
-        <li><a href="https://github.com/blurlzy/zl-blog" target="_blank">Source Code - GitHub</a></li>
       </ul>
     </div>
 

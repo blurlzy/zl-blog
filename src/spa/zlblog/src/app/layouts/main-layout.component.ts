@@ -34,7 +34,9 @@ import { Loader } from '../core/services/loader.service';
               <li class="nav-item head-item">
                 <a class="nav-link" [routerLink]="['/about']">About</a>
               </li>
-
+            <li class="nav-item head-item">
+                <a class="nav-link" [routerLink]="['/contact']">Contact</a>
+              </li>
             </ul>
           </div>
 
@@ -56,8 +58,10 @@ import { Loader } from '../core/services/loader.service';
       <footer class="border-top py-3 text-center">
         <p class="mb-2 footer-item">
           &copy; 2025 ZL Blog. 🚀 All rights reserved. 
+          <!-- 
           <a href="https://x.com/dczl1047" class="link-dark" target="_blank"><i class="bi bi-twitter-x ms-2 me-2 larger-icon"></i></a>  
-          <a href="https://github.com/blurlzy/zl-blog" class="link-dark" target="_blank"><i class="bi bi-github ms-1 larger-icon"></i></a>         
+          <a href="https://github.com/blurlzy/zl-blog" class="link-dark" target="_blank"><i class="bi bi-github ms-1 larger-icon"></i></a>    
+          -->     
         </p>           
       </footer>
   `,
