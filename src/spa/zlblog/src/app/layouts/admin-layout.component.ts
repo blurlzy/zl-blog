@@ -7,6 +7,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 // auth0
 import { AuthService } from '@auth0/auth0-angular';
 import { Loader } from '../core/services/loader.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-admin-layout',
@@ -83,6 +84,8 @@ export class AdminLayoutComponent {
 
   logout(): void {
     // logout 
-    this.auth.logout();
+    this.auth.logout({ 
+      logoutParams: {returnTo: window.location.origin} 
+    });
   }
 }
