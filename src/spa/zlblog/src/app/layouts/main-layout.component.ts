@@ -34,9 +34,7 @@ import { Loader } from '../core/services/loader.service';
               <li class="nav-item head-item">
                 <a class="nav-link" [routerLink]="['/about']">About</a>
               </li>
-            <li class="nav-item head-item">
-                <a class="nav-link" [routerLink]="['/contact']">Contact</a>
-              </li>
+
             </ul>
           </div>
 

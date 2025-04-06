@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 // services
 import { Util } from '../../../core/services/util.service';
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [ RouterLink ],
   template: `
   <div class="profile-header text-center">
     <img src="https://stzlblog.blob.core.windows.net/blog-images/cb60013f-361f-4742-988e-5ea4656f1765.jpg"  alt="ZL" class="profile-img mt-3"/>
@@ -16,10 +17,14 @@ import { Util } from '../../../core/services/util.service';
     <div class="col-md-10 offset-md-1">
       <h2 class="section-title">About ZL Blog </h2>
       <p>
-A space where I share my knowledge, experiences, and ideas on Cloud, AI, industry insights, and beyond. Whether it’s tech-related discussions or interesting thoughts on non-tech topics, this is where I explore and share what matters most.
+        A space where I share my knowledge, experiences, and ideas on Cloud, AI, industry insights, and beyond. Whether it’s tech-related discussions or interesting thoughts on non-tech topics, this is where I explore and share what matters most.      
       </p>
+      
+       <a class="link-body-emphasis link-offset-1 link-underline-opacity-100 link-underline-opacity-50-hover" routerLink="/contact">
+           <i class="bi bi-person-square me-2"></i>Contact<i class="bi bi-arrow-right ms-1"></i>  
+      </a>
 
-      <h2 class="section-title">Overview of the technology stack and high-level architectural design of ZL Blog:</h2>
+      <h2 class="section-title mt-3">Overview of the technology stack and high-level architectural design of ZL Blog:</h2>
       <ul class="profile-list">
         <li>Frontend: Angular 19</li>
         <li>Backend: .NET 8.0</li>
