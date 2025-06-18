@@ -15,8 +15,14 @@ import { Util } from '../../../core/services/util.service';
   template: `
     <section class="comments-section border-top mt-2">            
       <!-- Add a comment form (static example) -->     
-
-      <button type="button" class="btn btn-link mt-2" (click)="toggleCommentForm()">{{ showCommentForm ? 'Cancel' : 'Add a Comment' }}</button>
+      @if(showCommentForm) {
+         <button type="button" class="btn btn-link mt-2" (click)="toggleCommentForm()">Cancel</button>
+      } 
+      @else {
+    
+        <button type="button" class="btn btn-light mt-2" (click)="toggleCommentForm()"> <i class="bi bi-chat"></i> Add a Comment</button>
+      }
+      
       @if (showCommentForm) {
         <form [formGroup]="form">
           <div class="row mt-1 ms-2 py-2 border border-secondary rounded">
