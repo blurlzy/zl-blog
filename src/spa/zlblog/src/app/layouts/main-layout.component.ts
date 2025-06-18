@@ -24,16 +24,16 @@ import { Loader } from '../core/services/loader.service';
           <div [ngClass]="collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show'">
             <ul class="navbar-nav ms-auto">
 
-              <li class="nav-item head-item">
+              <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'Azure', type: 'tag' }">Azure</a>
               </li>
-              <li class="nav-item head-item">
+              <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'AI', type: 'tag' }">AI</a>
               </li>
-              <li class="nav-item head-item">
+              <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'Misc', type: 'tag' }">Miscellaneous</a>
               </li>
-              <li class="nav-item head-item">
+              <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/about']">About</a>
               </li>
 
