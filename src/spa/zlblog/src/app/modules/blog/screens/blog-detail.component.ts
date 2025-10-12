@@ -73,23 +73,32 @@ export class BlogDetailComponent {
   private readonly location = inject(Location);
 
   ngOnInit() {
-    this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
-    // validate blog id
-    if(!this.util.isValidGUID(this.blogId)) {
-      // route to home
-      this.router.navigate(['/404']);
-      return;
-    }
+    // subscribe to route param changes
+    this.route.paramMap.subscribe(params => {
+      // get the blog id
+      this.blogId = params.get('id') ?? '';
+      //this.blogId = this.route.snapshot.paramMap.get('id') ?? '';
 
-    // get blog by id
-    this.getBlog(this.blogId);
+      // validate blog id
+      if (!this.util.isValidGUID(this.blogId)) {
+        // route to home
+        this.router.navigate(['/404']);
+        return;
+      }
+
+      // move to the top of the page
+      window.scroll(0, 0);
+      // get blog by id
+      this.getBlog(this.blogId);
+    });
+
+
   }
 
   // get blog
   private getBlog(id: string): void {
     this.blogDataService.getBlog(id).subscribe((data: any) => {
       this.blog = data;
-
       // set meta tags
       this.util.setMetaTags(this.blog);
     });

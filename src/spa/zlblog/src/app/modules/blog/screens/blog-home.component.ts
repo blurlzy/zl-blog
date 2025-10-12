@@ -71,6 +71,8 @@ export class BlogHomeComponent {
 
       // reset the result      			
       this.pagedList = { data: [], total: 0 };
+      // ensure it scrolls to the top of the page
+      window.scroll(0, 0);     
       // if keywords is a tag, then filter by tag
       if (params['type'] && params['type'] === 'tag') {
         this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
@@ -79,9 +81,6 @@ export class BlogHomeComponent {
         // search blogs
         this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
       }
-
-      // ensure it scrolls to the top of the page
-      // window.scroll(0, 0);     
     });
 
     // reset meta tags
