@@ -10,17 +10,17 @@ import { Loader } from '../../../core/services/loader.service';
 import { Util } from '../../../core/services/util.service';
 // import components
 import { BlogListComponent } from '../components/blog-list.component';
+import { BlogRightNavComponent } from '../components/blog-right-nav.component';
 
 @Component({
   selector: 'app-blog-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogListComponent],
+  imports: [CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogListComponent, BlogRightNavComponent],
   template: `
-        <div class="row">
-            <div class="col-12 mt-3">
+        <div class="row g-4 mt-2">
+            <div class="col-lg-8">
                 <app-blog-list [data]="pagedList.data"></app-blog-list>
-            </div>
-            <mat-paginator 
+                <mat-paginator 
                       [pageSize]="filterFormGroup.value.pageSize"
                       [pageIndex]="filterFormGroup.value.pageIndex" 
                       [length]="pagedList.total"
@@ -29,7 +29,12 @@ import { BlogListComponent } from '../components/blog-list.component';
                       (page)="pageIndexChanged($event)"            
                       showFirstLastButtons
                       aria-label="Select page">
-          </mat-paginator>
+              </mat-paginator>
+            </div>
+
+            <div class="col-lg-4"> 
+                <app-blog-right-nav></app-blog-right-nav>
+            </div>
         </div>
   `,
   styles: ``

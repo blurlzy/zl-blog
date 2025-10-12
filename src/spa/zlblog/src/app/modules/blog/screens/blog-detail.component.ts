@@ -10,15 +10,16 @@ import { Util } from '../../../core/services/util.service';
 import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 // components
 import { BlogCommentsComponent } from '../components/blog-comments.component';
+import { BlogRightNavComponent } from '../components/blog-right-nav.component';
 
 @Component({
   selector: 'app-blog-detail',
   imports: [RouterLink, MatChipsModule, MatButtonModule, SafeHtmlPipe, DatePipe, UpperCasePipe,
-    BlogCommentsComponent
+    BlogCommentsComponent, BlogRightNavComponent
   ],
   template: `
-    <div class="row">
-      <div class="col-12 mt-3">
+    <div class="row g-4 mt-2">
+      <div class="col-lg-8">
             <div class="mb-3">
               <h2 class="post-title"> {{ blog.title }}</h2>
               <p class="post-meta"><i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>
@@ -42,6 +43,10 @@ import { BlogCommentsComponent } from '../components/blog-comments.component';
             <div class="d-flex justify-content-between mt-1 mb-2">
               <button type="button" class="btn btn-outline-dark mt-3" (click)="goBackOrHome()"><i class="bi bi-arrow-left"></i> Back </button>            
             </div>
+      </div>
+
+      <div class="col-lg-4"> 
+        <app-blog-right-nav></app-blog-right-nav>
       </div>
     </div>
   `,
