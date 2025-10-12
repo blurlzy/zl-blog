@@ -11,11 +11,12 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 // components
 import { BlogCommentsComponent } from '../components/blog-comments.component';
 import { BlogRightNavComponent } from '../components/blog-right-nav.component';
+import { GoogleAdsComponent } from '../../../core/components/google-ads.component';
 
 @Component({
   selector: 'app-blog-detail',
   imports: [RouterLink, MatChipsModule, MatButtonModule, SafeHtmlPipe, DatePipe, UpperCasePipe,
-    BlogCommentsComponent, BlogRightNavComponent
+    BlogCommentsComponent, BlogRightNavComponent, GoogleAdsComponent
   ],
   template: `
     <div class="row g-4 mt-2">
@@ -42,6 +43,10 @@ import { BlogRightNavComponent } from '../components/blog-right-nav.component';
             
             <div class="d-flex justify-content-between mt-1 mb-2">
               <button type="button" class="btn btn-outline-dark mt-3" (click)="goBackOrHome()"><i class="bi bi-arrow-left"></i> Back </button>            
+            </div>
+
+            <div class="mt-2">
+              <app-google-ads></app-google-ads>
             </div>
       </div>
 

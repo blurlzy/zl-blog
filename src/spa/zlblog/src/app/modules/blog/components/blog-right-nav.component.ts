@@ -29,17 +29,18 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
           <a class="nav-link" href="https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table/" target="_blank">Azure Products by Region</a>
         </nav>
 
-        <hr class="my-4">
+        <!-- <hr class="my-4">
 
         <h6 class="mb-3">
           🌀
           <a class="link-body-emphasis link-offset-1 link-underline-opacity-0 link-underline-opacity-50-hover" routerLink="/contact">Contact<i class="bi bi-arrow-right ms-1"></i></a>  
-        </h6>   
+        </h6>    -->
         
-        <hr class="my-4">
-
         <!-- google ads -->
-        <app-google-ads></app-google-ads>
+         <div class="mt-2">
+          <app-google-ads></app-google-ads>
+         </div> 
+        
       </div>
   </aside>
 

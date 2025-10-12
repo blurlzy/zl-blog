@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-// ads
-import { GoogleAdsComponent } from '../core/components/google-ads.component';
 // material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 // services
@@ -12,7 +10,7 @@ import { Loader } from '../core/services/loader.service';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterOutlet, RouterLink, CommonModule, MatProgressBarModule, GoogleAdsComponent],
+  imports: [FormsModule, ReactiveFormsModule, RouterOutlet, RouterLink, CommonModule, MatProgressBarModule],
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
@@ -65,9 +63,9 @@ import { Loader } from '../core/services/loader.service';
         </p>           
       </footer>
 
-    <div class="mt-1 container-xl">
+    <!-- <div class="mt-1 container-xl">
       <app-google-ads></app-google-ads>
-    </div>
+    </div> -->
   `,
   styles: `
     .main-content {
