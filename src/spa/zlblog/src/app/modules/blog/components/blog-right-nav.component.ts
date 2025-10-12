@@ -4,9 +4,10 @@ import { RouterLink } from '@angular/router';
 import { BlogDataService } from '../blog.data.service';
 // components
 import { GoogleAdsComponent } from '../../../core/components/google-ads.component';
+
 @Component({
   selector: 'app-blog-right-nav',
-  imports: [ RouterLink, GoogleAdsComponent],
+  imports: [ RouterLink],
   template: `
   <aside class="sidebar sticky">
       <div class="pt-2 pt-lg-1 ps-lg-4">
@@ -29,17 +30,17 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
           <a class="nav-link" href="https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table/" target="_blank">Azure Products by Region</a>
         </nav>
 
-        <!-- <hr class="my-4">
+        <hr class="my-4">
 
         <h6 class="mb-3">
           🌀
           <a class="link-body-emphasis link-offset-1 link-underline-opacity-0 link-underline-opacity-50-hover" routerLink="/contact">Contact<i class="bi bi-arrow-right ms-1"></i></a>  
-        </h6>    -->
+        </h6>   
         
         <!-- google ads -->
-         <div class="mt-2">
+         <!-- <div class="mt-2">
           <app-google-ads></app-google-ads>
-         </div> 
+         </div>  -->
         
       </div>
   </aside>
