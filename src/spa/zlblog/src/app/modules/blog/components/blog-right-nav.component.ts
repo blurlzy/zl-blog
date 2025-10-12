@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 // services
 import { BlogDataService } from '../blog.data.service';
-
+// components
+import { GoogleAdsComponent } from '../../../core/components/google-ads.component';
 @Component({
   selector: 'app-blog-right-nav',
-  imports: [ RouterLink],
+  imports: [ RouterLink, GoogleAdsComponent],
   template: `
   <aside class="sidebar sticky">
       <div class="pt-2 pt-lg-1 ps-lg-4">
@@ -30,10 +31,15 @@ import { BlogDataService } from '../blog.data.service';
 
         <hr class="my-4">
 
-        <h6 class="mb-1">
+        <h6 class="mb-3">
           🌀
           <a class="link-body-emphasis link-offset-1 link-underline-opacity-0 link-underline-opacity-50-hover" routerLink="/contact">Contact<i class="bi bi-arrow-right ms-1"></i></a>  
-        </h6>           
+        </h6>   
+        
+        <hr class="my-4">
+
+        <!-- google ads -->
+        <app-google-ads></app-google-ads>
       </div>
   </aside>
 
