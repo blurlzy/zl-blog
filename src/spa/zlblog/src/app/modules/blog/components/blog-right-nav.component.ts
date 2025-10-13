@@ -11,7 +11,7 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
   template: `
   <aside class="sidebar sticky">
       <div class="pt-2 pt-lg-1 ps-lg-4">
-        <h5 class=" mb-3">📝 Recent posts</h5>
+        <h5 class=" mb-3">📝 Recent Posts</h5>
         <nav class="nav flex-column small">
           @for (post of recentPosts; track post.id) { 
             <a class="nav-link" routerLink="/blogs/{{post.id}}">{{post.title}}</a>
@@ -32,11 +32,10 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
 
         <hr class="my-4">
 
-        <h6 class="mb-3">
-          🌀
-          <a class="link-body-emphasis link-offset-1 link-underline-opacity-0 link-underline-opacity-50-hover" routerLink="/contact">Contact<i class="bi bi-arrow-right ms-1"></i></a>  
-        </h6>   
-        
+        <p class="mb-3">
+          📢 <a class="link-body-emphasis link-offset-1 icon-link icon-link-hover" routerLink="/contact">Contact<i class="bi bi-arrow-right"></i></a>  
+        </p>
+
         <!-- google ads -->
          <!-- <div class="mt-2">
           <app-google-ads></app-google-ads>
