@@ -15,10 +15,10 @@ import { Util } from '../../../core/services/util.service';
   <!-- About Section -->
   <div class="row mb-3">
     <div class="col-md-10 offset-md-1">
-      <h2 class="section-title">Hey, I'm Justin a.k.a. ZL 👋</h2>
-      <p>
+      <h2 class="section-title">Hello, I'm Zongyi 👋</h2>
+      <!-- <p>
         A space where I share my knowledge, experiences, and ideas on Cloud, AI, industry insights, and beyond. Whether it’s tech-related discussions or interesting thoughts on non-tech topics, this is where I explore and share what matters most.      
-      </p>
+      </p> -->
       
        <a class="link-body-emphasis link-offset-1 link-underline-opacity-100 link-underline-opacity-50-hover" routerLink="/contact">
            <i class="bi bi-person-square me-2"></i>Contact<i class="bi bi-arrow-right ms-1"></i>  
