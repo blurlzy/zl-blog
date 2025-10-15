@@ -68,7 +68,7 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
 })
 export class BlogDetailComponent {
   blogId: string = '';
-  blog: any = {};
+  blog: any = { content: '' };
 
   // Inject ActivatedRoute and Router in the constructor of the component class so they are available to this component:
   private readonly route = inject(ActivatedRoute);
