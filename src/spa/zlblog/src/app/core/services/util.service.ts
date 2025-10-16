@@ -11,7 +11,7 @@ export class Util {
 	// default SEO tags
 	private readonly defaultTags = 'AI,Azure,Cloud computing,Tech,OpenAI,Azure OpenAI,AWS,GCP,Fabric,Microsoft,Google,Amazon,Cloud,Machine Learning,Generative AI, AGI, AI Agent, LLMs, LLM, Data Engineering,Security,DevOps,CICD,Container,Docker';
 	private readonly defaultDescription = 'AI,Azure,Cloud computing,Tech,OpenAI,Azure OpenAI,AWS,GCP,Fabric,Microsoft,Google,Amazon,Cloud,Machine Learning,Generative AI, AGI, AI Agent, LLMs, LLM,Security,DevOps,CICD,Container,Docker';
-	private readonly defaultTitle = 'ZL Blog - Tech & Beyond';
+	private readonly defaultTitle = 'zongyi.me';
 
 	isValidGUID(id: string): boolean {
 		const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

@@ -14,8 +14,8 @@ import { Loader } from '../core/services/loader.service';
   template: `
       <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top">
         <div class="container">
-          <!-- <a class="navbar-brand head-title" routerLink=""> Not Just <i class="bi bi-pencil-square"></i> Tech</a> -->
-          <a class="head-title" routerLink=""> <i class="bi bi-pencil-square"></i> </a>
+          <a class="navbar-brand head-title" routerLink=""> Not Just <i class="bi bi-pencil-square"></i> Tech</a>
+          <!-- <a class="head-title" routerLink=""> <i class="bi bi-pencil-square"></i> </a> -->
           <button  class="navbar-toggler" type="button" (click)="toggleNav()">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -56,7 +56,7 @@ import { Loader } from '../core/services/loader.service';
 
       <footer class="border-top py-3 text-center">
         <p class="mb-2 footer-item">
-          &copy; 2025 ZL Blog. 🚀 All rights reserved. 
+          &copy; 2025 zongyi.me 🚀 All rights reserved. 
           <!-- 
           <a href="https://x.com/dczl1047" class="link-dark" target="_blank"><i class="bi bi-twitter-x ms-2 me-2 larger-icon"></i></a>  
           <a href="https://github.com/blurlzy/zl-blog" class="link-dark" target="_blank"><i class="bi bi-github ms-1 larger-icon"></i></a>    
