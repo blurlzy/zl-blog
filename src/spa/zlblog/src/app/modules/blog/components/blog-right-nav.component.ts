@@ -34,7 +34,7 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
         <hr class="my-4">
 
         <p class="mb-3">
-          📢 <a class="link-body-emphasis link-offset-1 icon-link icon-link-hover" routerLink="/contact">Contact<i class="bi bi-arrow-right"></i></a>  
+          📢 <a class="link-body-emphasis link-offset-1 icon-link icon-link-hover " routerLink="/contact">Contact<i class="bi bi-arrow-right"></i></a>  
         </p>
 
         <!-- google ads -->
@@ -48,10 +48,10 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
   `,
   styles: `
     .sidebar { border-left: 1px solid #e5e5e5; }
-    .sidebar .nav-link { color: #111; padding-left: 2; }
+    .sidebar .nav-link { color: #111; padding-left: 2; text-decoration: underline; }
     // .sidebar .nav-link.active { text-decoration: underline; }
     // hover
-    .sidebar .nav-link:hover { text-decoration: underline; }
+    .sidebar .nav-link:hover { text-decoration: none; }
     .sidebar .muted { color: #111; font-size: .95rem; }
     .sticky { position: sticky; top: 75px; }
   `
