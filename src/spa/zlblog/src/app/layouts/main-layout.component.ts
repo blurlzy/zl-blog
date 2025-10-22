@@ -30,7 +30,7 @@ import { Loader } from '../core/services/loader.service';
                 <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'AI', type: 'tag' }">AI</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'Misc', type: 'tag' }">Miscellaneous</a>
+                <a class="nav-link" [routerLink]="['/']" [queryParams]="{ keywords: 'Misc', type: 'tag' }">Notes</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/about']">About</a>
