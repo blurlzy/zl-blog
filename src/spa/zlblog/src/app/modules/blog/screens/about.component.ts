@@ -7,7 +7,7 @@ import { Util } from '../../../core/services/util.service';
   imports: [ RouterLink ],
   template: `
   <div class="profile-header text-center">
-    <img src="https://stzlblog.blob.core.windows.net/blog-images/cb60013f-361f-4742-988e-5ea4656f1765.jpg"  alt="ZL" class="profile-img mt-3"/>
+    <img src="https://stzlblog.blob.core.windows.net/app-images/about.jpg"  alt="ZL" class="profile-img mt-3"/>
     <h3 class="mt-3">About me</h3>
     <small>Sr Cloud Solution Architect &#64; Microsoft</small> <i class="bi bi-microsoft ms-2"></i>
   </div>
@@ -50,7 +50,7 @@ import { Util } from '../../../core/services/util.service';
       height: 260px;
       object-fit: cover;
       border-radius: 50%;
-      border: 2px solid #212529;
+      // border: 1px solid #212529;
       margin-bottom: 1rem;
     }
     .section-title {
