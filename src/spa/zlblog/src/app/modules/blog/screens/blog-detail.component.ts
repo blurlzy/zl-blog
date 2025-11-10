@@ -20,7 +20,7 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
   ],
   template: `
     <div class="row g-4 mt-2">
-      <div class="col-lg-8">
+      <div class="col-lg-8 pe-4">
             <div class="mb-3">
               <h2 class="post-title"> {{ blog.title }}</h2>
               <p class="post-meta"><i class="bi bi-calendar-event me-1"></i> {{ blog.createdOn | date : 'MMM d, y, hh:mm' | uppercase }} <i class="bi bi-person-fill ms-1"></i> {{ blog.userName }}</p>

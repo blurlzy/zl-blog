@@ -5,14 +5,15 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 // services
 import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
+import { A11yModule } from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [ RouterLink, MatChipsModule, DatePipe, UpperCasePipe, SafeHtmlPipe ],
+  imports: [RouterLink, MatChipsModule, DatePipe, UpperCasePipe, SafeHtmlPipe, A11yModule],
   template: `
     @for (blog of data; track blog.id) {
-        <article>        
+        <article class="pe-5">        
             <h2 class="article-title">
                <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
             </h2>

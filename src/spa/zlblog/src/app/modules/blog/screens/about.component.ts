@@ -34,7 +34,7 @@ import { Util } from '../../../core/services/util.service';
     </div>
 
     <div class="col-md-10 offset-md-1">
-      <img src="https://stzlblog.blob.core.windows.net/blog-images/e54271e6-c3f9-4fec-8635-643a1a8ada41.png" alt="design" class="border rounded-4 img-fluid">
+      <img src="https://stzlblog.blob.core.windows.net/blog-images/e54271e6-c3f9-4fec-8635-643a1a8ada41.png" alt="design" class="border img-fluid">
     </div>
    
   </div>
