@@ -13,7 +13,7 @@ import { A11yModule } from "@angular/cdk/a11y";
   imports: [RouterLink, MatChipsModule, DatePipe, UpperCasePipe, SafeHtmlPipe, A11yModule],
   template: `
     @for (blog of data; track blog.id) {
-        <article class="pe-5">        
+        <article class="pe-md-5">        
             <h2 class="article-title">
                <a routerLink="/blogs/{{blog.id}}" class="link-dark link-underline-opacity-0"> {{ blog.title }} </a>              
             </h2>
