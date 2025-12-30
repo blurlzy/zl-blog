@@ -1,0 +1,6 @@
+services:
+  zlblog:
+    image: ${DOCKER_REGISTRY-}zlblog
+    build:
+      context: Host
+      dockerfile: Dockerfile
