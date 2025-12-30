@@ -11,7 +11,7 @@ SecretClient secretClient = new SecretClient(new Uri($"https://{builder.Configur
                                               {
                                                   ExcludeEnvironmentCredential = true,
                                                   ExcludeVisualStudioCodeCredential = true,
-                                                  ExcludeSharedTokenCacheCredential = true,
+                                                  //ExcludeSharedTokenCacheCredential = true,
                                                   ExcludeInteractiveBrowserCredential = true,
                                               }));
 
@@ -45,8 +45,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        //app.MapOpenApi();
+        app.UseSwagger();
+        app.UseSwaggerUI( options => { 
+                options.DefaultModelsExpandDepth(-1); 
+        });
 }
 
 // get the logger instance from the app

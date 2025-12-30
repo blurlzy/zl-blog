@@ -15,7 +15,7 @@ namespace ZLBlog.Tests
                                        ExcludeEnvironmentCredential = true,
                                        ExcludeVisualStudioCredential = true,
                                        ExcludeVisualStudioCodeCredential = true,
-                                       ExcludeSharedTokenCacheCredential = true
+                                       //ExcludeSharedTokenCacheCredential = true
                                    }));
 
         // get secret from azure key vault
