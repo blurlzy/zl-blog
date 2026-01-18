@@ -23,11 +23,13 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
 
         <h5 class="mb-3">🔗 Links</h5>
         <nav class="nav flex-column small">
+          <a class="nav-link" href="https://azureutil.zongyi.me/" target="_blank">Azure AI Model Explorer</a>   
           <a class="nav-link" href="https://azure.microsoft.com/en-au/updates" target="_blank">Azure Updates</a>                                     
           <a class="nav-link" href="https://datacenters.microsoft.com/globe/explore?view=map" target="_blank">Azure Datacenters</a>
           <a class="nav-link" href="https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table/" target="_blank">Azure Product Availability by Region</a>
           <a class="nav-link" href="https://blog.fabric.microsoft.com/en-AU/blog/" target="_blank">Microsoft Fabric Updates</a>
           <a class="nav-link" href="https://www.microsoft.com/en-us/research/lab/ai-frontiers/" target="_blank">AI Frontiers</a>   
+          <a class="nav-link" href="https://mcr.microsoft.com/en-us/" target="_blank">Microsoft Artifact Registry</a>   
           <a class="nav-link" href="https://m365maps.com/" target="_blank">Microsoft 365 Licensing</a>
         </nav>
 

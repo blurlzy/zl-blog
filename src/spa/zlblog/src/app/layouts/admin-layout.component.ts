@@ -88,4 +88,14 @@ export class AdminLayoutComponent {
       logoutParams: {returnTo: window.location.origin} 
     });
   }
+
+  // ngOnInit(): void {
+  //   // get the access token
+  //   this.auth.getAccessTokenSilently().subscribe(token => {
+  //     // store the token in local storage
+  //     console.log('Access Token:', token);  
+  //   });
+  //   // set the initial value of the keywords form control from environment
+  //   // this.keywordsCtrl.setValue(environment.adminDefaultSearchKeywords);
+  // }
 }
