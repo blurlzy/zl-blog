@@ -7,7 +7,7 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
 
 @Component({
   selector: 'app-blog-right-nav',
-  imports: [ RouterLink],
+  imports: [ RouterLink, GoogleAdsComponent],
   template: `
   <aside class="sidebar sticky">
       <div class="pt-2 pt-lg-1 ps-lg-4">
@@ -40,9 +40,9 @@ import { GoogleAdsComponent } from '../../../core/components/google-ads.componen
         </p>
 
         <!-- google ads -->
-         <!-- <div class="mt-2">
+         <div class="mt-2">
           <app-google-ads></app-google-ads>
-         </div>  -->
+         </div> 
         
       </div>
   </aside>
