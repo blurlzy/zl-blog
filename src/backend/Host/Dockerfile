@@ -13,7 +13,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Host/ZLBlog.csproj", "Host/"]
-RUN dotnet restore "./Host/./ZLBlog.csproj"
+RUN dotnet restore "./Host/ZLBlog.csproj"
 COPY . .
 WORKDIR "/src/Host"
 RUN dotnet build "./ZLBlog.csproj" -c $BUILD_CONFIGURATION -o /app/build
