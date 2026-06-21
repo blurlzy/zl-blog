@@ -156,5 +156,35 @@ namespace ZLBlog.Persistence
 
             return new PagedList<Blog>(totalCount, pagedList);
         }
+
+        public async Task<PagedList<Blog>> GetPopularBlogsAsync(int pageIndex, int pageSize, bool includeDeletedItems)
+        {
+            var query = @"SELECT * FROM c WHERE c.isPopular = true ";
+
+            if (!includeDeletedItems)
+            {
+                query += "AND c.isDeleted = false ";
+            }
+
+            query += "ORDER BY c.createdOn DESC OFFSET @skip LIMIT @take";
+
+            QueryDefinition queryDef = new QueryDefinition(query)
+                .WithParameter("@skip", pageIndex * pageSize)
+                .WithParameter("@take", pageSize);
+
+            var pagedList = await base.RunQueryAsync(queryDef);
+
+            var countQuery = @"SELECT VALUE COUNT(1) FROM c WHERE c.isPopular = true ";
+
+            if (!includeDeletedItems)
+            {
+                countQuery += "AND c.isDeleted = false ";
+            }
+
+            QueryDefinition countQueryDef = new QueryDefinition(countQuery);
+            var totalCount = await base.CountAsync(countQueryDef);
+
+            return new PagedList<Blog>(totalCount, pagedList);
+        }
     }
 }

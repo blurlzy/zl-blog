@@ -28,7 +28,9 @@ import { QuickLink } from '../components/quick-link';
             <img src="https://stzlblog.blob.core.windows.net/app-images/about.jpg" class="about-avatar" alt="Zongyi Li" />
             <div>
               <p class="about-name">Zongyi Li</p>
-              <p class="about-bio">Solution Architect | Data & AI</p>
+              <p class="about-bio">Cloud Solution Architect</p>
+              <p class="about-bio">Data &amp; AI Innovator</p>
+              <p class="about-bio">Living in <img src="https://stzlblog.blob.core.windows.net/app-images/Australia.png" style="width: 18px; height: 18px;"  /></p>
             </div>
           </div>
         </div>

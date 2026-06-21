@@ -68,5 +68,15 @@ namespace ZLBlog.Controllers
 
             return await base.Mediator.Send(req);
         }
-    }
+
+          [HttpGet("popular")]
+          [Produces("application/json")]
+          [ProducesResponseType(StatusCodes.Status200OK)]
+          [ProducesResponseType(StatusCodes.Status400BadRequest)]
+          public async Task<PagedList<SimpleBlogDto>> ListPopularBlogsAsync([FromQuery] int pageIndex = 0, int pageSize = 5)
+          {
+              var req = new ListPopularBlogsRequest { PageIndex = pageIndex, PageSize = pageSize };
+              return await base.Mediator.Send(req);
+          }    
+     }
 }

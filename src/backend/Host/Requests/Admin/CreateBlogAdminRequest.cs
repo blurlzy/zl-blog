@@ -6,7 +6,7 @@ namespace ZLBlog.Requests
         public string Title { get; init; }
         public string Content { get; init; }
         public string Tags { get; init; }
-        public string UserId { get; set; }
+          public string UserId { get; set; }
         public string UserName { get; set; }
     }
 

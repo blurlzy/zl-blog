@@ -1,7 +1,4 @@
 ﻿using Microsoft.ApplicationInsights.AspNetCore.Extensions;
-using Microsoft.Azure.Cosmos.Serialization.HybridRow;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 
 namespace ZLBlog
@@ -18,7 +15,7 @@ namespace ZLBlog
           public static void ConfigureAutoMapper(this IServiceCollection services)
           {
                // register auto mapper            
-               services.AddAutoMapper(typeof(Startup));
+               services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Startup).Assembly));
           }
 
           public static void ConfigureCors(this IServiceCollection services, string corsPolicy)

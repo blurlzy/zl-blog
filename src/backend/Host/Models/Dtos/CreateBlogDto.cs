@@ -6,6 +6,7 @@
         public string Title { get; init; }
         public string Content { get; init; }
         public string Tags { get; init; }
+        public bool? IsPopular { get; init; }
     }
 
 }

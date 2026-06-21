@@ -110,21 +110,21 @@ export class AdminBlogForm {
   // Inject ActivatedRoute and Router in the constructor of the component class so they are available to this component:
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly sanitizer = inject(DomSanitizer);
-  private readonly auth = inject(AuthService);
+  // private readonly sanitizer = inject(DomSanitizer);
+  // private readonly auth = inject(AuthService);
   private readonly fb = inject(FormBuilder);
-  public readonly  loader = inject(Loader);
+  public readonly loader = inject(Loader);
   public readonly snackbarService = inject(SnackbarService);
   public readonly util = inject(Util);
   private readonly blogAdminDataService = inject(BlogAdminDataService);
   private readonly dialog = inject(MatDialog);
 
-    // form group
-  form: FormGroup = this.fb.group({    
+  // form group
+  form: FormGroup = this.fb.group({
     title: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required]),
     tags: new FormControl(''),
-    id:'',
+    id: '',
     isPopular: false,
     published: false
   });
@@ -133,7 +133,7 @@ export class AdminBlogForm {
   ngOnInit(): void {
     const blogId = this.route.snapshot.paramMap.get('id');
     // ensure blog id is GUID    
-    if(blogId && blogId.length > 10){
+    if (blogId && this.util.isValidGUID(blogId)) {
       this.editing = true;
       this.getBlog(blogId);
     }
@@ -175,7 +175,7 @@ export class AdminBlogForm {
     this.router.navigate(['/admin']);
   }
 
-  openImageListDialog(): void { 
+  openImageListDialog(): void {
     const dialogRef = this.dialog.open(AdminBlogImageDialog, {
       width: '750px',
       maxWidth: '750px',
@@ -184,7 +184,7 @@ export class AdminBlogForm {
 
     // when an image is selected
     dialogRef.afterClosed().subscribe(result => {
-      if(result.name){
+      if (result.name) {
         // create image tag
         const imgTag = this.util.createImgHtml(result.uri, result.name);
         // add image to the editor
@@ -194,23 +194,23 @@ export class AdminBlogForm {
   }
 
   // create a new blog
-  createBlog(): void { 
+  createBlog(): void {
     // this.form.patchValue({ tags: this.tags.join(',') });
     this.blogAdminDataService.createBlog(this.form.value).subscribe((res) => {
-      this.snackbarService.success('Blog created successfully');    
+      this.snackbarService.success('Blog created successfully');
       // redirect to edit page
       this.router.navigate(['/admin/edit', res.id]);
     });
-    
+
   }
 
   // update a blog
-  updateBlog(): void { 
+  updateBlog(): void {
     // this.form.patchValue({ tags: this.tags.join(',') });
     this.blogAdminDataService.updateBlog(this.form.value).subscribe((res) => {
       this.snackbarService.success('Blog updated successfully');
     });
-  } 
+  }
 
   saveBlog(): void {
     // convert tags
@@ -220,7 +220,7 @@ export class AdminBlogForm {
     // clean html
     this.form.patchValue({ content: this.util.cleanHtml(this.form.value.content) });
 
-    if(this.editing) {
+    if (this.editing) {
       this.updateBlog();
       return;
     }
@@ -228,7 +228,7 @@ export class AdminBlogForm {
     this.createBlog();
   }
 
-  getBlog(id:string): void {
+  getBlog(id: string): void {
     this.blogAdminDataService.getBlogById(id).subscribe((res) => {
       // patch form values
       this.form.patchValue({
@@ -237,15 +237,15 @@ export class AdminBlogForm {
         tags: res.tags,
         id: res.id,
         published: res.published,
-        isPopular: res.isPopular       
+        isPopular: res.isPopular
       });
 
       // set tags
-      this.tags = res.tags?? [];
+      this.tags = res.tags ?? [];
     });
   }
 
-  publishBlog(): void { 
+  publishBlog(): void {
     // open confirm dialog
     const dialogRef = this.dialog.open(ConfirmDialog, {
       width: '400px',

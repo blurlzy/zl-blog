@@ -25,27 +25,24 @@ import { PopularBlogList} from '../components/popular-blog-list';
           
           <div class="byline-info">
             <span class="byline-name">{{ blog().userName }}</span>
-            <span class="byline-meta">{{ blog().createdOn | date : 'MMM d, y, hh:mm' | uppercase }}</span>
+            <span class="byline-meta">{{ blog().createdOn | date : 'MMM d, y, HH:mm' | uppercase }}</span>
           </div>
 
         </div>
       </header>
 
-      <!-- ── TWO-COLUMN: ARTICLE + TOC ──────────────────────────── -->
+      <!--  TWO-COLUMN: ARTICLE + TOC  -->
       <div class="article-wrap mb-3">
 
-        <!-- ── ARTICLE BODY ──────────────────────────────────────── -->
+        <!-- ── ARTICLE BODY  -->
         <div class="article-col">
 
           <!-- blog content -->
           <div class="article-body" [innerHTML]="blog().content | safeHtml"></div>
 
-            <!-- Tags -->
-          <app-tag-filter [data]="blog().tags"></app-tag-filter >
+        </div>
 
-        </div><!-- /article-col -->
-
-        <!-- ── TABLE OF CONTENTS ───────────────────────────────────── -->
+        <!-- ── TABLE OF CONTENTS  -->
         <aside class="toc">
           <app-popular-blog-list></app-popular-blog-list>
           <a routerLink="/" class="toc-back">← All posts</a>
@@ -87,11 +84,11 @@ import { PopularBlogList} from '../components/popular-blog-list';
     .article-title {
       font-family: var(--font-serif);
       font-size: clamp(1.75rem, 3.5vw, 1.95rem);
-      font-weight: 700;
+      font-weight: 600;
       line-height: 1.18;
       letter-spacing: -0.03em;
       color: var(--black);
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.85rem;
     }
 
     .article-deck {

@@ -6,108 +6,114 @@ using ZLBlog.Persistence;
 
 namespace ZLBlog.Tests.Tests
 {
-    public class Persistence_Tests
-    {
-        // cosmos settings
-        private readonly string _cosmosConnection = SecretManager.GetSecret(SecretKeys.CosmosConnection);
-        private readonly string _cosmosDb = SecretManager.GetSecret(SecretKeys.CosmosDb);
-        private readonly string _blogContainer = SecretManager.GetSecret(SecretKeys.BlogContainer);
-        private readonly string _blogCommentContainer = SecretManager.GetSecret(SecretKeys.BlogCommentContainer);
+     public class Persistence_Tests
+     {
+          // cosmos settings
+          private readonly string _cosmosConnection = SecretManager.GetSecret(SecretKeys.CosmosConnection);
+          private readonly string _cosmosDb = SecretManager.GetSecret(SecretKeys.CosmosDb);
+          private readonly string _blogContainer = SecretManager.GetSecret(SecretKeys.BlogContainer);
+          private readonly string _blogCommentContainer = SecretManager.GetSecret(SecretKeys.BlogCommentContainer);
 
-        private readonly CosmosDbBlogContext _context;
-        private readonly CosmosDbBlogCommentContext _commentContext;
-        
-        private readonly BlogRepository _blogRepository;
-        private readonly BlogCommentRepository _blogCommentRepository;
+          private readonly CosmosDbBlogContext _context;
+          private readonly CosmosDbBlogCommentContext _commentContext;
 
-        private readonly ITestOutputHelper _output;
+          private readonly BlogRepository _blogRepository;
+          private readonly BlogCommentRepository _blogCommentRepository;
 
-        // ctor
-        public Persistence_Tests(ITestOutputHelper output)
-        {
-            // cosmos db context
-            _context = new CosmosDbBlogContext(_cosmosConnection, _cosmosDb, _blogContainer);
-            _commentContext = new CosmosDbBlogCommentContext(_cosmosConnection, _cosmosDb, _blogCommentContainer);
+          private readonly ITestOutputHelper _output;
 
-            // repo
-            _blogRepository = new BlogRepository(_context);
-            _blogCommentRepository = new BlogCommentRepository(_commentContext);
+          // ctor
+          public Persistence_Tests(ITestOutputHelper output)
+          {
+               // cosmos db context
+               _context = new CosmosDbBlogContext(_cosmosConnection, _cosmosDb, _blogContainer);
+               _commentContext = new CosmosDbBlogCommentContext(_cosmosConnection, _cosmosDb, _blogCommentContainer);
 
-            _output = output;
-        }
+               // repo
+               _blogRepository = new BlogRepository(_context);
+               _blogCommentRepository = new BlogCommentRepository(_commentContext);
 
-        [Theory]
-        [InlineData("second", 0, 12, false, true)]
-        public async Task Search_Blogs_Test(string keyword, int skip, int count, bool publishedOnly, bool includeDeletedItems)
-        {
-           var pagedList = await _blogRepository.SearcchBlogsAsync(keyword, skip, count, publishedOnly, includeDeletedItems);
+               _output = output;
+          }
 
-            Assert.True(pagedList.Total >= 0);
-        }
+          [Theory]
+          [InlineData("second", 0, 12, false, true)]
+          public async Task Search_Blogs_Test(string keyword, int skip, int count, bool publishedOnly, bool includeDeletedItems)
+          {
+               var pagedList = await _blogRepository.SearcchBlogsAsync(keyword, skip, count, publishedOnly, includeDeletedItems);
 
-        [Theory]
-        [InlineData("Azure", 0, 12, false, true)]
-        [InlineData("About", 0, 12, false, true)]
-        [InlineData("Test", 0, 12, false, true)]
-        public async Task Flter_Blogs_Test(string tag, int skip, int count, bool publishedOnly, bool includeDeletedItems)
-        {
-            var pagedList = await _blogRepository.FilterBlogsAsync(tag, skip, count, publishedOnly, includeDeletedItems);
+               Assert.True(pagedList.Total >= 0);
+          }
 
-            _output.WriteLine($"Total results: {pagedList.Total}");
-        }
+          [Theory]
+          [InlineData("Azure", 0, 12, false, true)]
+          [InlineData("About", 0, 12, false, true)]
+          [InlineData("Test", 0, 12, false, true)]
+          public async Task Flter_Blogs_Test(string tag, int skip, int count, bool publishedOnly, bool includeDeletedItems)
+          {
+               var pagedList = await _blogRepository.FilterBlogsAsync(tag, skip, count, publishedOnly, includeDeletedItems);
 
-        [Theory]
-        [InlineData("My first blog", "jil", "<main class=\"container my-5\">Test</main>")]
-        public async Task Create_Blog_Test(string title, string userId, string content)
-        {
-            var newBlog = new Blog(title, content, Array.Empty<string>(), userId, userId);
+               _output.WriteLine($"Total results: {pagedList.Total}");
+          }
 
-            await _blogRepository.CreateAsync(newBlog);
-        }
+          [Fact]
+          public async Task List_Popular_Blogs_Test()
+          {
+               var popularBlogs = await _blogRepository.GetPopularBlogsAsync(0, 12);
+               Assert.NotNull(popularBlogs);
+          }
 
-        [Theory]
-        [InlineData("")]
-        public async Task Delete_Blog_Test(string id)
-        {
-            await _blogRepository.DeleteAsync(id);
-        }
+          [Theory]
+          [InlineData("My first blog", "jil", "<main class=\"container my-5\">Test</main>")]
+          public async Task Create_Blog_Test(string title, string userId, string content)
+          {
+               var newBlog = new Blog(title, content, Array.Empty<string>(), userId, userId);
 
-        [Theory]
-        [InlineData("")]
-        public async Task List_Comments_Test(string blogId)
-        {
-            var comments = await _blogCommentRepository.GetCommentsAsync(blogId);
+               await _blogRepository.CreateAsync(newBlog);
+          }
 
-            Assert.NotNull(comments);
-        }
+          [Theory]
+          [InlineData("")]
+          public async Task Delete_Blog_Test(string id)
+          {
+               await _blogRepository.DeleteAsync(id);
+          }
 
-        [Theory]
-        [InlineData("", "Justin Li", "Hello world!")]
-        public async Task Create_Comment_Test(string blogId, string name, string commentText)
-        {
-            var blogComment = new BlogComment(blogId, commentText, name, name);
+          [Theory]
+          [InlineData("")]
+          public async Task List_Comments_Test(string blogId)
+          {
+               var comments = await _blogCommentRepository.GetCommentsAsync(blogId);
 
-            await _blogCommentRepository.CreateAsync(blogComment);
-        }
+               Assert.NotNull(comments);
+          }
 
-        [Theory]
-        [InlineData("", true)]
-        public async Task Archive_Blog_Test(string blogId, bool isArchived)
-        {
-            await _blogRepository.ArchiveAsync(blogId, isArchived);
-        }
+          [Theory]
+          [InlineData("", "Justin Li", "Hello world!")]
+          public async Task Create_Comment_Test(string blogId, string name, string commentText)
+          {
+               var blogComment = new BlogComment(blogId, commentText, name, name);
 
-        [Theory]
-        [InlineData("30a6f8fe-f58f-4ab4-a64e-d87e30566fda")]
-        public async Task Update_Blog_Test(string id)
-        {
-            var blog = await _blogRepository.GetBlogAsync(id);
+               await _blogCommentRepository.CreateAsync(blogComment);
+          }
 
-            // update
-            blog.CreatedOn = DateTime.Now.AddDays(-12);
+          [Theory]
+          [InlineData("", true)]
+          public async Task Archive_Blog_Test(string blogId, bool isArchived)
+          {
+               await _blogRepository.ArchiveAsync(blogId, isArchived);
+          }
 
-            await _blogRepository.UpdateAsync(blog);
-        }
+          [Theory]
+          [InlineData("")]
+          public async Task Update_Blog_Test(string id)
+          {
+               var blog = await _blogRepository.GetBlogAsync(id);
 
-    }
+               // update
+               blog.IsPopular = true;
+               await _blogRepository.UpdateAsync(blog);
+          }
+
+     }
 }
