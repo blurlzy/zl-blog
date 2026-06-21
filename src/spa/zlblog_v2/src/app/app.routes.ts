@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-
 // layouts
 import { MainLayout } from './layouts/main-layout';
+import { AdminLayout } from './layouts/admin-layout';
 
 export const routes: Routes = [
       	{
@@ -14,15 +14,15 @@ export const routes: Routes = [
 			}
 		]
 	},
-	// {
-	// 	path: 'admin',
-	// 	component: AdminLayout,
-	// 	children: [
-	// 		{
-	// 			// admin module (auth required)
-	// 			path: '', loadChildren: () => import('./modules/admin/admin.routes').then(m => m.adminRoutes)
-	// 		}
-	// 	]
-	// },
+	{
+		path: 'admin',
+		component: AdminLayout,
+		children: [
+			{
+				// admin module (auth required)
+				path: '', loadChildren: () => import('./modules/admin/admin.routes').then(m => m.adminRoutes)
+			}
+		]
+	},
 	{ path: '**',   redirectTo: '404', pathMatch: 'full' } // redirect to 404 screen (not found) in the default (blog) module
 ];

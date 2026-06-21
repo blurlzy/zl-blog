@@ -32,16 +32,14 @@ import { QuickLink } from '../components/quick-link';
             </div>
           </div>
         </div>
-
-        <!-- Popular posts -->
-        <app-popular-blog-list></app-popular-blog-list>
-
-        <hr>
         <!-- Quick links -->
         <app-quick-link></app-quick-link>
-
+        <hr>
         <!-- Laozao Shanghai -->
         <app-laozaoshanghai-intro></app-laozaoshanghai-intro>
+
+        <!-- Popular posts -->
+        <app-popular-blog-list></app-popular-blog-list>        
 
       </aside><!-- /sidebar -->
   `,

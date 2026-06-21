@@ -1,0 +1,85 @@
+import { Component, inject, signal } from '@angular/core';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+// material
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+// services
+import { BlogAdminDataService } from '../admin.data.service';
+// components
+import { AdminBlogList } from '../components/admin-blog-list';
+
+@Component({
+  selector: 'app-admin-home',
+  imports: [AdminBlogList, RouterLink, ReactiveFormsModule, MatButtonModule, MatPaginatorModule],
+  template: ` 
+      <div class="row">
+          <div class="col-12 mb-2">         
+            <button type="button" class="btn btn-outline-dark" routerLink="/admin/create"><i class="bi bi-plus-lg"></i> New Blog</button>
+          </div>
+          <div class="col-12 mt-2">
+            <app-admin-blog-list [data]="pagedList().data"></app-admin-blog-list>
+          </div>
+          <mat-paginator 
+                  [pageSize]="filterFormGroup.value.pageSize"
+                  [pageIndex]="filterFormGroup.value.pageIndex" 
+                  [length]="pagedList().total"
+                  [hidePageSize]="true" 
+                  (page)="pageIndexChanged($event)"            
+                  showFirstLastButtons
+                  aria-label="Select page">
+        </mat-paginator>
+      </div>
+  `,
+  styles: ``,
+})
+export class AdminHome {
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly blogAdminDataService = inject(BlogAdminDataService);
+  
+  // properties
+  pagedList = signal<any>({ data: [], total: 0 });
+  // filter form group
+  filterFormGroup = new FormGroup({
+    keyword: new FormControl(''),
+    pageSize: new FormControl(15),
+    pageIndex: new FormControl(0)
+  });
+
+    ngOnInit() {
+    // query params change
+    this.activatedRoute.queryParams.subscribe(params => {
+      const pageIndex = +params['pageIndex'];
+			// retrive the query params
+			this.filterFormGroup.patchValue({
+				pageIndex: pageIndex ? pageIndex : 0,
+				keyword: params['keywords'] ?? '',        
+			});
+      
+      // reset the result      			
+			this.pagedList.set({ data: [], total: 0 });
+      // load blogs
+      this.loadBlogs(this.filterFormGroup.value.keyword ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? 15);
+    });
+
+  }
+
+  private loadBlogs(keyword: string, pageIndex: number, pageSize: number) {
+    this.blogAdminDataService.search(keyword, pageIndex, pageSize)
+      .subscribe((pagedList: any) => {
+        this.pagedList.set(pagedList);
+      });
+  }
+
+  // page index changed
+  pageIndexChanged(event: PageEvent): void {
+    // update the page index in the query string, which will trigger the query params changes event		
+    this.router.navigate(['/admin'], {
+      queryParams: {
+        pageIndex: event.pageIndex,
+        keyword: this.filterFormGroup.value.keyword,
+      }
+    });
+  }
+}

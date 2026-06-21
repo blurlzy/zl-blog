@@ -7,7 +7,7 @@ import { BlogDataService } from '../blog.data.service';
   selector: 'app-popular-blog-list',
   imports: [ DatePipe, UpperCasePipe],
   template: ` 
-      <div class="widget">
+      <div class="widget mt-3">
           <h4 class="widget-title">📝 Popular</h4>
           <ul class="widget-post-list">
             @for (post of pagedList().data; track post.id) {
