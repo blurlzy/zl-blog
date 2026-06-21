@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `          
     <div class="widget mt-4 mb-3">
-        <h4 class="widget-title">Also on the web</h4>
+        <h4 class="widget-title">🌀 My Side Project</h4>
         <a href="https://laozaoshanghai.com" target="_blank" class="laozao-card">
           <img src="https://stlaoshanghaiprod.blob.core.windows.net/photos/c27eab90-59af-43b3-8beb-417c12613cac.jpg" class="laozao-img" alt="Laozao Shanghai" />
           <div class="laozao-body">

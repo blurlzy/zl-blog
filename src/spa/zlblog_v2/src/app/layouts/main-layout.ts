@@ -8,7 +8,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   <header class="site-header">
     <div class="container-xl">
       <nav class="top-nav">
-        <a class="nav-home" routerLink="">👋 Zongyi Li</a>
+        <a class="nav-home" routerLink="">👋 Zongyi.me</a>
         <ul class="nav-links">
           <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'Azure', type: 'tag' }">Azure</a></li>
           <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'AI', type: 'tag' }">Data & AI</a></li>
