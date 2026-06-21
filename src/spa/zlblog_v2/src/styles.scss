@@ -324,77 +324,6 @@ a {
   border-color: var(--black);
 }
 
-/* ── NEWSLETTER ──────────────────────────────────────────────────── */
-.newsletter-section {
-  padding: 0 0 4rem;
-}
-
-.newsletter-inner {
-  background: var(--bg-soft);
-  padding: 2.5rem;
-}
-
-.newsletter-title {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--black);
-  margin-bottom: 0.4rem;
-  letter-spacing: -0.01em;
-}
-
-.newsletter-sub {
-  font-size: 0.88rem;
-  color: var(--muted);
-  margin-bottom: 1.25rem;
-  line-height: 1.6;
-}
-
-.newsletter-form {
-  display: flex;
-  gap: 0;
-}
-
-.nl-input {
-  flex: 1;
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  color: var(--black);
-  background: var(--bg);
-  border: 1px solid var(--rule);
-  border-right: none;
-  padding: 0.65rem 1rem;
-  outline: none;
-  border-radius: 0;
-  transition: border-color var(--ease);
-}
-
-.nl-input::placeholder {
-  color: var(--faint);
-}
-.nl-input:focus {
-  border-color: var(--black);
-}
-
-.nl-btn {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--bg);
-  background: var(--black);
-  border: 1px solid var(--black);
-  padding: 0.65rem 1.5rem;
-  cursor: pointer;
-  border-radius: 0;
-  white-space: nowrap;
-  transition: background var(--ease);
-}
-
-.nl-btn:hover {
-  background: #333;
-}
-
 /* ── FOOTER ──────────────────────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid var(--rule);
@@ -769,6 +698,20 @@ a {
   animation: fadeIn 0.3s 0.43s ease both;
 }
 
+ .full-width {
+	width: 100%;
+}
+
+.text-code {
+	padding-top: 10px;
+	padding-left: 15px;
+	display: block;
+	font-family: monospace;
+	margin: 0;
+	color: white;
+	background-color:black;
+ } 
+ 
 :root {
 	@include mat.paginator-overrides((
 		select-trigger-text-size: var(--mat-sys-body-small-size),
@@ -777,3 +720,10 @@ a {
 	  	container-background-color: transparent,
 	));
  }
+
+ :root {
+  @include mat.progress-bar-overrides((
+    active-indicator-color: #ed008c,
+    track-color: transparent,
+  ));
+}

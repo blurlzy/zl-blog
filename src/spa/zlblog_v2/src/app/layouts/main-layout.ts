@@ -1,10 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
-
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink } from '@angular/router';
+// material
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+// services
+import { Loader } from '../core/services/loader.service';
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet, RouterLink],
+  imports: [CommonModule, RouterOutlet, RouterLink, MatProgressBarModule],
   template: `
+  
+  @if (loader.isLoading | async) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
   <header class="site-header">
     <div class="container-xl">
       <nav class="top-nav">
@@ -43,4 +52,6 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
 
   `,
 })
-export class MainLayout {}
+export class MainLayout {
+  public readonly loader = inject(Loader);
+}
