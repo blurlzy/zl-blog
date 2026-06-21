@@ -1,28 +1,72 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}
 /* ============================================================
    Personal Blog v2 — Ultra-minimal, typography-first
    ============================================================ */
 
 /* ── TOKENS ──────────────────────────────────────────────────────── */
 :root {
-  --black:     #111111;
-  --ink:       #222222;
-  --muted:     #666666;
-  --faint:     #999999;
-  --rule:      #e8e8e8;
-  --bg:        #ffffff;
-  --bg-soft:   #f7f7f7;
+  --black: #111111;
+  --ink: #222222;
+  --muted: #666666;
+  --faint: #999999;
+  --rule: #e8e8e8;
+  --bg: #ffffff;
+  --bg-soft: #f7f7f7;
 
   --font-serif: 'Lora', Georgia, serif;
-  --font-sans:  'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono:  'IBM Plex Mono', 'Courier New', monospace;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
 
   --max-w: 680px;
   --ease: 0.15s ease;
 }
 
 /* ── RESET ───────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: var(--font-sans);
@@ -33,7 +77,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { text-decoration: none; color: inherit; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 /* ── CONTAINER ──────────────────────────────────────────────────── */
 .container {
@@ -85,7 +132,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .nav-links a {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   font-weight: 400;
   color: var(--muted);
   transition: color var(--ease);
@@ -124,8 +171,7 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--rule);
+
   margin-bottom: 0;
 }
 
@@ -139,7 +185,10 @@ a { text-decoration: none; color: inherit; }
   padding: 0.28rem 0.75rem;
   cursor: pointer;
   border-radius: 999px;
-  transition: color var(--ease), border-color var(--ease), background var(--ease);
+  transition:
+    color var(--ease),
+    border-color var(--ease),
+    background var(--ease);
 }
 
 .tag-btn:hover {
@@ -155,7 +204,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ── ARTICLE LIST ────────────────────────────────────────────────── */
-.article-list { }
+.article-list {
+}
 
 .post-row {
   display: grid;
@@ -195,7 +245,8 @@ a { text-decoration: none; color: inherit; }
   white-space: nowrap;
 }
 
-.post-main-col { }
+.post-main-col {
+}
 
 .post-tag {
   display: inline-block;
@@ -222,14 +273,16 @@ a { text-decoration: none; color: inherit; }
   transition: color var(--ease);
 }
 
-.post-title a:hover { color: var(--muted); }
+.post-title a:hover {
+  color: var(--muted);
+}
 
 .post-excerpt {
   font-size: 1rem;
   color: var(--muted);
   line-height: 1.7;
   margin-bottom: 0.75rem;
-  max-width: 56ch;
+  // max-width: 56ch;
 }
 
 .post-footer {
@@ -261,7 +314,9 @@ a { text-decoration: none; color: inherit; }
   padding: 0;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 2px;
-  transition: color var(--ease), border-color var(--ease);
+  transition:
+    color var(--ease),
+    border-color var(--ease);
 }
 
 .load-more-btn:hover {
@@ -314,8 +369,12 @@ a { text-decoration: none; color: inherit; }
   transition: border-color var(--ease);
 }
 
-.nl-input::placeholder { color: var(--faint); }
-.nl-input:focus { border-color: var(--black); }
+.nl-input::placeholder {
+  color: var(--faint);
+}
+.nl-input:focus {
+  border-color: var(--black);
+}
 
 .nl-btn {
   font-family: var(--font-sans);
@@ -332,7 +391,9 @@ a { text-decoration: none; color: inherit; }
   transition: background var(--ease);
 }
 
-.nl-btn:hover { background: #333; }
+.nl-btn:hover {
+  background: #333;
+}
 
 /* ── FOOTER ──────────────────────────────────────────────────────── */
 .site-footer {
@@ -366,11 +427,13 @@ a { text-decoration: none; color: inherit; }
   transition: color var(--ease);
 }
 
-.footer-nav a:hover { color: var(--black); }
+.footer-nav a:hover {
+  color: var(--black);
+}
 
 .footer-copy {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: var(--faint);
 }
 
@@ -389,7 +452,9 @@ a { text-decoration: none; color: inherit; }
     gap: 2rem;
   }
 
-  .widget-about { flex-direction: row; }
+  .widget-about {
+    flex-direction: row;
+  }
 }
 
 @media (max-width: 540px) {
@@ -406,14 +471,30 @@ a { text-decoration: none; color: inherit; }
     grid-template-columns: 1fr;
   }
 
-  .newsletter-inner { padding: 1.75rem 1.25rem; }
+  .newsletter-inner {
+    padding: 1.75rem 1.25rem;
+  }
 
-  .newsletter-form { flex-direction: column; }
-  .nl-input { border-right: 1px solid var(--rule); border-bottom: none; }
-  .nl-input:focus { border-color: var(--black); }
-  .nl-btn { width: 100%; border-top: none; }
+  .newsletter-form {
+    flex-direction: column;
+  }
+  .nl-input {
+    border-right: 1px solid var(--rule);
+    border-bottom: none;
+  }
+  .nl-input:focus {
+    border-color: var(--black);
+  }
+  .nl-btn {
+    width: 100%;
+    border-top: none;
+  }
 
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 /* ── SIDEBAR ────────────────────────────────────────────────────── */
@@ -486,7 +567,9 @@ a { text-decoration: none; color: inherit; }
   color: var(--muted);
   border-bottom: 1px solid var(--rule);
   padding-bottom: 1px;
-  transition: color var(--ease), border-color var(--ease);
+  transition:
+    color var(--ease),
+    border-color var(--ease);
 }
 
 .about-socials a:hover {
@@ -505,7 +588,9 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--rule);
 }
 
-.widget-topic-list li:last-child { border-bottom: none; }
+.widget-topic-list li:last-child {
+  border-bottom: none;
+}
 
 .topic-link {
   display: flex;
@@ -518,9 +603,13 @@ a { text-decoration: none; color: inherit; }
 }
 
 .topic-link:hover,
-.topic-link.active { color: var(--black); }
+.topic-link.active {
+  color: var(--black);
+}
 
-.topic-link.active > span:first-child { font-weight: 500; }
+.topic-link.active > span:first-child {
+  font-weight: 500;
+}
 
 .topic-count {
   font-family: var(--font-mono);
@@ -545,7 +634,9 @@ a { text-decoration: none; color: inherit; }
   transition: opacity var(--ease);
 }
 
-.mini-post-link:hover { opacity: 0.7; }
+.mini-post-link:hover {
+  opacity: 0.7;
+}
 
 .mini-post-title {
   font-family: var(--font-serif);
@@ -573,7 +664,9 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--rule);
 }
 
-.widget-archive-list li:last-child { border-bottom: none; }
+.widget-archive-list li:last-child {
+  border-bottom: none;
+}
 
 .widget-archive-list a {
   display: flex;
@@ -585,7 +678,9 @@ a { text-decoration: none; color: inherit; }
   transition: color var(--ease);
 }
 
-.widget-archive-list a:hover { color: var(--black); }
+.widget-archive-list a:hover {
+  color: var(--black);
+}
 
 .widget-archive-list span {
   font-family: var(--font-mono);
@@ -604,28 +699,58 @@ a { text-decoration: none; color: inherit; }
 }
 
 .widget-quick-links a {
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--muted);
   transition: color var(--ease);
 }
 
-.widget-quick-links a:hover { color: var(--black); }
+.widget-quick-links a:hover {
+  color: var(--black);
+}
 
 /* ── PAGE LOAD FADE ──────────────────────────────────────────────── */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.page-intro { animation: fadeIn 0.35s ease both; }
-.tag-filter  { animation: fadeIn 0.35s 0.05s ease both; }
-.sidebar     { animation: fadeIn 0.35s 0.1s ease both; }
+.page-intro {
+  animation: fadeIn 0.35s ease both;
+}
+.tag-filter {
+  animation: fadeIn 0.35s 0.05s ease both;
+}
+.sidebar {
+  animation: fadeIn 0.35s 0.1s ease both;
+}
 
-.post-row:nth-child(1) { animation: fadeIn 0.3s 0.08s ease both; }
-.post-row:nth-child(2) { animation: fadeIn 0.3s 0.13s ease both; }
-.post-row:nth-child(3) { animation: fadeIn 0.3s 0.18s ease both; }
-.post-row:nth-child(4) { animation: fadeIn 0.3s 0.23s ease both; }
-.post-row:nth-child(5) { animation: fadeIn 0.3s 0.28s ease both; }
-.post-row:nth-child(6) { animation: fadeIn 0.3s 0.33s ease both; }
-.post-row:nth-child(7) { animation: fadeIn 0.3s 0.38s ease both; }
-.post-row:nth-child(8) { animation: fadeIn 0.3s 0.43s ease both; }
+.post-row:nth-child(1) {
+  animation: fadeIn 0.3s 0.08s ease both;
+}
+.post-row:nth-child(2) {
+  animation: fadeIn 0.3s 0.13s ease both;
+}
+.post-row:nth-child(3) {
+  animation: fadeIn 0.3s 0.18s ease both;
+}
+.post-row:nth-child(4) {
+  animation: fadeIn 0.3s 0.23s ease both;
+}
+.post-row:nth-child(5) {
+  animation: fadeIn 0.3s 0.28s ease both;
+}
+.post-row:nth-child(6) {
+  animation: fadeIn 0.3s 0.33s ease both;
+}
+.post-row:nth-child(7) {
+  animation: fadeIn 0.3s 0.38s ease both;
+}
+.post-row:nth-child(8) {
+  animation: fadeIn 0.3s 0.43s ease both;
+}

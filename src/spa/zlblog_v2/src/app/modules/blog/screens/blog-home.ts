@@ -1,11 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject, HostListener, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+// services
+import { BlogDataService } from '../blog.data.service';
+import { Util } from '../../../core/services/util.service';
+// components
+import { BlogList } from '../components/blog-list';
 
 @Component({
   selector: 'app-blog-home',
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, BlogList],
   template: ` 
     <div class="page-wrap">
-
       <!-- LEFT: MAIN CONTENT  -->
       <div class="content-col">
 
@@ -15,61 +22,8 @@ import { Component } from '@angular/core';
           <p class="page-desc">Published when I have something worth sharing.</p>
         </section>
 
-        <!-- ── FILTER ────────────────────────────────────────────────────── -->
-        <div class="tag-filter">
-          <button class="tag-btn active">All</button>
-          <button class="tag-btn">Technology</button>
-          <button class="tag-btn">Design</button>
-          <button class="tag-btn">Engineering</button>
-          <button class="tag-btn">Thoughts</button>
-        </div>
-
-        <!-- ── ARTICLE LIST ───────────────────────────────────────────────── -->
-        <section class="article-list">
-
-          <article class="post-row">
-            <div class="post-date-col">
-              <time class="post-date">Jun 18</time>
-            </div>
-            <div class="post-main-col">
-              <span class="post-tag">Technology</span>
-              <h2 class="post-title"><a href="#">How LLMs Are Quietly Rewriting the Rules of Software Engineering</a></h2>
-              <p class="post-excerpt">A deep look at what happens when AI becomes a co-author of the code that runs our world — and why the implications reach far beyond productivity metrics.</p>
-              <div class="post-footer">
-                <span class="post-read">9 min read</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="post-row">
-            <div class="post-date-col">
-              <time class="post-date">Jun 12</time>
-            </div>
-            <div class="post-main-col">
-              <span class="post-tag">Design</span>
-              <h2 class="post-title"><a href="#">The Silent Language of Design Systems</a></h2>
-              <p class="post-excerpt">Good design systems don't just solve consistency problems. They encode decisions, preserve intent, and carry the institutional memory of a product across time.</p>
-              <div class="post-footer">
-                <span class="post-read">5 min read</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="post-row post-row--featured">
-            <div class="post-date-col">
-              <time class="post-date">Jun 5</time>
-            </div>
-            <div class="post-main-col">
-              <span class="post-tag">Engineering</span>
-              <h2 class="post-title"><a href="#">The Open Source Reckoning</a></h2>
-              <p class="post-excerpt">When a single volunteer's burnout can take down half the web, it's time to reconsider how we value invisible labor. The sustainability crisis in open source is not a funding problem — it's a culture problem.</p>
-              <div class="post-footer">
-                <span class="post-read">6 min read</span>
-              </div>
-            </div>
-          </article>
-
-        </section>
+        <!-- blog list -->
+        <app-blog-list [data]="pagedList().data"></app-blog-list>
 
         <!-- ── LOAD MORE ──────────────────────────────────────────────────── -->
         <div class="load-more-wrap">
@@ -166,8 +120,63 @@ import { Component } from '@angular/core';
   styles: ``,
 })
 export class BlogHome {
+  // inject services
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly blogDataService = inject(BlogDataService);
+  public readonly util = inject(Util);
 
-  ngInit() { 
-    console.log('blog-home initialized');
+  private readonly pageSize = 5;
+  // properties
+  pagedList = signal<any>({ data: [], total: 0 });
+  // filter form group
+  filterFormGroup = new FormGroup({
+    keywords: new FormControl(''),
+    type: new FormControl(''),
+    pageSize: new FormControl(this.pageSize),
+    pageIndex: new FormControl(0)
+  });
+
+  ngOnInit() {
+    // query params change
+    this.activatedRoute.queryParams.subscribe(params => {
+      const pageIndex = +params['pageIndex'];
+      // retrive the query params
+      this.filterFormGroup.patchValue({
+        pageIndex: pageIndex ? pageIndex : 0,
+        keywords: params['keywords'] ?? '',
+        type: params['type'] ?? ''
+      });
+
+      // reset the result      			
+      this.pagedList.set({ data: [], total: 0 });
+      // ensure it scrolls to the top of the page
+      window.scroll(0, 0);
+      // if keywords is a tag, then filter by tag
+      if (params['type'] && params['type'] === 'tag') {
+        this.listBlogsByTag(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
+      }
+      else {
+        // search blogs
+        this.listBlogs(this.filterFormGroup.value.keywords ?? '', this.filterFormGroup.value.pageIndex ?? 0, this.filterFormGroup.value.pageSize ?? this.pageSize);
+      }
+    });
+
+    // reset meta tags
+    this.util.resetMetaTags();
+  }
+
+  // list blogs by keywords
+  private listBlogs(keywords: string, pageIndex: number, pageSize: number) {
+    this.blogDataService.listBlogs(keywords, pageIndex, pageSize).subscribe((data: any) => {
+      this.pagedList.set(data);  
+    });
+  }
+
+  // list blogs by a tag
+  private listBlogsByTag(tag: string, pageIndex: number, pageSize: number) {
+    this.blogDataService.listBlogsByTag(tag, pageIndex, pageSize).subscribe((data: any) => {
+      this.pagedList.set(data);
+    });
   }
 }

@@ -6,7 +6,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   imports: [RouterOutlet],
   template: `
   <header class="site-header">
-    <div class="container">
+    <div class="container-xl">
       <nav class="top-nav">
         <a class="nav-home">Zongyi Li</a>
         <ul class="nav-links">
@@ -20,7 +20,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
   </header>
 
   <main>
-    <div class="container">
+    <div class="container-xl">
       <router-outlet></router-outlet>
     </div>
   </main>
