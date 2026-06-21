@@ -28,6 +28,12 @@ export class BlogDataService {
 		return this.http.get(url);
 	}
 
+	// get popular blogs
+	getPopularBlogs(): Observable<any> { 
+		const url = `${this.blogApiEndpoint}/popular`;
+		return this.http.get(url);
+	}
+
 	listComments(blogId:string): Observable<any> { 
 		const url = `${this.blogApiEndpoint}/${blogId}/comments`;
 		return this.http.get(url);

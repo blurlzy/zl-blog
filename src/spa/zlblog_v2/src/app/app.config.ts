@@ -1,6 +1,5 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { BrowserAnimationsModule, provideNoopAnimations } from '@angular/platform-browser/animations'
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ApplicationConfig, ErrorHandler, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { GlobalErrorHandler } from './core/services/error-handler.service';
 import { provideRouter } from '@angular/router';
 // http module
 import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS, withFetch, withInterceptors } from '@angular/common/http';
@@ -32,6 +31,6 @@ export const appConfig: ApplicationConfig = {
     //{ provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     //{ provide: HTTP_INTERCEPTORS, useClass: NotFoundInterceptor, multi: true },
     // global error handler
-    // { provide: ErrorHandler,  useClass: GlobalErrorHandler}
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ]
 };

@@ -3,17 +3,17 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink],
   template: `
   <header class="site-header">
     <div class="container-xl">
       <nav class="top-nav">
-        <a class="nav-home">Zongyi Li</a>
+        <a class="nav-home" routerLink="">👋 Zongyi Li</a>
         <ul class="nav-links">
-          <li><a class="active">Azure</a></li>
-          <li><a >Data & AI</a></li>
-          <li><a>Notes</a></li>
-          <li><a>About</a></li>
+          <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'Azure', type: 'tag' }">Azure</a></li>
+          <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'AI', type: 'tag' }">Data & AI</a></li>
+          <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'Misc', type: 'tag' }">Notes</a></li>
+          <li><a [routerLink]="['/about']">About</a></li>
         </ul>
       </nav>
     </div>
