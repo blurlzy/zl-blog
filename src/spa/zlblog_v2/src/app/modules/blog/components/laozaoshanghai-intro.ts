@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-laozaoshanghai-intro',
   imports: [],
   template: `          
-    <div class="widget mt-4 mb-3">
+    <div class="widget">
         <h4 class="widget-title">🌀 My Side Project</h4>
         <a href="https://laozaoshanghai.com" target="_blank" class="laozao-card">
           <img src="https://stlaoshanghaiprod.blob.core.windows.net/photos/5bcc457d-7a37-47a3-9079-50e3ab8effb8.png" class="laozao-img" alt="Shanghai Then" />

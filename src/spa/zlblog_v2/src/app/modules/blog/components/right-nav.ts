@@ -41,8 +41,10 @@ import { GoogleAds } from '../../../core/components/google-ads';
         <app-laozaoshanghai-intro></app-laozaoshanghai-intro>
 
         <!-- Popular posts -->
-        <app-popular-blog-list></app-popular-blog-list>        
-
+        <div class="mt-4 mb-3">
+           <app-popular-blog-list></app-popular-blog-list>    
+        </div>              
+        <hr>
         <!-- Google Ads -->
         <app-google-ads></app-google-ads>
 

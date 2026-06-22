@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-quick-link',
   imports: [],
   template: ` 
-    <div class="widget mb-2">
+    <div class="widget">
       <h4 class="widget-title">🔗 Quick Links</h4>
       <ul class="widget-quick-links">
         <li><a href="https://azureutil.zongyi.me/" target="_blank">→ Azure AI Model Explorer</a></li>
