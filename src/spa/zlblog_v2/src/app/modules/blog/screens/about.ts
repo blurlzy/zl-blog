@@ -5,7 +5,7 @@ import { Util } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [RouterLink],
   template: ` 
       <div class="profile-header text-center">
     <img src="https://stzlblog.blob.core.windows.net/app-images/about.jpg"  alt="ZL" class="profile-img mt-3"/>
