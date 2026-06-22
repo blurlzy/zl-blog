@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,RouterLink } from '@angular/router';
 import { FormControl,  ReactiveFormsModule, Validators } from '@angular/forms';
 // components
 import { PopularBlogList } from '../components/popular-blog-list';
 import { LaozaoshanghaiIntro  } from '../components/laozaoshanghai-intro';
 import { QuickLink } from '../components/quick-link';
-
+import { GoogleAds } from '../../../core/components/google-ads';
 @Component({
   selector: 'app-right-nav',
-  imports: [ QuickLink, PopularBlogList, LaozaoshanghaiIntro, ReactiveFormsModule],
+  imports: [ RouterLink, QuickLink, PopularBlogList, LaozaoshanghaiIntro, GoogleAds, ReactiveFormsModule],
   template: ` 
       <aside class="sidebar">
           <!-- Search -->
@@ -27,10 +27,10 @@ import { QuickLink } from '../components/quick-link';
           <div class="widget-about">
             <img src="https://stzlblog.blob.core.windows.net/app-images/about.jpg" class="about-avatar" alt="Zongyi Li" />
             <div>
-              <p class="about-name">Zongyi Li</p>
+              <p class="about-name">Zongyi Li <img src="https://stzlblog.blob.core.windows.net/app-images/Australia.png" style="width: 18px; height: 18px;" class="ms-1" /></p>
               <p class="about-bio">Cloud Solution Architect</p>
               <p class="about-bio">Data &amp; AI Innovator</p>
-              <p class="about-bio">Living in <img src="https://stzlblog.blob.core.windows.net/app-images/Australia.png" style="width: 18px; height: 18px;"  /></p>
+              <p class="about-bio"><a routerLink="/contact">Contact me →</a></p>
             </div>
           </div>
         </div>
@@ -42,6 +42,9 @@ import { QuickLink } from '../components/quick-link';
 
         <!-- Popular posts -->
         <app-popular-blog-list></app-popular-blog-list>        
+
+        <!-- Google Ads -->
+        <app-google-ads></app-google-ads>
 
       </aside><!-- /sidebar -->
   `,

@@ -145,11 +145,12 @@ a {
 
 /* ── PAGE INTRO ──────────────────────────────────────────────────── */
 .page-intro {
-  padding: 3.5rem 0 2rem;
+  padding: 3.5rem 0 1.8rem;
 }
 
 .page-title {
-  font-family: var(--font-serif);
+  // font-family: var(--font-serif);
+  font-family: 'Comic Sans MS', Courier, monospace;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -464,8 +465,8 @@ a {
 }
 
 .about-avatar {
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;

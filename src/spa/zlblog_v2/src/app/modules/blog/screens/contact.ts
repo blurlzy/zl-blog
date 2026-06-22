@@ -7,7 +7,14 @@ import { Loader } from '../../../core/services/loader.service';
 @Component({
   selector: 'app-contact',
   imports: [],
-  template: ` <p>contact works!</p> `,
+  template: ` 
+    <div class="ratio ratio-4x3">
+      <iframe
+        src="https://forms.office.com/Pages/ResponsePage.aspx?id=saBbiNVo4kCtqiOMtpnb3ONR4c4CD3RNjH4WjPfnf81UMlY5TDRPTkdBUE9UV1IySkFWMzRMMzBZSy4u"
+        (load)="loader.isLoading.next(false)">
+      </iframe>
+    </div>
+  `,
   styles: ``,
 })
 export class Contact {

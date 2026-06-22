@@ -8,10 +8,11 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 // components
 import { TagFilter } from '../components/tag-filter';
 import { PopularBlogList} from '../components/popular-blog-list';
+import { GoogleAds } from '../../../core/components/google-ads';
 
 @Component({
   selector: 'app-blog-detail',
-  imports: [ RouterLink, DatePipe, UpperCasePipe, SafeHtmlPipe, TagFilter, PopularBlogList ],
+  imports: [ RouterLink, DatePipe, UpperCasePipe, SafeHtmlPipe, TagFilter, PopularBlogList, GoogleAds ],
   template: ` 
       <!-- ── ARTICLE HEADER ─────────────────────────────────────── -->
       <header class="article-header">
@@ -44,8 +45,9 @@ import { PopularBlogList} from '../components/popular-blog-list';
 
         <!-- ── TABLE OF CONTENTS  -->
         <aside class="toc">
-          <app-popular-blog-list></app-popular-blog-list>
-          <a routerLink="/" class="toc-back">← All posts</a>
+          <app-popular-blog-list></app-popular-blog-list>          
+          <a routerLink="/" class="toc-back mb-2">← All posts</a>
+          <app-google-ads></app-google-ads>
         </aside>
 
       </div><!-- /article-wrap -->

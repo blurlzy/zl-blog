@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common'; // Import common module if neede
 
 @Component({
   selector: 'app-google-ads',
-  imports: [CommonModule  ],
+  imports: [CommonModule],
   template: ` 
-    <div>
+    <div class="mt-3">
       <ins class="adsbygoogle"
         style="display:block"
         data-ad-client="ca-pub-7792978464943079"
