@@ -47,8 +47,8 @@ import { GoogleAds } from '../../../core/components/google-ads';
         <aside class="toc">
           <app-popular-blog-list></app-popular-blog-list>          
           <a routerLink="/" class="toc-back mb-2">← All posts</a>
-          <hr>
-          <app-google-ads></app-google-ads>
+          <!-- <hr> -->
+         
         </aside>
 
       </div><!-- /article-wrap -->

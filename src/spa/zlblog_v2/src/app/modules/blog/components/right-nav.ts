@@ -44,9 +44,9 @@ import { GoogleAds } from '../../../core/components/google-ads';
         <div class="mt-4 mb-3">
            <app-popular-blog-list></app-popular-blog-list>    
         </div>              
-        <hr>
+        <!-- <hr> -->
         <!-- Google Ads -->
-        <app-google-ads></app-google-ads>
+       
 
       </aside><!-- /sidebar -->
   `,

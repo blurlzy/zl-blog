@@ -19,7 +19,7 @@ namespace ZLBlog.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<PagedList<Blog>> ListBlogsAsync([FromQuery] string? keywords, int pageIndex = 0, int pageSize = 8)
+        public async Task<PagedList<SimpleBlogDto>> ListBlogsAsync([FromQuery] string? keywords, int pageIndex = 0, int pageSize = 8)
         {
             var req = new ListBlogsRequest { Keywords = keywords,  PageIndex = pageIndex, PageSize = pageSize };
 
@@ -50,7 +50,7 @@ namespace ZLBlog.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<PagedList<Blog>> ListBlogsByTagAsync(string tag, [FromQuery] int pageIndex = 0, int pageSize = 8)
+        public async Task<PagedList<SimpleBlogDto>> ListBlogsByTagAsync(string tag, [FromQuery] int pageIndex = 0, int pageSize = 8)
         {
             var req = new ListBlogsByTagRequest { Tag = tag, PageIndex = pageIndex, PageSize = pageSize };
 
