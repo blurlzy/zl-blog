@@ -8,13 +8,13 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 // components
 import { TagFilter } from '../components/tag-filter';
 import { PopularBlogList} from '../components/popular-blog-list';
-import { GoogleAds } from '../../../core/components/google-ads';
+// import { GoogleAds } from '../../../core/components/google-ads';
 
 @Component({
   selector: 'app-blog-detail',
-  imports: [ RouterLink, DatePipe, UpperCasePipe, SafeHtmlPipe, TagFilter, PopularBlogList, GoogleAds ],
+  imports: [ RouterLink, DatePipe, UpperCasePipe, SafeHtmlPipe, TagFilter, PopularBlogList ],
   template: ` 
-      <!-- ── ARTICLE HEADER ─────────────────────────────────────── -->
+      <!--  ARTICLE HEADER  -->
       <header class="article-header">
         <span class="article-category">
           <!-- Tags -->

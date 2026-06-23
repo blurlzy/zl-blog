@@ -5,10 +5,11 @@ import { FormControl,  ReactiveFormsModule, Validators } from '@angular/forms';
 import { PopularBlogList } from '../components/popular-blog-list';
 import { LaozaoshanghaiIntro  } from '../components/laozaoshanghai-intro';
 import { QuickLink } from '../components/quick-link';
-import { GoogleAds } from '../../../core/components/google-ads';
+// import { GoogleAds } from '../../../core/components/google-ads';
+
 @Component({
   selector: 'app-right-nav',
-  imports: [ RouterLink, QuickLink, PopularBlogList, LaozaoshanghaiIntro, GoogleAds, ReactiveFormsModule],
+  imports: [ RouterLink, QuickLink, PopularBlogList, LaozaoshanghaiIntro,  ReactiveFormsModule],
   template: ` 
       <aside class="sidebar">
           <!-- Search -->
@@ -36,12 +37,17 @@ import { GoogleAds } from '../../../core/components/google-ads';
         </div>
         <!-- Quick links -->
         <app-quick-link></app-quick-link>
+        
         <hr>
-        <!-- Laozao Shanghai -->
-        <app-laozaoshanghai-intro></app-laozaoshanghai-intro>
+
+        <div class="mt-4">
+          <!-- Laozao Shanghai -->
+          <app-laozaoshanghai-intro></app-laozaoshanghai-intro>
+        </div>
+
 
         <!-- Popular posts -->
-        <div class="mt-4 mb-3">
+        <div class="mt-4">
            <app-popular-blog-list></app-popular-blog-list>    
         </div>              
         <!-- <hr> -->
