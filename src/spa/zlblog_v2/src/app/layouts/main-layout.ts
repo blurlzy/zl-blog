@@ -17,7 +17,7 @@ import { Loader } from '../core/services/loader.service';
   <header class="site-header">
     <div class="container-xl">
       <nav class="top-nav">
-        <a class="nav-home" routerLink="">👋 Zongyi.me</a>
+        <a class="nav-home" routerLink="">zongyi.me</a>
         <ul class="nav-links">
           <!-- <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'Azure', type: 'tag' }">Azure</a></li>
           <li><a [routerLink]="['/']" [queryParams]="{ keywords: 'AI', type: 'tag' }">Data & AI</a></li>
@@ -38,11 +38,11 @@ import { Loader } from '../core/services/loader.service';
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span class="footer-name">zongyi.me</span>
+        <span class="footer-name">zongyi.me 🚀 All rights reserved</span>
         <nav class="footer-nav">
-          <a href="https://github.com/blurlzy" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://github.com/blurlzy" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i></a>
         </nav>
-        <span class="footer-copy">© 2026 🚀 All rights reserved</span>
+        <span class="footer-copy">© 2026</span>
       </div>
     </div>
   </footer>

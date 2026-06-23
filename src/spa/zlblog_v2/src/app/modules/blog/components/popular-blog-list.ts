@@ -6,7 +6,7 @@ import { BlogDataService } from '../blog.data.service';
 
 @Component({
   selector: 'app-popular-blog-list',
-  imports: [ RouterLink, DatePipe, UpperCasePipe],
+  imports: [ RouterLink, DatePipe],
   template: ` 
       <div class="widget">
           <h4 class="widget-title">📝 Popular</h4>
@@ -15,7 +15,7 @@ import { BlogDataService } from '../blog.data.service';
               <li>
                 <a routerLink="/blogs/{{post.id}}" class="mini-post-link">
                   <span class="mini-post-title">{{ post.title }}</span>
-                  <span class="mini-post-meta">{{ post.createdOn | date : 'MMM d, y' | uppercase }}</span>
+                  <span class="mini-post-meta">{{ post.createdOn | date : 'MMM d, y' }}</span>
                 </a>
               </li>
             }

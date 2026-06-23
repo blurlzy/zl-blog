@@ -7,13 +7,13 @@ import { SafeHtmlPipe } from '../../../core/pipes/safe-html.pipe';
 import { TagFilter } from './tag-filter';
 @Component({
   selector: 'app-blog-list',
-  imports: [RouterLink, DatePipe, UpperCasePipe, SafeHtmlPipe, TagFilter],
+  imports: [RouterLink, DatePipe,  SafeHtmlPipe, TagFilter],
   template: ` 
         <section class="article-list">
           @for(blog of data; track blog.id) {
             <article class="post-row">
               <div class="post-date-col">
-                <time class="post-date">{{ blog.createdOn | date : 'MMM d' | uppercase  }}</time>
+                <time class="post-date">{{ blog.createdOn | date : 'MMM d' }}</time>
               </div>
               <div class="post-main-col">
                 

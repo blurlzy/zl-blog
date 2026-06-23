@@ -36,8 +36,7 @@ import { QuickLink } from '../components/quick-link';
           </div>
         </div>
         <!-- Quick links -->
-        <app-quick-link></app-quick-link>
-        
+        <app-popular-blog-list></app-popular-blog-list>                    
         <hr>
 
         <div class="mt-4">
@@ -48,7 +47,7 @@ import { QuickLink } from '../components/quick-link';
 
         <!-- Popular posts -->
         <div class="mt-4">
-           <app-popular-blog-list></app-popular-blog-list>    
+           <app-quick-link></app-quick-link>
         </div>              
         <!-- <hr> -->
         <!-- Google Ads -->

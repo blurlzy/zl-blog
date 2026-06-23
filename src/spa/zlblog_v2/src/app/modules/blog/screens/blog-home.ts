@@ -13,7 +13,7 @@ import { RightNav } from '../components/right-nav';
 
 @Component({
   selector: 'app-blog-home',
-  imports: [CommonModule, ReactiveFormsModule, MatPaginatorModule, BlogList, RightNav],
+  imports: [CommonModule,RouterLink, ReactiveFormsModule, MatPaginatorModule, BlogList, RightNav],
   template: ` 
     <div class="page-wrap">
       <!-- LEFT: MAIN CONTENT  -->
@@ -21,8 +21,8 @@ import { RightNav } from '../components/right-nav';
 
         <!--  intro  -->
         <section class="page-intro">
-          <h1 class="page-title">Not Just <i class="bi bi-pencil-square"></i> Tech</h1>
-          <p class="page-desc">Published when I have something worth sharing.</p>
+          <a routerLink="/"><h1 class="page-title">Not Just <i class="bi bi-pencil-square"></i> Tech</h1></a>
+          <p class="page-desc">🎯 Published when I have something worth sharing.</p>
         </section>
 
         <!-- blog list -->

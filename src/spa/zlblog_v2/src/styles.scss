@@ -145,7 +145,7 @@ a {
 
 /* ── PAGE INTRO ──────────────────────────────────────────────────── */
 .page-intro {
-  padding: 3.5rem 0 1.8rem;
+  padding: 3.5rem 0 1.15rem;
 }
 
 .page-title {
@@ -352,7 +352,7 @@ a {
 }
 
 .footer-nav a {
-  font-size: 0.82rem;
+  font-size: 1.05rem;
   color: var(--muted);
   transition: color var(--ease);
 }
@@ -715,10 +715,10 @@ a {
  
 :root {
 	@include mat.paginator-overrides((
-		select-trigger-text-size: var(--mat-sys-body-small-size),
-		container-text-weight: var(--mat-sys-body-small-weight),
-		container-text-size: var(--mat-sys-body-small-size),
-	  	container-background-color: transparent,
+		select-trigger-text-size: var(--mat-sys-body-medium-size),
+		container-text-weight: var(--mat-sys-body-medium-weight),
+		container-text-size: var(--mat-sys-body-medium-size),
+    container-background-color: transparent,
 	));
  }
 
