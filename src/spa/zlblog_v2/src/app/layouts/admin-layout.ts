@@ -36,8 +36,8 @@ import { Loader } from '../core/services/loader.service';
 
         <form class="d-flex ms-auto ms-3" role="search">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search" [formControl]="keywordsCtrl">
-          <button class="btn btn-light ms-2" (click)="search()"><i class="bi bi-search"></i></button>
-          <button class="btn btn-light ms-2" (click)="logout()"><i class="bi bi-box-arrow-in-right"></i></button>
+          <button type="button" class="btn btn-light ms-2" (click)="search()"><i class="bi bi-search"></i></button>
+          <button type="button" class="btn btn-light ms-2" (click)="logout()"><i class="bi bi-box-arrow-in-right"></i></button>
         </form>
       </div>
     </nav>

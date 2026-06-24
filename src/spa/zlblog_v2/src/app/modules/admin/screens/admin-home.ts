@@ -51,6 +51,7 @@ export class AdminHome {
     // query params change
     this.activatedRoute.queryParams.subscribe(params => {
       const pageIndex = +params['pageIndex'];
+        console.log('query params changed', params);
 			// retrive the query params
 			this.filterFormGroup.patchValue({
 				pageIndex: pageIndex ? pageIndex : 0,
