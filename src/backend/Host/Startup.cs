@@ -6,16 +6,31 @@ namespace ZLBlog
      public static class Startup
      {
           // register mediatR
-          public static void ConfigureMediatR(this IServiceCollection services)
+          public static void ConfigureMediatR(this IServiceCollection services, IConfiguration configuration)
           {
-               services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
+               var bundleLicense = configuration[SecretKeys.BundleLicense];
+
+               services.AddMediatR(cfg =>
+               {
+                    cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly);
+                    cfg.LicenseKey = bundleLicense;
+               });
+
+
+               //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
           }
 
           // register automapper
-          public static void ConfigureAutoMapper(this IServiceCollection services)
+          public static void ConfigureAutoMapper(this IServiceCollection services, IConfiguration configuration)
           {
                // register auto mapper            
-               services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Startup).Assembly));
+               var bundleLicense = configuration[SecretKeys.BundleLicense];
+
+               services.AddAutoMapper(cfg =>
+               {
+                    cfg.LicenseKey = bundleLicense;
+                    cfg.AddMaps(typeof(Startup).Assembly);
+               });
           }
 
           public static void ConfigureCors(this IServiceCollection services, string corsPolicy)

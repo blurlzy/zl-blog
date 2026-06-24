@@ -9,10 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 SecretClient secretClient = new SecretClient(new Uri($"https://{builder.Configuration["Azure:KeyVault"]}.vault.azure.net"),
                                               new DefaultAzureCredential(new DefaultAzureCredentialOptions
                                               {
-                                                  ExcludeEnvironmentCredential = true,
-                                                  ExcludeVisualStudioCodeCredential = true,
-                                                  //ExcludeSharedTokenCacheCredential = true,
-                                                  ExcludeInteractiveBrowserCredential = true,
+                                                   ExcludeEnvironmentCredential = true,
+                                                   // ExcludeVisualStudioCodeCredential = true,
+                                                   ExcludeManagedIdentityCredential = true,
+                                                   // ExcludeSharedTokenCacheCredential = true,
+                                                   // ExcludeInteractiveBrowserCredential = true,
                                               }));
 
 // loads secrets into configuration. ## it requres Azure.Extensions.AspNetCore.Configuration.Secrets package
@@ -23,8 +24,8 @@ builder.Configuration.AddAzureKeyVault(secretClient, new KeyVaultSecretManager()
 // auth service provider - auth0 
 builder.Services.ConfigureAuth0(builder.Configuration);
 // register mediatR & auto mapper
-builder.Services.ConfigureMediatR();
-builder.Services.ConfigureAutoMapper();
+builder.Services.ConfigureMediatR(builder.Configuration);
+builder.Services.ConfigureAutoMapper(builder.Configuration);
 
 // register persistence services
 builder.Services.ConfigurePersistence(builder.Configuration);
