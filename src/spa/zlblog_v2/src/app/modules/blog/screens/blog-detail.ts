@@ -41,6 +41,9 @@ import { PopularBlogList} from '../components/popular-blog-list';
           <!-- blog content -->
           <div class="article-body" [innerHTML]="blog().content | safeHtml"></div>
 
+          <div class="text-center">
+            <a routerLink="/" class="toc-back">← Back to all posts</a>
+          </div>
         </div>
 
         <!-- ── TABLE OF CONTENTS  -->
@@ -85,9 +88,9 @@ import { PopularBlogList} from '../components/popular-blog-list';
     }
 
     .article-title {
-      font-family: var(--font-serif);
+     // font-family: var(--font-serif);
       font-size: clamp(1.75rem, 3.5vw, 1.95rem);
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1.18;
       letter-spacing: -0.03em;
       color: var(--black);
@@ -98,8 +101,8 @@ import { PopularBlogList} from '../components/popular-blog-list';
       font-size: 1.1rem;
       color: var(--muted);
       line-height: 1.65;
-      font-style: italic;
-      font-family: var(--font-serif);
+     // font-style: italic;
+     // font-family: var(--font-serif);
       max-width: 60ch;
       margin-bottom: 1.75rem;
     }
@@ -127,7 +130,7 @@ import { PopularBlogList} from '../components/popular-blog-list';
 
     /* ── ARTICLE BODY ─────────────────────────────────────────── */
     .article-body {
-      font-family: var(--font-serif);
+     // font-family: var(--font-serif);
       font-size: 1.05rem;
       line-height: 1.8;
       color: var(--ink);
@@ -143,11 +146,11 @@ import { PopularBlogList} from '../components/popular-blog-list';
       margin-right: 0.1em;
       margin-top: 0.05em;
       color: var(--black);
-      font-family: var(--font-serif);
+    //  font-family: var(--font-serif);
     }
 
     .article-body h2 {
-      font-family: var(--font-serif);
+     // font-family: var(--font-serif);
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--black);
@@ -158,7 +161,7 @@ import { PopularBlogList} from '../components/popular-blog-list';
     }
 
     .article-body h3 {
-      font-family: var(--font-sans);
+    //  font-family: var(--font-sans);
       font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -221,7 +224,7 @@ import { PopularBlogList} from '../components/popular-blog-list';
     }
 
     .toc-title {
-      font-family: var(--font-sans);
+     // font-family: var(--font-sans);
       font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.1em;
@@ -242,7 +245,7 @@ import { PopularBlogList} from '../components/popular-blog-list';
 
     .toc-back:hover { color: var(--black); }
 
-    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    /* -- RESPONSIVE -- */
     @media (max-width: 860px) {
       .article-wrap {
         grid-template-columns: 1fr;
