@@ -5,15 +5,15 @@ using ZLBlog.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// https://learn.microsoft.com/en-au/azure/developer/java/sdk/authentication/credential-chains#chainedtokencredential-overview
 // register secret client
 SecretClient secretClient = new SecretClient(new Uri($"https://{builder.Configuration["Azure:KeyVault"]}.vault.azure.net"),
                                               new DefaultAzureCredential(new DefaultAzureCredentialOptions
                                               {
                                                    ExcludeEnvironmentCredential = true,
-                                                   // ExcludeVisualStudioCodeCredential = true,
-                                                   ExcludeManagedIdentityCredential = true,
-                                                   // ExcludeSharedTokenCacheCredential = true,
-                                                   // ExcludeInteractiveBrowserCredential = true,
+                                                   ExcludeVisualStudioCodeCredential = true,
+                                                   //ExcludeSharedTokenCacheCredential = true,
+                                                   ExcludeInteractiveBrowserCredential = true,
                                               }));
 
 // loads secrets into configuration. ## it requres Azure.Extensions.AspNetCore.Configuration.Secrets package
