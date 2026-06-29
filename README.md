@@ -1,9 +1,9 @@
 # ZL Blog
 A simple and minimalist blog site designed for a clean reading experience. It includes an admin portal that allows administrators to create, edit, publish and delete blogs efficiently.
 
-Frontend: Developed using Angular 19 for a modern and responsive UI.
+Frontend: Developed using Angular v21 for a modern and responsive UI.
 
-Backend: Powered by ASP.NET Core 8.0, ensuring high performance and scalability.
+Backend: Powered by ASP.NET Core 10.0, ensuring high performance and scalability.
 
 Database: Securely stores data in Azure Cosmos DB for reliability and flexibility.
 
@@ -20,7 +20,7 @@ Database: Securely stores data in Azure Cosmos DB for reliability and flexibilit
 - Azure Storage Account - Blob Storage
 - Auth0 Tenant (Authentication)
 
-## Backend (Asp.Net Core 8.0)
+## Backend (Asp.Net Core 10.0)
 ### Azure Key Vault provides a way to store credentials and other secrets with increased security. 
 ### Add Key vault secrets
 ```

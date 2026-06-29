@@ -22,7 +22,7 @@ import { RightNav } from '../components/right-nav';
         <!--  intro  -->
         <section class="page-intro">
           <a routerLink="/"><h1 class="page-title">Not Just <i class="bi bi-pencil-square"></i> Tech</h1></a>
-          <p class="page-desc">🎯 Published when I have something worth sharing.</p>
+          <p class="page-desc">Thoughts on cloud, Data & AI, software engineering, and more. Published when I have something worth sharing.🎯</p>
         </section>
 
         <!-- blog list -->
