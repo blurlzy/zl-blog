@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
         <li><a href="https://datacenters.microsoft.com/globe/explore?view=map" target="_blank">→ Azure Datacenters</a></li>
         <li><a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table/" target="_blank">→ Azure Product Availability</a></li>
         <li><a href="https://blog.fabric.microsoft.com/en-AU/blog/" target="_blank">→ Microsoft Fabric Updates</a></li>
+        <!-- <li><a href="https://code.visualstudio.com/blogs/archive" target="_blank">→ VS Code Blogs</a></li> -->
         <li><a href="https://azure.microsoft.com/en-au/pricing/calculator/" target="_blank">→ Azure Pricing Calculator</a></li>
       </ul>
     </div>

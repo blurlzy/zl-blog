@@ -43,7 +43,16 @@ import { AdminBlogImageUploader } from './admin-blog-image-uploader';
         <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
       </mat-dialog-actions>
   `,
-  styles: ``,
+  styles: `
+    .card {
+      margin-top: 10px;
+      cursor: pointer; /* Show a pointer cursor to indicate clickability */
+    }
+
+    .card.selected {
+      border: 3px solid #ed008c; /* Blue border for selected state */
+    }
+  `,
 })
 export class AdminBlogImageDialog {
   images = signal<any[]>([]);
