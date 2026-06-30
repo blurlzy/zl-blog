@@ -44,8 +44,10 @@ namespace ZLBlog.Requests
 
                 // generate unique file name
                 var fileName = Guid.NewGuid().ToString() + file.FileExtension;
+                // resolve content type from extension
+                var contentType = FileValidator.GetImageContentType(file.FileExtension);
                 // upload file
-                await _blobService.UploadImageAsync(file.FileStream, fileName, metadata);
+                await _blobService.UploadImageAsync(file.FileStream, fileName, metadata, contentType);
             }
 
             return Unit.Value;

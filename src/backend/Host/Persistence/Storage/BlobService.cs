@@ -143,7 +143,7 @@
         }
 
         // upload a file blob including meta data
-        public async Task<Uri> UploadImageAsync(Stream stream, string fileName, Dictionary<string, string>? metadata = null)
+        public async Task<Uri> UploadImageAsync(Stream stream, string fileName, Dictionary<string, string>? metadata = null, string? contentType = null)
         {
             // blob client
             var blobClient = _containerClient.GetBlobClient(fileName);
@@ -152,6 +152,10 @@
             {
                 Metadata = (metadata == null || metadata.Count == 0) ? new Dictionary<string, string>() : metadata
             };
+            if (!string.IsNullOrEmpty(contentType))
+            {
+                options.HttpHeaders = new BlobHttpHeaders { ContentType = contentType };
+            }
             await blobClient.UploadAsync(stream, options);
             return blobClient.Uri;
         }

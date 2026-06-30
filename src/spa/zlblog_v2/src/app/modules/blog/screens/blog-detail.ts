@@ -26,7 +26,7 @@ import { PopularBlogList} from '../components/popular-blog-list';
           
           <div class="byline-info">
             <span class="byline-name">{{ blog().userName }}</span>
-            <span class="byline-meta">{{ blog().createdOn | date : 'MMM d, y, HH:mm' | uppercase }}</span>
+            <span class="byline-meta">{{ blog().createdOn | date : 'MMM d, y, HH:mm' | uppercase }} 📅</span>
           </div>
 
         </div>
@@ -88,9 +88,9 @@ import { PopularBlogList} from '../components/popular-blog-list';
     }
 
     .article-title {
-     // font-family: var(--font-serif);
+      font-family: var(--font-serif);
       font-size: clamp(1.75rem, 3.5vw, 1.95rem);
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.18;
       letter-spacing: -0.03em;
       color: var(--black);
@@ -124,7 +124,7 @@ import { PopularBlogList} from '../components/popular-blog-list';
 
     .byline-meta {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.8rem;
       color: var(--faint);
     }
 

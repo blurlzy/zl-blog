@@ -26,5 +26,25 @@
         {
             return AllowedExtensions.Contains(fileExtension);
         }
+
+        private static readonly Dictionary<string, string> ExtensionToMimeType = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { ".png",  "image/png" },
+            { ".jpg",  "image/jpeg" },
+            { ".jpeg", "image/jpeg" },
+            { ".gif",  "image/gif" },
+            { ".jfif", "image/jpeg" },
+            { ".webp", "image/webp" },
+            { ".bmp",  "image/bmp" },
+            { ".svg",  "image/svg+xml" },
+            { ".tiff", "image/tiff" },
+            { ".tif",  "image/tiff" },
+            { ".ico",  "image/x-icon" }
+        };
+
+        public static string? GetImageContentType(string fileExtension)
+        {
+            return ExtensionToMimeType.TryGetValue(fileExtension, out var mimeType) ? mimeType : null;
+        }
     }
 }

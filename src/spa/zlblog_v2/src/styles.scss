@@ -149,14 +149,13 @@ a {
 }
 
 .page-title {
-  // font-family: var(--font-serif);
-  // // font-family: 'Comic Sans MS', Courier, monospace;
+  font-family: var(--font-serif);
   font-size: 2rem;
-  // font-weight: 700;
-  // letter-spacing: -0.03em;
-  // color: var(--black);
-  // margin-bottom: 0.6rem;
-  // line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 0.6rem;
+  line-height: 1.15;
 }
 
 .page-desc {
@@ -260,9 +259,9 @@ a {
 }
 
 .post-title {
-  // font-family: var(--font-serif);
+  font-family: var(--font-serif);
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.015em;
   color: var(--black);
@@ -340,9 +339,9 @@ a {
 }
 
 .footer-name {
-  // font-family: var(--font-serif);
+  font-family: var(--font-serif);
   font-size: 0.875rem;
-  // font-weight: 600;
+  font-weight: 600;
   color: var(--black);
 }
 
